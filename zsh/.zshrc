@@ -1,6 +1,6 @@
 # Path to zsh
 export ZSH="$HOME/.zshrc"
-source $ZSH/.zshrc
+#source $ZSH/.zshrc
 
 # Enable zsh-completion
 autoload -Uz compinit && compinit -u
@@ -28,7 +28,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 DISABLE_LS_COLORS="true"
-COMPLETION_WAITING_DOTS"true"
 
 # Spaceship
 SPACESHIP_PROMPT_ADD_NEWLINE=false
