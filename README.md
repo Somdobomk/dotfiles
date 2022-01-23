@@ -47,7 +47,8 @@ updated](./Fork.md))
   - [Zsh-autojump](https://github.com/wting/autojump)
   - [Zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
   - [Zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-- [Visual Studio Code](https://code.visualstudio.com/)
+- [Visual Studio Code](https://code.visualstudio.com)
+  - Extensions stored in `~/.vscode/extensions`
 
 ## [MacOS](https://www.apple.com/osx/)
 
@@ -65,10 +66,13 @@ updated](./Fork.md))
     - [Zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) `brew install zsh-autosuggestions`
     - [Zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) `brew install zsh-syntax-highlighting`
 - [Visual Studio Code](https://code.visualstudio.com/) `brew cask install visual-studio-code`
+        - Extensions stored in `~/.vscode/extensions`
 
 ## [Windows](https://www.microsoft.com/en-us/windows/)
 
 - [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
+  - `winget install code`
+  - Extensions stored in `%USERPROFILE%\.vscode\extensions`
 
 ## Upgrading to WSL 2
 
