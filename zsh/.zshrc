@@ -1,11 +1,12 @@
 # Path to zsh
 export ZSH="$HOME/.zshrc"
+source $ZSH/.zshrc
 
 # Enable zsh-completion
 autoload -Uz compinit && compinit -u
 
 # Enable Spaceship
-autoload -U promptinit; promptinit
+autoload -Uz promptinit; promptinit
 prompt spaceship
 
 # Prompt Theme
@@ -14,21 +15,20 @@ ZSH_THEME="spaceship"
 # Enable colors and change prompt:
 autoload -U colors && colors
 
+CASE_SENSITIVE="true"
+
 # History in cache directory:
 HISTSIZE=1000
 SAVEHIST=
 
+zstyle ':completion:*' menu select
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
-
-# Load autojump
-source /usr/share/autojump/autojump.zsh
-
-# Load zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-
-# Load zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+DISABLE_LS_COLORS="true"
+COMPLETION_WAITING_DOTS"true"
 
 # Spaceship
 SPACESHIP_PROMPT_ADD_NEWLINE=false
@@ -114,3 +114,21 @@ then
 fi
 
 export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# Arch Linux
+
+# Load autojump
+#source /usr/share/autojump/autojump.zsh
+
+# Load zsh-autosuggestions
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+
+# Load zsh-syntax-highlighting
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+# MacOS
+source /usr/local/share/autojump/autojump.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
