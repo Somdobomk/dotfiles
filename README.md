@@ -25,9 +25,7 @@ updated](./Fork.md))
 
 ## VS Code
 
-<div align="left">
-    <img src="./images/gruvbox.png" width="400px">
-</div>
+<img src="./images/gruvbox.png" width="400px">
 
 ## Vim Gruvbox
 
@@ -86,9 +84,11 @@ updated](./Fork.md))
 
 ## [Windows](https://www.microsoft.com/en-us/windows/)
 
-- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/)
+- [Winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/) (⬅️ Windows terminal package manager)
   - `winget install code`
   - Extensions stored in `%USERPROFILE%\.vscode\extensions`
+
+<img src="./images/winget-windows.png" width="400px">
 
 ## Upgrading to WSL 2
 
