@@ -31,8 +31,9 @@ updated](./Fork.md))
 
 ## Vim Gruvbox
 
-<img src="./images/vim-arch.png" width="365px">
-<img src="./images/vim-macos.jpg" width="400px">
+| <img src="./images/vim-arch.png" width="400px"> | <img src="./images/vim-macos.jpg" width="400px"> |
+| :-: | :-: |
+| Arch | MacOS |
 
 ## Customize
 

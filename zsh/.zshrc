@@ -29,11 +29,12 @@ COMPLETION_WAITING_DOTS="true"
 ENABLE_CORRECTION="true"
 DISABLE_LS_COLORS="true"
 
-# Spaceship
+# Spaceship Prompt Options
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_CHAR_SYMBOL=❯
 SPACESHIP_CHAR_SUFFIX=" "
+SPACESHIP_EXEC_TIME_SHOW=false
 SPACESHIP_HG_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
@@ -88,16 +89,26 @@ alias lsa='ls -aGpFh'
 alias df='df -h'             # human-readable sizes
 alias free='free -m'         # show sizes in MB
 
-# Brew Update
-alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
-
 # Copy SSH
 alias copyssh='pbcopy < ~/.ssh/id_rsa.pub'
 
-# MacOS Store Update
+# Updating the OS
+
+# Arch
+alias psearch='sudo pacman -Ss '
+alias pinstall='sudo pacman -S '
+alias asearch='yay '
+alias ainstall='yay S '
+
+# MacOS
+
+# Brew Update
+alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
+
+# Store Apps Update
 alias macosstore='mas upgrade'
 
-# MacOS Update
+# System Upgrade
 alias macosup='sudo softwareupdate -i -a'
 
 # Zshrc
@@ -117,7 +128,6 @@ export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # Arch Linux
-
 # Load autojump
 source /usr/share/autojump/autojump.zsh
 
@@ -128,6 +138,11 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # MacOS
+# Load autojump
 #source /usr/local/share/autojump/autojump.zsh
+
+# Load zsh-autosuggestions
 #source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load zsh-syntax-highlighting
 #source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
