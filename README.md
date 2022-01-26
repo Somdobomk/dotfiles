@@ -14,8 +14,8 @@ The setup process is as follows:
 - Clone the repository to your local machine.
 
 ```sh
-git clone https://github.com/Somdobomk/dotfiles.git ~/Dotfiles
-cd ~/Dotfiles
+git clone https://github.com/Somdobomk/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ```
 
 (Or, [fork and keep your fork

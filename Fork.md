@@ -27,6 +27,6 @@ The goal of the rebase is to have a cleaner history and to have the latest chang
 
 When you want to commit to upstream, you need to have the rights to push to the upstream. You can do it by:
 
-```
+```sh
 git checkout -b upstream upstream/main
 ```
