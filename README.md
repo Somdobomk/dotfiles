@@ -21,6 +21,20 @@ cd ~/Dotfiles
 (Or, [fork and keep your fork
 updated](./Fork.md))
 
+## Screenshots
+
+## VS Code
+
+![VSCode](./images/gruvbox.png)
+
+### Git
+
+Output for `git status`:
+
+| ![Arch][git output arch-linux] | ![MacOS][git output macos]
+| :---: | :---: |
+| Arch | MacOS |
+
 ### Font
 
 - [Dank Mono](https://philpl.gumroad.com/l/dank-mono)
@@ -140,3 +154,7 @@ chmod 0600 .ssh/id_rsa
 ## Set Arch Linux as the default WSL
 
 Run `wsl --set-default Arch` in the windows command line
+
+<!-- Link labels: -->
+[git output macos]:https://user-images.githubusercontent.com/3749153/151091173-b8e75afb-a86b-4543-a559-1e55ef529e15.jpg
+[git output arch-linux]:https://user-images.githubusercontent.com/3749153/151091095-be3701ec-f189-41d4-8248-62da528adf93.png
