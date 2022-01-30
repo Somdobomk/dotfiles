@@ -74,7 +74,7 @@ updated](./Fork.md))
   - [Vim](https://www.vim.org/) `brew install vim`
     - [Gruvbox Theme](https://github.com/morhetz/gruvbox)
   - [Zsh](https://www.zsh.org/) `brew install zsh`
-    - [Spaceship Prompt](https://github.com/spaceship-prompt/spaceship-prompt) `brew install spaceship-prompt`
+    - [Spaceship Prompt](https://github.com/spaceship-prompt/spaceship-prompt) `brew install spaceship`
 
     - [Zsh-autojump](https://github.com/wting/autojump) `brew install autojump`
     - [Zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) `brew install zsh-autosuggestions`
@@ -156,3 +156,7 @@ chmod 0600 .ssh/id_rsa
 ## Set Arch Linux as the default WSL
 
 Run `wsl --set-default Arch` in the windows command line
+
+## Run Linux GUI apps in WSL
+
+[WSL2 Docs](https://docs.microsoft.com/en-us/windows/wsl/tutorials/gui-apps?WT.mc_id=windows-c9-niner#install-support-for-linux-gui-apps)
