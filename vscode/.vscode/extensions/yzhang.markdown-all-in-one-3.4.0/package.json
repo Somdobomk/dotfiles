@@ -471,6 +471,7 @@
 		"publisherId": "36c8b41c-6ef6-4bf5-a5b7-65bef29b606f",
 		"publisherDisplayName": "Yu Zhang",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891623289
+		"preRelease": false,
+		"installedTimestamp": 1644334486462
 	}
 }

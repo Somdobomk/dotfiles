@@ -131,6 +131,7 @@
 		"publisherId": "a892fb38-060b-475f-9e73-2e06a8a17a68",
 		"publisherDisplayName": "Christian Kohler",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891619139
+		"preRelease": false,
+		"installedTimestamp": 1644334481216
 	}
 }

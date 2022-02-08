@@ -10068,6 +10068,7 @@
 		"publisherId": "678d198b-9b2e-49d3-96ff-6d801c9575df",
 		"publisherDisplayName": "GitKraken",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891621393
+		"preRelease": false,
+		"installedTimestamp": 1644334484172
 	}
 }

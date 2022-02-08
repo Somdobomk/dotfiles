@@ -841,6 +841,7 @@
 		"publisherId": "7c1c19cd-78eb-4dfb-8999-99caf7679002",
 		"publisherDisplayName": "GitHub",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1644015787989
+		"preRelease": false,
+		"installedTimestamp": 1644334485979
 	}
 }

@@ -171,6 +171,7 @@
 		"publisherId": "3982f084-5346-4d3e-a32c-05ed222fd530",
 		"publisherDisplayName": "quicktype",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891628049
+		"preRelease": false,
+		"installedTimestamp": 1644334488416
 	}
 }

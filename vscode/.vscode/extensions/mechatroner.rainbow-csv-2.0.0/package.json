@@ -415,6 +415,7 @@
 		"publisherId": "0d5438b6-325a-4f88-aa28-6192aa2cf2a6",
 		"publisherDisplayName": "mechatroner",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891619427
+		"preRelease": false,
+		"installedTimestamp": 1644334480648
 	}
 }

@@ -201,6 +201,7 @@
 		"publisherId": "02145bab-b083-4d1e-b8ec-08d7abdd68da",
 		"publisherDisplayName": "Aaron Bond",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618877
+		"preRelease": false,
+		"installedTimestamp": 1644334478274
 	}
 }

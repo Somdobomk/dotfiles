@@ -5,14 +5,9 @@
 #### END FIG ENV VARIABLES ####
 # Path to zsh
 export ZSH="$HOME/.zshrc"
-#source $ZSH/.zshrc
 
 # Enable zsh-completion
 autoload -Uz compinit && compinit -u
-
-# Enable Spaceship
-autoload -Uz promptinit; promptinit
-prompt spaceship
 
 # Prompt Theme
 ZSH_THEME="spaceship"
@@ -24,7 +19,7 @@ CASE_SENSITIVE="true"
 
 # History in cache directory:
 HISTSIZE=1000
-SAVEHIST=
+SAVEHIST=1000
 
 zstyle ':completion:*' menu select
 # Auto complete with case insenstivity
@@ -130,11 +125,10 @@ fi
 
 export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
 # Arch Linux
 # Load autojump
 #source /usr/share/autojump/autojump.zsh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # Load zsh-autosuggestions
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
@@ -144,13 +138,28 @@ export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 
 # MacOS
 # Load autojump
-source /usr/local/share/autojump/autojump.zsh
+#source /usr/local/share/autojump/autojump.zsh
+[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 # Load zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# M1 MacOS
+# Load autojump
+
+
+# Load zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load zsh-syntax-highlighting
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Enable Spaceship
+autoload -Uz promptinit; promptinit
+prompt spaceship
 
 #### FIG ENV VARIABLES ####
 # Please make sure this block is at the end of this file.

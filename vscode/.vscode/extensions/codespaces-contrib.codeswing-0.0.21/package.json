@@ -464,6 +464,7 @@
 		"publisherId": "a9e16f58-a8db-4d1d-bc33-b62fd43cbef0",
 		"publisherDisplayName": "Jonathan Carter",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891621267
+		"preRelease": false,
+		"installedTimestamp": 1644334484306
 	}
 }

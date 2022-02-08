@@ -230,6 +230,7 @@
 		"publisherId": "47daa402-5396-4346-b7bd-62494d6d63ec",
 		"publisherDisplayName": "Wayou Liu",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891619149
+		"preRelease": false,
+		"installedTimestamp": 1644334480136
 	}
 }

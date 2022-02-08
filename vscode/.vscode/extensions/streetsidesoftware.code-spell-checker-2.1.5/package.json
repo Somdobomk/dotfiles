@@ -2121,6 +2121,7 @@
 		"publisherId": "67600ca7-88fb-4104-9f7e-dd51c00facf2",
 		"publisherDisplayName": "Street Side Software",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1644015787384
+		"preRelease": false,
+		"installedTimestamp": 1644334484051
 	}
 }

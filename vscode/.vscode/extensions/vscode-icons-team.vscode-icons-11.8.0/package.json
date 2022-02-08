@@ -336,6 +336,7 @@
 		"publisherId": "652ad61d-3a6a-48ca-ab1a-80dc8953b2b6",
 		"publisherDisplayName": "VSCode Icons Team",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891625085
+		"preRelease": false,
+		"installedTimestamp": 1644334487427
 	}
 }

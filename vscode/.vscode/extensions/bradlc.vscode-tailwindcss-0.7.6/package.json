@@ -283,6 +283,7 @@
 		"publisherId": "84722833-669b-4c7d-920e-b60e43fae19a",
 		"publisherDisplayName": "Tailwind Labs",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891619137
+		"preRelease": false,
+		"installedTimestamp": 1644334479585
 	}
 }

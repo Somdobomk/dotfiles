@@ -712,6 +712,7 @@
 		"publisherId": "151820df-5dc5-4c97-8751-eb84643203fa",
 		"publisherDisplayName": "Alexander",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618428
+		"preRelease": false,
+		"installedTimestamp": 1644334479687
 	}
 }

@@ -68,6 +68,7 @@
 		"publisherId": "9ea94209-a714-4c79-872e-95fcd2b2d718",
 		"publisherDisplayName": "XadillaX",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618156
+		"preRelease": false,
+		"installedTimestamp": 1644334479280
 	}
 }

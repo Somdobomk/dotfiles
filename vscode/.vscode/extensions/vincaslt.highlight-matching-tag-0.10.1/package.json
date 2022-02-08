@@ -637,6 +637,7 @@
 		"publisherId": "81b5ff8a-7099-47ff-acce-7406aece08b3",
 		"publisherDisplayName": "vincaslt",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618324
+		"preRelease": false,
+		"installedTimestamp": 1644334479472
 	}
 }

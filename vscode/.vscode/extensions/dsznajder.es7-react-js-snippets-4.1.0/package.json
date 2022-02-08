@@ -175,6 +175,7 @@
 		"publisherId": "7ea644b4-2d93-4979-aac5-a12afebeb762",
 		"publisherDisplayName": "dsznajder",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891621042
+		"preRelease": false,
+		"installedTimestamp": 1644334483449
 	}
 }

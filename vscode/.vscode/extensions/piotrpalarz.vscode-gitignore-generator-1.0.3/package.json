@@ -61,6 +61,7 @@
 		"publisherId": "faeac7fd-0315-4473-96af-470ac6a0e527",
 		"publisherDisplayName": "Piotr Palarz",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891617958
+		"preRelease": false,
+		"installedTimestamp": 1644334479149
 	}
 }

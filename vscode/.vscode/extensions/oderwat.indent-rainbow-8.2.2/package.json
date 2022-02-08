@@ -131,6 +131,7 @@
 		"publisherId": "ac064ae0-224d-4351-9aa4-45ef7bf3ed21",
 		"publisherDisplayName": "oderwat",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891624740
+		"preRelease": false,
+		"installedTimestamp": 1644334487297
 	}
 }

@@ -144,6 +144,7 @@
 		"publisherId": "3975bc66-f8bb-46a9-b8b6-430f013e4fa5",
 		"publisherDisplayName": "Pranay Prakash",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891621544
+		"preRelease": false,
+		"installedTimestamp": 1644334484582
 	}
 }

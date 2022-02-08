@@ -71,7 +71,8 @@
 		"publisherId": "571210a8-f372-43c2-8b5a-018868d4ac96",
 		"publisherDisplayName": "jdinhlife",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618642
+		"preRelease": false,
+		"installedTimestamp": 1644334480646
 	},
 	"devDependencies": {
 		"@semantic-release/changelog": "^5.0.1",

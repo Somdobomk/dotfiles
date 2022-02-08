@@ -130,6 +130,7 @@
 		"publisherId": "c0528e29-cda0-47c8-be59-457385bd457f",
 		"publisherDisplayName": "tldraw",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1643967049070
+		"preRelease": false,
+		"installedTimestamp": 1644334481365
 	}
 }

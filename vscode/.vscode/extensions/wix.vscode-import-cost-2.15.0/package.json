@@ -160,6 +160,7 @@
 		"publisherId": "7a344d8a-64ec-42a7-9255-9eacf94e746a",
 		"publisherDisplayName": "Wix",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891632762
+		"preRelease": false,
+		"installedTimestamp": 1644334489548
 	}
 }

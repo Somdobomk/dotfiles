@@ -134,6 +134,7 @@
 		"publisherId": "e9a76d04-24d4-44eb-a202-964f71acf59e",
 		"publisherDisplayName": "Sergii Naumov",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891621328
+		"preRelease": false,
+		"installedTimestamp": 1644334483892
 	}
 }

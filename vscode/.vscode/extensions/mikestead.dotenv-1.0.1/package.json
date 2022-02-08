@@ -72,6 +72,7 @@
 		"publisherId": "b6aa9b98-56e5-4846-b7d2-600d45fc63fc",
 		"publisherDisplayName": "mikestead",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891618121
+		"preRelease": false,
+		"installedTimestamp": 1644334478724
 	}
 }

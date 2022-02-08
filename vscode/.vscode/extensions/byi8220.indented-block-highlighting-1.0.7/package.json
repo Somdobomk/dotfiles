@@ -78,6 +78,7 @@
 		"publisherId": "e756117c-0f80-447b-b5f5-279776152941",
 		"publisherDisplayName": "byi8220",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642891631583
+		"preRelease": false,
+		"installedTimestamp": 1644334489244
 	}
 }

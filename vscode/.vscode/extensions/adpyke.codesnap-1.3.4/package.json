@@ -153,6 +153,7 @@
 		"publisherId": "8d7f2028-26ae-4724-8306-a1c8bb6c6794",
 		"publisherDisplayName": "adpyke",
 		"isPreReleaseVersion": false,
-		"installedTimestamp": 1642926096878
+		"preRelease": false,
+		"installedTimestamp": 1644334487885
 	}
 }
