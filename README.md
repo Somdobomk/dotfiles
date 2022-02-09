@@ -118,6 +118,7 @@ pacman -Sy archlinux-keyring
 
 ```sh
 pacman -S zsh
+zsh
 chsh -s $(which zsh)
 ```
 
@@ -125,7 +126,7 @@ chsh -s $(which zsh)
 
 - Add a sudo group: `sudo groupadd sudo`
 - Enable sudoers: `vim /etc/sudoers` and uncomment lines `%wheel ALL=(ALL) ALL` and `%sudo ALL=(ALL) ALL`
-- Add a new admin user: `user add -m -G wheel,sudo -s /bin/zsh <username>`
+- Add a new admin user: `useradd -m -G wheel,sudo -s /bin/zsh <username>`
 - Set password for the new user: `passwd <username>`
 - Open Windows command shell, go to the directory where you extracted Arch Linux, run `Arch.exe config --default-user <username>`
 - Now you have a new user with basic Arch Linux configured

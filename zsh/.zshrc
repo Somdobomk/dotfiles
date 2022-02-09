@@ -127,19 +127,19 @@ export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 
 # Arch Linux
 # Load autojump
-#source /usr/share/autojump/autojump.zsh
+source /usr/share/autojump/autojump.zsh
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # Load zsh-autosuggestions
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 
 # Load zsh-syntax-highlighting
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # MacOS
 # Load autojump
 #source /usr/local/share/autojump/autojump.zsh
-[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh
+#[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 # Load zsh-autosuggestions
 #source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -152,10 +152,10 @@ export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 
 
 # Load zsh-autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enable Spaceship
 autoload -Uz promptinit; promptinit
