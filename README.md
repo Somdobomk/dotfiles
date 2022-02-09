@@ -63,6 +63,7 @@ updated](./Fork.md))
   - [Zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [Visual Studio Code](https://code.visualstudio.com)
   - Extensions stored in `~/.vscode/extensions`
+- [Reflector](https://wiki.archlinux.org/title/Reflector) `pacman -S reflector`
 
 ## [MacOS](https://www.apple.com/osx/)
 
@@ -145,6 +146,18 @@ chsh -s $(which zsh)
 
 - Install some useful console tools: `sudo pacman -S mc wget htop pv ccze`
 
+### How to sort and rate the 10 fastest mirrors closest to you
+
+- Visit [Pacman Mirrorlist Generator](https://archlinux.org/mirrorlist/)
+- Select your country and click `Generate List`
+- Copy the whole page that is generated
+- `sudo vim /etc/pacman.d/mirrorlist`
+- Erase the file contents and paste the generated list
+- Save and Exit vim
+- Run `sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+- `sudo pacman -Syyu`
+`
+
 ### If you had ssh setup in Windows and want to keep the same ssh keys
 
 Copy .ssh from Windows to Linux home directory:
@@ -161,3 +174,27 @@ Run `wsl --set-default Arch` in the windows command line
 ## Run Linux GUI apps in WSL
 
 [WSL2 Docs](https://docs.microsoft.com/en-us/windows/wsl/tutorials/gui-apps?WT.mc_id=windows-c9-niner#install-support-for-linux-gui-apps)
+
+## How to completely remove a Linux distro from WSL
+
+1. Open up PowerShell
+2. To get the exact name for the distro you want, enter wsl -l -v
+3. Enter into the terminal wsl --unregister <distro name>
+
+## Backing up and importing to WSL
+
+```sh
+wsl --export <distro> <filename.tar>
+wsl --import <distro> <install location> <filename>
+```
+
+## How to map a drive from Windows to your Linux subsystem
+
+- Open Windows Explorer
+- Click the `...` toolbar and choose `Map network drive`
+- If the `Map network drive` menu option is missing make sure `This PC` is highlighted on the left hand side of the Explorer Window
+- Enter the share; all available Linux subsystems will be uner the `\wsl$` share followed by the operating system
+
+```sh
+\\wsl$\Arch
+```
