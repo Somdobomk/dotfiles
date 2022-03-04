@@ -154,9 +154,8 @@ chsh -s $(which zsh)
 - `sudo vim /etc/pacman.d/mirrorlist`
 - Erase the file contents and paste the generated list
 - Save and Exit vim
-- Run `sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+- Run `sudo reflector --latest 10 --sort rate --save /etc/pacman.d/mirrorlist`
 - `sudo pacman -Syyu`
-`
 
 ### If you had ssh setup in Windows and want to keep the same ssh keys
 
