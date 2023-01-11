@@ -132,6 +132,10 @@ Once added, reload your profile for the changes to take effect.
 . $PROFILE
 ```
 
+### Vim
+
+To use vim config in Windows, copy `.vim` folder to `$HOME/vimfiles`. Copy `.vimrc` to `$HOME/.vimrc`.
+
 ## Install WSL
 
 ```powershell
