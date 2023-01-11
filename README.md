@@ -134,7 +134,13 @@ Once added, reload your profile for the changes to take effect.
 
 ### Vim
 
-To use vim config in Windows, copy `.vim` folder to `$HOME/vimfiles`. Copy `.vimrc` to `$HOME/.vimrc`.
+Install Vim using Scoop.
+
+```powershell
+scoop install vim
+```
+
+To use vim config in Windows, rename `.vim` folder to `$HOME/vimfiles`. Copy `.vimrc` to `$HOME/.vimrc`.
 
 ## Install WSL
 
