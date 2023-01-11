@@ -174,7 +174,9 @@ Make all future WSL machines WSL 2
 wsl --set-default-version 2
 ```
 
-## Installing [Arch Linux](https://archlinux.org/) under WSL
+## Arch Linux
+
+### Installing [Arch Linux](https://archlinux.org/) under WSL
 
 ### Basic Installation
 
