@@ -37,14 +37,12 @@ updated](./Fork.md))
 - [Git](https://git-scm.com/)
 - [Vim](https://www.vim.org/)
   - [Gruvbox Theme](https://github.com/morhetz/gruvbox)
-- [Starship Prompt](https://starship.rs/)
+- Prompts
+  - [Oh My Posh Prompt](https://ohmyposh.dev)
+  - [Starship Prompt](https://starship.rs/)
 - [Zoxide](https://github.com/ajeetdsouza/zoxide)
 - [Zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [Zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-
-```sh
-brew install mas hyper fig git vim starship zoxide zsh-autosuggestions zsh-syntax-highlighting
-```
 
 ## Windows
 
@@ -164,7 +162,7 @@ Check version of WSL with the command:
 wsl -l -v
 ```
 
-## Upgrading to WSL 2
+### Upgrading to WSL 2
 
 [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
@@ -216,7 +214,7 @@ chsh -s $(which zsh)
 - Open Windows command shell, go to the directory where you extracted Arch Linux, run `Arch.exe config --default-user <username>`
 - Now you have a new user with basic Arch Linux configured
 
-## Pacman Animation
+### Pacman Animation
 
 Edit pacman.conf
 
@@ -267,7 +265,7 @@ cd paru
 makepkg -sic
 ```
 
-## Packages
+### Packages
 
 - [Gruvbox Theme](https://github.com/morhetz/gruvbox)
 - [Hyper Terminal](https://aur.archlinux.org/packages/hyper)
@@ -309,24 +307,24 @@ chmod 0644 .ssh/id_rsa.pub
 chmod 0600 .ssh/id_rsa
 ```
 
-## Set Arch Linux as the default WSL
+### Set Arch Linux as the default WSL
 
 ```sh
 wsl --set-default Arch
 ```
 
-## Run Linux GUI apps in WSL
+### Run Linux GUI apps in WSL
 
 [WSL2 Docs](https://docs.microsoft.com/en-us/windows/wsl/tutorials/gui-apps?WT.mc_id=windows-c9-niner#install-support-for-linux-gui-apps)
 
-## Backing up and importing to WSL
+### Backing up and importing to WSL
 
 ```sh
 wsl --export <distro> <filename.tar>
 wsl --import <distro> <install location> <filename>
 ```
 
-## How to map a drive from Windows to your Linux subsystem
+### How to map a drive from Windows to your Linux subsystem
 
 - Open Windows Explorer
 - Click the `...` toolbar and choose `Map network drive`
@@ -337,7 +335,7 @@ wsl --import <distro> <install location> <filename>
 \\wsl$\Arch
 ```
 
-## How to completely remove a Linux distro from WSL
+### How to completely remove a Linux distro from WSL
 
 - Open up PowerShell
 - To get the exact name for the distro you want
