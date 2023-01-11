@@ -27,7 +27,7 @@ updated](./Fork.md))
 - [Skribble Mono](https://www.skribble.dev/)
 - [Victor Mono](https://rubjo.github.io/victor-mono/)
 
-## [MacOS](https://www.apple.com/osx/)
+## MacOS
 
 ### [Homebrew](https://brew.sh/)
 
@@ -46,10 +46,10 @@ updated](./Fork.md))
 brew install mas hyper fig git vim starship zoxide zsh-autosuggestions zsh-syntax-highlighting
 ```
 
-## [Windows](https://www.microsoft.com/en-us/windows/)
+## Windows
 
 - [Winget](https://github.com/microsoft/winget-cli) (Windows Package Manager Client)
-- [Scoop]([https://](https://github.com/ScoopInstaller/Scoop)) (Command-line installer)
+- [Scoop](https://github.com/ScoopInstaller/Scoop) (Command-line installer)
 
 ## Install WSL
 
