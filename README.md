@@ -21,18 +21,6 @@ cd ~/dotfiles
 (Or, [fork and keep your fork
 updated](./Fork.md))
 
-## Screenshots
-
-## VS Code
-
-<img src="./images/gruvbox.png" width="400px">
-
-## Vim Gruvbox
-
-| <img src="./images/vim-arch.png" width="400px"> | <img src="./images/vim-macos.jpg" width="400px"> |
-| :-: | :-: |
-| Arch | MacOS |
-
 ## Fonts
 
 - [Dank Mono](https://philpl.gumroad.com/l/dank-mono)
