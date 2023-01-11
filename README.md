@@ -184,9 +184,7 @@ wsl --set-default-version 2
 
 ## Arch Linux
 
-### Installing [Arch Linux](https://archlinux.org/) under WSL
-
-### Basic Installation
+### Basic Installation under WSL
 
 Download [ArchWSL](https://github.com/yuk7/ArchWSL) install zip, pick a folder (for example, 'C:\Program Files\ArchWSL') and run `ArchWSL.exe`
 
