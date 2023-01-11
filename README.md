@@ -46,8 +46,22 @@ updated](./Fork.md))
 
 ## Windows
 
-- [Winget](https://github.com/microsoft/winget-cli) (Windows Package Manager Client)
-- [Scoop](https://github.com/ScoopInstaller/Scoop) (Command-line installer)
+### Package Managers
+
+[Winget](https://github.com/microsoft/winget-cli) (Windows Package Manager Client) is the central repository for sharing and acquiring PowerShell code including PowerShell modules, scripts, and DSC resources. Kind of like the Arch User Repository.
+
+```powershell
+# Windows 11 comes with Winget by default
+```
+
+[Scoop](https://github.com/ScoopInstaller/Scoop) (Command-line installer) Scoop downloads and manages packages in a portable way, keeping them neatly isolated in ~\scoop. It won't install files outside its home, and you can place a Scoop installation wherever you like.
+
+```powershell
+# Optional: Needed to run a remote script the first time
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Install Scoop
+irm get.scoop.sh | iex
+```
 
 ### [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?WT.mc_id=THOMASMAURER-blog-thmaure&view=powershell-7.3&viewFallbackFrom=powershell-7)
 
@@ -126,12 +140,6 @@ Invoke-Expression (&starship init powershell)
 
 or copy my [profile](windows/Microsoft.PowerShell_profile.ps1).
 
-Once added, reload your profile for the changes to take effect.
-
-```powershell
-. $PROFILE
-```
-
 ### Vim
 
 Install Vim using Scoop.
@@ -141,6 +149,37 @@ scoop install vim
 ```
 
 To use vim config in Windows, rename `.vim` folder to `$HOME/vimfiles`. Copy `.vimrc` to `$HOME/.vimrc`.
+
+### Install Z
+
+[Z](https://www.powershellgallery.com/packages/z/) makes navigation in PowerShell extremely easy)
+
+```powershell
+Install-Module -Name z -Force
+```
+
+### Install PSReadLine
+
+[PSReadLine](https://www.powershellgallery.com/packages/PSReadLine/) adds autocompletion to PowerShell based on previous commands
+
+```powershell
+Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+```
+
+### Install Fzf
+
+[Fzf](https://www.powershellgallery.com/packages/PSFzf/2.5.16) (fuzzy finder) is a command-line fuzzy finder tool
+
+```powershell
+scoop install fzf
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+```
+
+Once you finish editing your powershell profile, reload the profile for the changes to take effect.
+
+```powershell
+. $PROFILE
+```
 
 ## Install WSL
 
