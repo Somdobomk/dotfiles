@@ -51,15 +51,116 @@ brew install mas hyper fig git vim starship zoxide zsh-autosuggestions zsh-synta
 - [Winget](https://github.com/microsoft/winget-cli) (Windows Package Manager Client)
 - [Scoop](https://github.com/ScoopInstaller/Scoop) (Command-line installer)
 
-## Install WSL
+### [Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?WT.mc_id=THOMASMAURER-blog-thmaure&view=powershell-7.3&viewFallbackFrom=powershell-7)
+
+Windows comes with PowerShell 5 by default. Open powershell and search for the latest version of PowerShell
 
 ```sh
+winget search Microsoft.Powershell
+```
+
+Install PowerShell or PowerShell Preview using the id parameter
+
+```sh
+winget install --id Microsoft.Powershell --source winget
+winget install --id Microsoft.Powershell.Preview --source winget
+```
+
+Use your preferred prompt from the following:
+
+### [Oh My Posh Prompt](https://ohmyposh.dev/)
+
+Install OhMyPosh prompt using winget
+
+```powershell
+winget install JanDeDobbeleer.OhMyPosh -s winget
+```
+
+Install the Gruvbox theme
+
+```powershell
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gruvbox.omp.json"
+```
+
+### [Starship Prompt](https://starship.rs/)
+
+Install Starship prompt using winget
+
+```powershell
+winget install --id Starship.Starship
+```
+
+To get started configuring starship, copy [my](windows/starship.toml) file into `~/.config/starship.toml`
+
+### [Terminal Icons](https://github.com/devblackops/Terminal-Icons)
+
+Terminal-Icons is a PowerShell module that adds file and folder icons when displaying items in the terminal.
+
+```powershell
+Install-Module -Name Terminal-Icons -Repository PSGallery
+Import-Module -Name Terminal-Icons
+```
+
+Edit your PowerShell profile script, you can find its location under the `$PROFILE` variable.
+
+For example, using vscode:
+
+```powershell
+code $PROFILE
+```
+
+If the above command gives an error, make sure to create the profile first
+
+```powershell
+New-Item -Path $PROFILE -Type File -Force
+```
+
+Add the following to the PowerShell configuration. Make sure starship is at the bottom of everything:
+
+```powershell
+Import-Module -Name Terminal-Icons
+
+# Choose the following configuration depending on which prompt you're using
+oh-my-posh init pwsh | Invoke-Expression
+# or
+Invoke-Expression (&starship init powershell)
+```
+
+or copy my [profile](windows/Microsoft.PowerShell_profile.ps1).
+
+Once added, reload your profile for the changes to take effect.
+
+```powershell
+. $PROFILE
+```
+
+## Install WSL
+
+```powershell
 wsl --install
+```
+
+You can also use the following command to install additional Linux distributions:
+
+```powershell
+wsl --install <Distribution Name>
+```
+
+You can check for a valid list of distribution names by using:
+
+```powershell
+wsl --list --online
+```
+
+Install the distribution from an online source rather than using the Microsoft Store:
+
+```powershell
+wsl --install --web-download --distribution <Distribution Name>
 ```
 
 Check version of WSL with the command:
 
-```sh
+```powershell
 wsl -l -v
 ```
 
@@ -69,7 +170,7 @@ wsl -l -v
 
 Make all future WSL machines WSL 2
 
-```sh
+```powershell
 wsl --set-default-version 2
 ```
 
