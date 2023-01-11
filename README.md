@@ -29,7 +29,9 @@ updated](./Fork.md))
 
 ## MacOS
 
-### [Homebrew](https://brew.sh/)
+Install [Homebrew](https://brew.sh/) - The Missing Package Manager for MacOS (or Linux)
+
+### Packages
 
 - [Mas](https://github.com/mas-cli/mas)
 - [Hyper Terminal](https://aur.archlinux.org/packages/hyper)
