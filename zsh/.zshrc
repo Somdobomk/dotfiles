@@ -54,7 +54,7 @@ alias lsa='exa --icons -a --no-user --group-directories-first --sort=name'
 alias ll='exa --icons -l --no-user --header --group-directories-first --sort=name --time-style long-iso'
 alias lla='exa --icons -la --no-user --header --group-directories-first --sort=name --time-style long-iso'
 alias cat='bat'
-alias nvim='vim'
+alias vim='nvim '
 
 # easier to read disk
 alias df='df -h'             # human-readable sizes

@@ -13,6 +13,7 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory
 
 # Alias
 Set-Alias grep findstr
+Set-Alias vim nvim
 
 # ChrisTituTech YouTuber better ninite
 Function chrisutil {
