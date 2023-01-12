@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/Users/somdobomk'
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/somdobomk/.config/nvim/lua/somdobomk'
+let g:netrw_dirhist_8='/home/somdobomk/.config/nvim/lua'
+let g:netrw_dirhist_7='/home/somdobomk/.config/nvim'
+let g:netrw_dirhist_6='/home/somdobomk/.config/nvim/plugin'
+let g:netrw_dirhist_5='/home/somdobomk/.config/nvim'
+let g:netrw_dirhist_4='/home/somdobomk/.config/nvim/after'
+let g:netrw_dirhist_3='/home/somdobomk/.config/nvim/after/plugin'
+let g:netrw_dirhist_2='/home/somdobomk/.config/nvim/after'
+let g:netrw_dirhist_1='/home/somdobomk/.config/nvim'
+let g:netrw_dirhist_0='/home/somdobomk/.config/nvim/lua/somdobomk'
