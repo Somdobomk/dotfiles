@@ -99,13 +99,13 @@ export PATH=$PATH:/usr/local/mysql/binexport PATH="/usr/local/sbin:$PATH"
 
 # Arch Linux
 # Zoxide
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
 
 # Load zsh-autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 
 # Load zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # MacOS
 # Zoxide
@@ -119,13 +119,13 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # M1 MacOS
 # Zoxide
-#eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # Load zsh-autosuggestions
-#source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Load zsh-syntax-highlighting
-#source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
 
