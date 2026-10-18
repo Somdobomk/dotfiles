@@ -303,6 +303,8 @@ Some Nerd Fonts use a different name than the original font: Source Code Pro is 
 ~/dotfiles/fonts/install.sh      # install
 ```
 
+On Windows, [`fonts/install.ps1`](fonts/install.ps1) does the same for the current user, without admin rights: `fonts\install.ps1 -DryRun`, then `fonts\install.ps1`. Restart open apps to see the new fonts.
+
 When a font ships as both `.otf` and `.ttf`, the `.otf` is used. Web formats are skipped. Fonts that are already installed are never overwritten, so the script is safe to run again.
 
 ### Paid fonts

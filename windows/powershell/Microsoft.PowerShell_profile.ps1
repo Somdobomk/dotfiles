@@ -17,11 +17,6 @@ $env:VISUAL = $env:EDITOR
 # Keep less's history (used by git) out of $HOME
 $env:LESSHISTFILE = Join-Path $env:TEMP 'lesshst'
 
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}
-
 # Checks GitHub for a newer PowerShell and installs it with winget.
 # Run it yourself; it no longer runs on every startup.
 function Update-PowerShell {
@@ -43,9 +38,6 @@ function Update-PowerShell {
         Write-Error "Failed to update PowerShell. Error: $_"
     }
 }
-
-# Quick Access to System Information
-function sysinfo { Get-ComputerInfo }
 
 # Preferred commands, same as macOS. `ls` stays PowerShell's own, so its
 # output can still be piped as objects.
