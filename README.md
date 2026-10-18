@@ -89,6 +89,14 @@ Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
 | --- | --- |
 | `Cmd+,` | Open the config in Zed |
 | `Cmd+Shift+,` | Reload the config after saving |
+| `Cmd+Shift+P` | Command palette: search every Ghostty action |
+| `Cmd+T` / `Cmd+Shift+[` / `Cmd+Shift+]` | New tab / previous tab / next tab |
+| `Cmd+D` / `Cmd+Shift+D` | Split side by side / split stacked |
+| `Cmd+[` / `Cmd+]` | Previous split / next split |
+| `Cmd+Shift+Enter` | Zoom the current split to full size and back |
+| `Cmd+W` | Close the tab or split without asking (`confirm-close-surface = false`) |
+
+Windows, tabs, and splits reopen after quitting (`window-save-state = always`). The left Option key acts as Alt; the right one types special characters.
 
 ### Zed
 

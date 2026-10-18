@@ -1,13 +1,42 @@
-# Ghostty config. See all options with: ghostty +show-config --default --docs
+# Ghostty config
+# Reload after saving: Cmd+Shift+,
+# All options: ghostty +show-config --default --docs
 
+# --- Theme -------------------------------------------------------------------
+
+# Copied from Zed's "Everforest Dark Hard (material)"; see themes/
 theme = Everforest Dark Hard Material
+
+# --- Font --------------------------------------------------------------------
 
 font-family = GeistMono Nerd Font Mono
 font-size = 16
 
+# --- Window ------------------------------------------------------------------
+
 window-padding-x = 14
 window-padding-y = 12
+# Spread leftover space evenly around the edges instead of right and bottom
+window-padding-balance = true
+
+# Tabs inside the title bar, like Zed
+macos-titlebar-style = tabs
+
+# Reopen windows, tabs, and splits after quitting or restarting
+window-save-state = always
+
+# Close tabs and windows without asking, even with something running
+confirm-close-surface = false
+
+# --- Input -------------------------------------------------------------------
+
+mouse-hide-while-typing = true
 
 # Left Option acts as Alt (for shortcuts like fzf's Alt+C); right Option
 # still types special characters like ç and é
 macos-option-as-alt = left
+
+# --- Shell integration -------------------------------------------------------
+
+# Keep the block cursor at the prompt (Ghostty switches to a bar by default)
+shell-integration-features = no-cursor
