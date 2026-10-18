@@ -15,7 +15,7 @@ My personal macOS configuration.
 | [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
 | [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list                                          | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
-| [`home/.config/ghostty/`](home/.config/ghostty/)           | [Ghostty](https://ghostty.org) terminal config and Everforest theme          | `~/.config/ghostty`       |
+| [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Everforest colors     | `~/.config/wezterm`       |
 | [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Everforest theme, and zoxide channel | `~/.config/television` |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
@@ -27,7 +27,7 @@ My personal macOS configuration.
 
    ```sh
    brew install git stow neovim tree-sitter-cli starship zoxide television fd ripgrep dust eza bat antidote
-   brew install --cask ghostty font-geist-mono-nerd-font
+   brew install --cask wezterm font-geist-mono-nerd-font
    ```
 
    That covers the terminal's font. The full font list is under [Fonts](#fonts).
@@ -91,20 +91,19 @@ Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
 | `:Lazy update` | Update plugins, then commit `lazy-lock.json` |
 | `:TSUpdate` | Update Treesitter parsers |
 
-### Ghostty
+### WezTerm
 
 | Shortcut | What it does |
 | --- | --- |
-| `Cmd+,` | Open the config in Zed |
-| `Cmd+Shift+,` | Reload the config after saving |
-| `Cmd+Shift+P` | Command palette: search every Ghostty action |
+| `Cmd+,` | Open the config in Zed. Saving reloads it automatically |
+| `Cmd+Shift+P` | Command palette: search every WezTerm action |
 | `Cmd+T` / `Cmd+Shift+[` / `Cmd+Shift+]` | New tab / previous tab / next tab |
 | `Cmd+D` / `Cmd+Shift+D` | Split side by side / split stacked |
 | `Cmd+[` / `Cmd+]` | Previous split / next split |
 | `Cmd+Shift+Enter` | Zoom the current split to full size and back |
-| `Cmd+W` | Close the tab or split without asking (`confirm-close-surface = false`) |
+| `Cmd+W` | Close the split, or the tab if it has none, without asking |
 
-Windows, tabs, and splits reopen after quitting (`window-save-state = always`). The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jump back / forward a word); the right one types special characters.
+The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jump back / forward a word); the right one types special characters.
 
 ### Zed
 
@@ -139,7 +138,7 @@ Run from `~/dotfiles`.
 **Adding a new config:** move it into `home/` at the same path it has in `$HOME`, then re-link. For example:
 
 ```sh
-mv ~/.config/ghostty ~/dotfiles/home/.config/ghostty
+mv ~/.config/wezterm ~/dotfiles/home/.config/wezterm
 cd ~/dotfiles && stow -R -t ~ home
 ```
 
@@ -154,7 +153,7 @@ cd ~/dotfiles && stow -R -t ~ home
 - **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
-- **Terminal:** Ghostty with Everforest Dark Hard colors and GeistMono Nerd Font
+- **Terminal:** WezTerm with Everforest Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
 
 ## Zen Browser
@@ -214,7 +213,7 @@ brew install --cask \
   font-ubuntu-nerd-font
 ```
 
-Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `ghostty +list-fonts`.
+Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `wezterm ls-fonts --list-system`.
 
 ### Other fonts
 
