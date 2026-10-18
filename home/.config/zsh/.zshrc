@@ -27,6 +27,20 @@ zstyle ':completion:*' matcher-list \
   'r:|[._-]=* r:|=*' \
   'l:|=* r:|=*'
 
+# Editor: Zed locally, Neovim over SSH (no window to open there)
+if [[ -n "$SSH_CONNECTION" ]]; then
+  export EDITOR="nvim"
+else
+  export EDITOR="zed --wait"
+fi
+export VISUAL="$EDITOR"
+
+# Keep tool history out of $HOME, in the private per-user temp folder
+_tmp="${TMPDIR:-/tmp}"
+export LESSHISTFILE="${_tmp%/}/lesshst"
+alias wget="wget --hsts-file=\"${_tmp%/}/wget-hsts\""
+unset _tmp
+
 # Preferred commands
 alias vim='nvim'
 alias cat='bat'
