@@ -1,7 +1,7 @@
 // Zed settings
 
 {
-	"agent_ui_font_family": "GeistMono Nerd Font",
+	"agent_ui_font_family": "GeistMono Nerd Font Mono",
  "agent_buffer_font_size": 18.0,
  "agent_ui_font_size": 18.0,
  "agent_servers": {
@@ -44,7 +44,7 @@
  },
  "on_new_window": "empty_tab",
  "theme": "Everforest Dark Hard (material)",
-	"buffer_font_family": "GeistMono Nerd Font",
+	"buffer_font_family": "GeistMono Nerd Font Mono",
 	"buffer_font_size": 18.0,
 	"ui_font_family": ".SystemUIFont",
 	"ui_font_size": 18.0,

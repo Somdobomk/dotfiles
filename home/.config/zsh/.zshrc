@@ -56,6 +56,17 @@ if command -v eza >/dev/null 2>&1; then
   alias lla='eza --icons -la --no-user --header --group-directories-first --sort=name --time-style long-iso'
 fi
 
+# Notes (~/notes, private repo Somdobomk/notes)
+alias notes='zed ~/notes'
+notes-sync() {
+  (
+    cd ~/notes || return
+    git add -A
+    git diff --cached --quiet || git commit -q -m "notes $(date +%F)"
+    git pull -q --rebase && git push -q && git log -1 --format='Synced: %h %s'
+  )
+}
+
 # Zoxide
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
