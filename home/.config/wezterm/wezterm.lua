@@ -4,6 +4,14 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+-- Shared with Windows, where the differences are marked "Windows"
+local is_windows = wezterm.target_triple:find("windows") ~= nil
+
+-- Windows: start PowerShell 7 instead of cmd.exe
+if is_windows then
+  config.default_prog = { "pwsh.exe", "-NoLogo" }
+end
+
 -- Theme ----------------------------------------------------------------------
 
 -- Everforest Dark Hard, copied from Zed's "Everforest Dark Hard (material)"
@@ -34,7 +42,8 @@ config.colors = {
 -- Font -----------------------------------------------------------------------
 
 config.font = wezterm.font("GeistMono Nerd Font Mono")
-config.font_size = 16
+-- Windows renders the same point size larger than macOS
+config.font_size = is_windows and 12 or 16
 
 -- Window ---------------------------------------------------------------------
 
@@ -44,7 +53,7 @@ config.window_padding = { left = 14, right = 14, top = 12, bottom = 12 }
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_frame = {
   font = wezterm.font("GeistMono Nerd Font Mono", { weight = "Medium" }),
-  font_size = 13,
+  font_size = is_windows and 10 or 13,
   active_titlebar_bg = bg_dim,
   inactive_titlebar_bg = bg_dim,
 }
@@ -63,21 +72,28 @@ config.send_composed_key_when_right_alt_is_pressed = true
 
 -- Keys -----------------------------------------------------------------------
 
--- Splits and shortcuts that match the defaults in Ghostty and iTerm
+-- Splits and shortcuts that match the defaults in Ghostty and iTerm.
+-- Windows: Ctrl+Shift stands in for Cmd, since Windows keeps most Win-key
+-- shortcuts for itself, and Ctrl alone belongs to the shell.
+local cmd = is_windows and "CTRL|SHIFT" or "CMD"
+local cmd_shift = is_windows and "CTRL|SHIFT|ALT" or "CMD|SHIFT"
+
 config.keys = {
-  { key = "d", mods = "CMD", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-  { key = "d", mods = "CMD|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "[", mods = "CMD", action = act.ActivatePaneDirection("Prev") },
-  { key = "]", mods = "CMD", action = act.ActivatePaneDirection("Next") },
-  { key = "Enter", mods = "CMD|SHIFT", action = act.TogglePaneZoomState },
-  { key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = false }) },
-  { key = "p", mods = "CMD|SHIFT", action = act.ActivateCommandPalette },
+  { key = "d", mods = cmd, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "d", mods = cmd_shift, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "[", mods = cmd, action = act.ActivatePaneDirection("Prev") },
+  { key = "]", mods = cmd, action = act.ActivatePaneDirection("Next") },
+  { key = "Enter", mods = cmd_shift, action = act.TogglePaneZoomState },
+  { key = "w", mods = cmd, action = act.CloseCurrentPane({ confirm = false }) },
+  { key = "p", mods = cmd_shift, action = act.ActivateCommandPalette },
   -- Open this config in Zed
   {
     key = ",",
-    mods = "CMD",
+    mods = cmd,
     action = wezterm.action_callback(function()
-      wezterm.background_child_process({ "open", "-a", "Zed", wezterm.config_file })
+      local open = is_windows and { "zed" } or { "open", "-a", "Zed" }
+      table.insert(open, wezterm.config_file)
+      wezterm.background_child_process(open)
     end),
   },
 }

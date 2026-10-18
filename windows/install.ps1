@@ -1,0 +1,157 @@
+# Set up this Windows PC from the dotfiles repo. Safe to run again.
+#
+# Usage: .\install.ps1                Install everything below
+#        .\install.ps1 -SaveTerminal  Copy Windows Terminal's live settings
+#                                     back into the repo, then commit them
+#
+# - PowerShell: $PROFILE (in OneDrive Documents) becomes a one-line file that
+#   loads windows\powershell\Microsoft.PowerShell_profile.ps1 from this repo.
+# - Windows Terminal: windows\terminal\settings.json is copied into place.
+#   It's a copy, not a link, because Terminal replaces links when it saves.
+# - Neovim: %LOCALAPPDATA%\nvim becomes a junction to home\.config\nvim.
+# - WezTerm: ~\.config\wezterm becomes a junction to home\.config\wezterm.
+# - Television: home\.config\television is copied into tv's config folder,
+#   next to the channels `tv update-channels` downloads.
+# - Notes: the private Somdobomk/notes repo is cloned next to this one.
+# Anything replaced is first renamed to <name>.bak-<date>.
+
+param([switch]$SaveTerminal)
+
+$ErrorActionPreference = 'Stop'
+$WindowsDir = $PSScriptRoot
+$Dotfiles = Split-Path $WindowsDir -Parent
+$Stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+
+# Store, Preview, and unpackaged installs of Windows Terminal
+$TerminalSettings = @(
+  "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+  "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
+  "$env:LOCALAPPDATA\Microsoft\Windows Terminal\settings.json"
+) | Where-Object { Test-Path $_ }
+$RepoTerminal = Join-Path $WindowsDir 'terminal\settings.json'
+
+if ($SaveTerminal) {
+  if (-not $TerminalSettings) { Write-Error 'Windows Terminal settings not found.' }
+  Copy-Item $TerminalSettings[0] $RepoTerminal -Force
+  Write-Host "Saved $($TerminalSettings[0]) to the repo. Review it with git diff."
+  return
+}
+
+function Backup ($Path) {
+  $backup = "$Path.bak-$Stamp"
+  Move-Item $Path $backup
+  Write-Host "  backed up to $(Split-Path $backup -Leaf)"
+}
+
+# PowerShell profile ---------------------------------------------------------
+
+$RepoProfile = Join-Path $WindowsDir 'powershell\Microsoft.PowerShell_profile.ps1'
+$Stub = ". '$RepoProfile'"
+$UserProfile = $PROFILE.CurrentUserCurrentHost
+Write-Host "PowerShell profile: $UserProfile"
+if ((Test-Path $UserProfile) -and (Get-Content $UserProfile -Raw).Trim() -eq $Stub) {
+  Write-Host '  already set up'
+} else {
+  if (Test-Path $UserProfile) { Backup $UserProfile }
+  New-Item -ItemType Directory -Path (Split-Path $UserProfile) -Force | Out-Null
+  Set-Content $UserProfile $Stub -Encoding utf8
+  Write-Host '  now loads the profile from the repo'
+}
+
+# Windows Terminal -----------------------------------------------------------
+
+foreach ($Target in $TerminalSettings) {
+  Write-Host "Windows Terminal: $Target"
+  if ((Get-FileHash $Target).Hash -eq (Get-FileHash $RepoTerminal).Hash) {
+    Write-Host '  already up to date'
+    continue
+  }
+  Copy-Item $Target "$Target.bak-$Stamp"
+  Write-Host "  backed up to $(Split-Path "$Target.bak-$Stamp" -Leaf)"
+  Copy-Item $RepoTerminal $Target -Force
+  Write-Host '  copied settings from the repo'
+}
+if (-not $TerminalSettings) { Write-Host 'Windows Terminal: not installed, skipped' }
+
+# Neovim and WezTerm ---------------------------------------------------------
+
+function Link-Folder ($Name, $Path, $Target) {
+  Write-Host "${Name}: $Path"
+  $Existing = Get-Item $Path -Force -ErrorAction SilentlyContinue
+  if ($Existing -and $Existing.LinkType -eq 'Junction' -and $Existing.Target -eq $Target) {
+    Write-Host '  already linked'
+    return
+  }
+  if ($Existing) { Backup $Path }
+  New-Item -ItemType Directory -Path (Split-Path $Path) -Force | Out-Null
+  # A junction needs no admin rights or Developer Mode, and works across drives
+  New-Item -ItemType Junction -Path $Path -Target $Target | Out-Null
+  Write-Host "  linked to $Target"
+}
+
+Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'home\.config\nvim')
+Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'home\.config\wezterm')
+
+# Television -----------------------------------------------------------------
+
+$RepoTv = Join-Path $Dotfiles 'home\.config\television'
+$Tv = Join-Path $env:LOCALAPPDATA 'television\config'
+Write-Host "Television: $Tv"
+New-Item -ItemType Directory -Path "$Tv\cable", "$Tv\themes" -Force | Out-Null
+if ((Test-Path "$Tv\config.toml") -and (Get-FileHash "$Tv\config.toml").Hash -ne (Get-FileHash "$RepoTv\config.toml").Hash) {
+  Copy-Item "$Tv\config.toml" "$Tv\config.toml.bak-$Stamp"
+  Write-Host "  backed up config.toml to config.toml.bak-$Stamp"
+}
+Copy-Item "$RepoTv\config.toml" $Tv -Force
+Copy-Item "$RepoTv\themes\*" "$Tv\themes" -Force
+# Channels run in PowerShell here, which has no `ls -la`; eza does the same
+(Get-Content "$RepoTv\cable\zoxide.toml" -Raw).Replace("ls -la --color=always '{}'", "eza -la --icons --color=always '{}'") |
+  Set-Content "$Tv\cable\zoxide.toml" -NoNewline -Encoding utf8
+Write-Host '  copied config, theme, and zoxide channel'
+if ((Get-Command tv -ErrorAction SilentlyContinue) -and -not (Test-Path "$Tv\cable\pwsh-history.toml")) {
+  # Ctrl+R needs the pwsh-history channel
+  tv update-channels | Out-Null
+  Write-Host '  downloaded the standard channels'
+}
+
+# Notes ----------------------------------------------------------------------
+
+$Notes = Join-Path (Split-Path $Dotfiles -Parent) 'notes'
+Write-Host "Notes: $Notes"
+if (Test-Path $Notes) {
+  Write-Host '  already cloned'
+} else {
+  git clone -q https://github.com/Somdobomk/notes.git $Notes
+  Write-Host '  cloned'
+}
+
+# Tools ----------------------------------------------------------------------
+
+# Tools the configs above use, with their winget IDs
+$Tools = [ordered]@{
+  starship      = 'Starship.Starship'
+  zoxide        = 'ajeetdsouza.zoxide'
+  tv            = 'alexpasmantier.television'
+  bat           = 'sharkdp.bat'
+  eza           = 'eza-community.eza'
+  rg            = 'BurntSushi.ripgrep.MSVC'
+  fd            = 'sharkdp.fd'
+  dust          = 'bootandy.dust'
+  zed           = 'ZedIndustries.Zed'
+  wezterm       = 'wez.wezterm'
+  zig           = 'zig.zig'
+  'tree-sitter' = 'tree-sitter.tree-sitter-cli'
+}
+$Missing = $Tools.Keys | Where-Object { -not (Get-Command $_ -ErrorAction SilentlyContinue) }
+foreach ($Module in 'Terminal-Icons') {
+  if (-not (Get-Module -ListAvailable -Name $Module)) {
+    Write-Host "Missing module $Module. Install it with: Install-Module $Module -Scope CurrentUser"
+  }
+}
+if ($Missing) {
+  Write-Host "`nMissing tools (Neovim's treesitter needs tree-sitter, plus zig as its C compiler):"
+  foreach ($Name in $Missing) { Write-Host "  winget install $($Tools[$Name])" }
+}
+
+Write-Host "`nDone. Open a new tab to load the new profile."
+Write-Host 'PowerToys: Settings > General > Backup & restore > Restore, using windows\powertoys.'

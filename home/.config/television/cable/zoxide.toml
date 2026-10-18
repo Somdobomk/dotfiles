@@ -11,7 +11,13 @@ frecency = false
 [preview]
 command = "ls -la --color=always '{}'"
 
+# tv has no normal mode, since j/k type into the search, so the vim keys
+# use Ctrl: Ctrl+J/K move, Ctrl+F/B scroll the preview
 [keybindings]
+ctrl-j = "select_next_entry"
+ctrl-k = "select_prev_entry"
+ctrl-f = "scroll_preview_half_page_down"
+ctrl-b = "scroll_preview_half_page_up"
 shift-enter = "actions:cd"
 ctrl-d = "actions:remove"
 
