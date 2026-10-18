@@ -3,47 +3,53 @@
 A small Neovim setup for opening files quickly while using Zed or VS Code for primary development.
 
 Included:
-- `lazy.nvim` plugin manager
-- Gruvbox Dark Hard theme
+- `lazy.nvim` plugin manager, with versions pinned in `lazy-lock.json`
+- Everforest Dark Hard theme, matching Zed and Hyper
 - Treesitter syntax highlighting
 - `blink.cmp` completion from file paths, snippets, and the current buffer
-- Optional `conform.nvim` formatting configuration
+- `conform.nvim` for formatting, with no formatters set up by default
 
 ## Requirements
 
 ```sh
-brew install neovim git
-nvim --version
+brew install neovim git tree-sitter-cli
 ```
 
-The setup targets current Neovim releases. No LSP servers are configured: this is intentionally a lightweight quick editor, and completion comes from paths, snippets, and words already in open buffers. It does not require language servers for those suggestions.
+`tree-sitter-cli` builds the Treesitter parsers. Without it, most languages fall back to basic highlighting. After installing it, run `:TSUpdate` once.
+
+No LSP servers are configured: this is intentionally a lightweight quick editor, and completion comes from paths, snippets, and words already in open buffers.
 
 ## Install
 
 This folder is linked to `~/.config/nvim` by Stow, along with the rest of the dotfiles. See the [main README](../../../README.md#gnu-stow).
 
-Launch with `nvim`. The `vim` alias in `.zshrc` also opens it. First launch downloads the plugin manager and plugins.
+Launch with `nvim`. The `vim` alias in `.zshrc` also opens it. First launch installs the plugins at the versions in `lazy-lock.json`.
 
-## Optional formatters
+## Plugin versions
 
-`conform.nvim` is installed by the plugin manager, but formatting only works when the matching formatter executable is installed.
+`lazy-lock.json` records the exact commit of every plugin, so each machine gets the same versions.
 
-To enable Prettier formatting, install Prettier in your project or globally with your Node package manager. Example global install:
+- `:Lazy update` updates plugins and rewrites the lockfile. Commit it afterwards.
+- `:Lazy restore` puts plugins back to the versions in the lockfile, for example after a bad update.
 
-```sh
-npm install --global prettier
+## Formatting
+
+Formatting is manual: `<Space>f` formats the current buffer, or the selection in visual mode. `:FormatToggle` turns format-on-save on or off until Neovim quits.
+
+No formatters are set up. To add one, install it, then add it to `formatters_by_ft` in [`lua/plugins/format.lua`](lua/plugins/format.lua):
+
+```lua
+formatters_by_ft = {
+  python = { "ruff_format" },  -- brew install ruff
+},
 ```
-
-For Lua formatting, install StyLua. For Python, install Ruff. Formatting only works when the corresponding executable is installed.
-
-## Hyper font
-
-Set Hyper's font family to your installed GeistMono Nerd Font family name and font size to 16. Font settings belong to Hyper, not Neovim.
 
 ## Basic commands
 
 - `<Space>w`: save
 - `<Space>q`: quit
+- `<Space>f`: format
+- `:FormatToggle`: format on save on or off
 - `:Lazy`: plugin manager
 - `:checkhealth`: health checks
-- `:ConformInfo`: formatter status (when Conform is enabled)
+- `:ConformInfo`: formatter status

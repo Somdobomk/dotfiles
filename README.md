@@ -24,7 +24,7 @@ My personal macOS configuration.
 1. Install [Homebrew](https://brew.sh), then the tools these configs use:
 
    ```sh
-   brew install git stow neovim starship zoxide eza bat antidote \
+   brew install git stow neovim tree-sitter-cli starship zoxide eza bat antidote \
      zsh-autosuggestions zsh-syntax-highlighting
    brew install --cask hyper font-geist-mono-nerd-font
    ```
@@ -74,8 +74,8 @@ cd ~/dotfiles && stow -R -t ~ home
 
 - **Shell:** Zsh with Antidote plugins (autosuggestions, syntax highlighting, completions), [zoxide](https://github.com/ajeetdsouza/zoxide), and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox ([details](home/.config/nvim/README.md))
-- **Terminal:** Hyper with the Everforest theme and GeistMono Nerd Font
+- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
+- **Terminal:** Hyper with Everforest Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
 
 ## Zen Browser
