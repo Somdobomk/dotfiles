@@ -15,6 +15,7 @@ My personal macOS configuration.
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`home/.hyper.js`](home/.hyper.js)                         | [Hyper](https://hyper.is) terminal config                                    | `~/.hyper.js`             |
 | [`home/.hyper_plugins/`](home/.hyper_plugins/)             | Hyper plugin list                                                            | `~/.hyper_plugins`        |
+| [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Font collection and [install script](fonts/install.sh)                       | `~/Library/Fonts`         |
 | [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
 
@@ -75,6 +76,47 @@ cd ~/dotfiles && stow -R -t ~ home
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox ([details](home/.config/nvim/README.md))
 - **Terminal:** Hyper with the Everforest theme and GeistMono Nerd Font
+- **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
+
+## Zen Browser
+
+[`zen/`](zen/) holds Zen's customizations, so they can be set up on another computer, including Windows:
+
+| File | What it holds |
+| --- | --- |
+| `zen-themes.json`, `chrome/` | Installed mods and their CSS |
+| `mod-prefs.js` | Mod settings, taken from `prefs.js` |
+| `zen-keyboard-shortcuts.json` | Keyboard shortcuts |
+| `containers.json` | Container tabs |
+
+Bookmarks, history, passwords, and extensions aren't here. Sign in to Sync (**Settings → Sync**) with the same Mozilla account to bring those over. Login files like `signedInUser.json` are never exported.
+
+Zen replaces files when it saves them, which would break symlinks, so this folder is copied rather than linked with Stow.
+
+### Save changes (macOS)
+
+Run this after changing mods, mod settings, or shortcuts, then commit:
+
+```sh
+~/dotfiles/zen/export.sh
+```
+
+The script uses the Zen profile that changed most recently. To choose one, pass its folder name, for example `./export.sh "rhlik1qw.Default (alpha)"`. Profile folders are listed at `about:profiles`.
+
+### Set up on Windows
+
+1. Install Zen, open it once so it creates a profile, then **close it**.
+2. Clone the repo and run the import script in PowerShell:
+
+   ```powershell
+   git clone https://github.com/Somdobomk/dotfiles.git $HOME\dotfiles
+   powershell -ExecutionPolicy Bypass -File $HOME\dotfiles\zen\import.ps1
+   ```
+
+   To choose a profile, add `-Profile "<folder name>"`.
+3. Start Zen and sign in to Sync.
+
+The custom UI font is GeistMono Nerd Font, so install it on Windows too, or pick another font in the mod's settings.
 
 ## Fonts
 
