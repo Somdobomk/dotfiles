@@ -5,8 +5,10 @@ A small Neovim setup for opening files quickly while using Zed or VS Code for pr
 Included:
 - `lazy.nvim` plugin manager, with versions pinned in `lazy-lock.json`
 - Everforest Dark Hard theme, matching Zed and Hyper
-- Treesitter syntax highlighting
+- Treesitter syntax highlighting and indentation, including zsh files (read with the bash parser) and git commit messages
 - `blink.cmp` completion from file paths, snippets, and the current buffer
+- `gitsigns.nvim` markers for added, changed, and removed lines
+- `which-key.nvim` popup listing shortcuts after pressing `<Space>`
 - `conform.nvim` for formatting, with no formatters set up by default
 
 ## Requirements
@@ -49,6 +51,7 @@ formatters_by_ft = {
 - `<Space>w`: save
 - `<Space>q`: quit
 - `<Space>f`: format
+- `Tab`: accept a completion suggestion (`Ctrl+N` / `Ctrl+P` move through the list)
 - `:FormatToggle`: format on save on or off
 - `:Lazy`: plugin manager
 - `:checkhealth`: health checks
