@@ -4,7 +4,5 @@ node_modules/
 **/.hyper_plugins/cache/
 .netrwhist
 fonts/private/
-.zcompdump*
-.zsh_plugins.zsh
 .zsh_sessions/
 home/.config/zed/prompts/

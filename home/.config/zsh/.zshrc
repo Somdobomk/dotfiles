@@ -1,15 +1,13 @@
-# Homebrew (fallback for non-login shells that skip .zprofile)
+# Homebrew is set up in .zprofile; this covers non-login shells that skip it
 if ! command -v brew >/dev/null 2>&1 && [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-if command -v brew >/dev/null 2>&1; then
-  export HOMEBREW_PREFIX="$(brew --prefix)"
-  export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
-  FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:$FPATH"
-fi
+
+# Shell state and cache live outside $HOME and the repo
+mkdir -p "$HOME/.local/state/zsh" "$HOME/.cache/zsh"
 
 # History
-HISTFILE="$HOME/.zsh_history"
+HISTFILE="$HOME/.local/state/zsh/history"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt HIST_IGNORE_DUPS
@@ -17,9 +15,15 @@ setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 
+# Plugins (Antidote). Loaded before compinit so zsh-completions is picked up.
+if [[ -r "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh" ]]; then
+  source "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
+  antidote load "$ZDOTDIR/.zsh_plugins.txt" "$HOME/.cache/zsh/plugins.zsh"
+fi
+
 # Completion
 autoload -Uz compinit
-compinit
+compinit -d "$HOME/.cache/zsh/zcompdump"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list \
   '' \
@@ -60,23 +64,4 @@ fi
 # Starship prompt
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
-fi
-
-# Command autosuggestions
-if [[ -n "${HOMEBREW_PREFIX:-}" &&
-      -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-  source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
-
-# Syntax highlighting — keep this last
-if [[ -n "${HOMEBREW_PREFIX:-}" &&
-      -r "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-
-# Antidote plugin manager
-if [[ -n "${HOMEBREW_PREFIX:-}" &&
-      -r "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh" ]]; then
-  source "$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
-  antidote load
 fi

@@ -2,8 +2,8 @@
 
 {
 	"agent_ui_font_family": "GeistMono Nerd Font",
- "agent_buffer_font_size": 16.0,
- "agent_ui_font_size": 16.0,
+ "agent_buffer_font_size": 18.0,
+ "agent_ui_font_size": 18.0,
  "agent_servers": {
   "claude-acp": {
    "default_config_options": {
@@ -45,9 +45,9 @@
  "on_new_window": "empty_tab",
  "theme": "Everforest Dark Hard (material)",
 	"buffer_font_family": "GeistMono Nerd Font",
-	"buffer_font_size": 16,
+	"buffer_font_size": 18.0,
 	"ui_font_family": ".SystemUIFont",
-	"ui_font_size": 16,
+	"ui_font_size": 18.0,
 	"icon_theme": "Colored Zed Icons Theme Dark",
 	"base_keymap": "VSCode",
 	// "vim_mode": true,
