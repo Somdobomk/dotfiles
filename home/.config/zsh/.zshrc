@@ -93,17 +93,20 @@ notes-sync() {
   )
 }
 
-# fzf: Ctrl+R searches history, Ctrl+T finds files, Alt+C jumps to a folder
-if command -v fzf >/dev/null 2>&1; then
-  export FZF_DEFAULT_OPTS="--height 40% --layout reverse --border \
---color bg+:#2e383c,fg:#d3c6aa,fg+:#d3c6aa,hl:#a7c080,hl+:#a7c080 \
---color info:#dbbc7f,prompt:#83c092,pointer:#e67e80,marker:#e69875,spinner:#d699b6,header:#7fbbb3,border:#495156"
-  source <(fzf --zsh)
+# Television (tv): Ctrl+R searches history; Ctrl+T picks what fits the command
+# being typed (files, or folders after `cd`, branches after `git checkout`...)
+if command -v tv >/dev/null 2>&1; then
+  source <(tv init zsh)
 fi
 
 # Zoxide: `cd foo` jumps to the most-used folder matching "foo"
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh --cmd cd)"
+  # `cdi`: pick a visited folder with Television instead of fzf
+  cdi() {
+    local dir
+    dir=$(tv zoxide) && [[ -n $dir ]] && cd -- "$dir"
+  }
 fi
 
 # Starship prompt

@@ -16,6 +16,7 @@ My personal macOS configuration.
 | [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list                                          | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`home/.config/ghostty/`](home/.config/ghostty/)           | [Ghostty](https://ghostty.org) terminal config and Everforest theme          | `~/.config/ghostty`       |
+| [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Everforest theme, and zoxide channel | `~/.config/television` |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
 | [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
@@ -25,7 +26,7 @@ My personal macOS configuration.
 1. Install [Homebrew](https://brew.sh), then the tools these configs use:
 
    ```sh
-   brew install git stow neovim tree-sitter-cli starship zoxide fzf eza bat antidote
+   brew install git stow neovim tree-sitter-cli starship zoxide television fd ripgrep eza bat antidote
    brew install --cask ghostty font-geist-mono-nerd-font
    ```
 
@@ -59,9 +60,10 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `cd foo` | Jump to the most-used folder matching "foo" (zoxide). Normal paths still work |
 | `foo` | Type just a folder name to `cd` into it |
 | `↑` / `↓` | Step through earlier commands that start with what's already typed |
-| `Ctrl+R` | Search all history with fzf |
-| `Ctrl+T` | Find a file with fzf and insert its path |
-| `Alt+C` | Jump to a folder with fzf. Uses the **left** Option key; the right one still types characters like `ç` |
+| `cdi` | Pick a folder you've visited before (Television) |
+| `Ctrl+R` | Search all history (Television) |
+| `Ctrl+T` | Pick something for the command being typed and insert it: files by default, folders after `cd`, branches after `git checkout`, and so on (Television) |
+| `tv` / `tv text` | Find files / search text in files. `tv` alone, then `Ctrl+T`, lists every channel |
 | ` command` | A leading space keeps the command out of history |
 | `ls` / `lsa` | List files with icons / including hidden ones (eza) |
 | `ll` / `lla` | Long listing / including hidden ones |
@@ -79,6 +81,7 @@ Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
 | `Space` | Show available shortcuts (which-key) |
 | `Space w` / `Space q` | Save / quit |
 | `Space f` | Format the buffer or selection |
+| `Space p` / `Space /` | Find files / search text in files (Television) |
 | `Tab` | Accept a completion suggestion |
 | `:FormatToggle` | Format on save on or off |
 | `:Lazy update` | Update plugins, then commit `lazy-lock.json` |
@@ -97,7 +100,7 @@ Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
 | `Cmd+Shift+Enter` | Zoom the current split to full size and back |
 | `Cmd+W` | Close the tab or split without asking (`confirm-close-surface = false`) |
 
-Windows, tabs, and splits reopen after quitting (`window-save-state = always`). The left Option key acts as Alt; the right one types special characters.
+Windows, tabs, and splits reopen after quitting (`window-save-state = always`). The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jump back / forward a word); the right one types special characters.
 
 ### Zed
 
@@ -144,7 +147,7 @@ cd ~/dotfiles && stow -R -t ~ home
 
 ## What's included
 
-- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [fzf](https://github.com/junegunn/fzf) for `Ctrl+R` history search, and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
+- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
 - **Terminal:** Ghostty with Everforest Dark Hard colors and GeistMono Nerd Font

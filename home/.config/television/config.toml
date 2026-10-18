@@ -1,0 +1,8 @@
+# Television (tv): only settings that differ from the defaults.
+# All options: https://alexpasmantier.github.io/television/docs/Users/configuration
+
+[ui]
+theme = "everforest"
+
+[ui.input_bar]
+prompt = "❯"

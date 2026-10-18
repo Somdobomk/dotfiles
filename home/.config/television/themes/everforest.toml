@@ -1,0 +1,25 @@
+# Everforest Dark Hard, matching Ghostty, Neovim, Starship, and Zed
+# general
+background = '#272e33'
+border_fg = '#495156'
+text_fg = '#d3c6aa'
+dimmed_text_fg = '#859289'
+# input
+input_text_fg = '#d3c6aa'
+result_count_fg = '#83c092'
+# results
+result_name_fg = '#7fbbb3'
+result_line_number_fg = '#dbbc7f'
+result_value_fg = '#d3c6aa'
+selection_fg = '#a7c080'
+selection_bg = '#374145'
+match_fg = '#e69875'
+# preview
+preview_title_fg = '#a7c080'
+# modes
+channel_mode_fg = '#272e33'
+channel_mode_bg = '#a7c080'
+remote_control_mode_fg = '#272e33'
+remote_control_mode_bg = '#83c092'
+action_picker_mode_fg = '#272e33'
+action_picker_mode_bg = '#7fbbb3'

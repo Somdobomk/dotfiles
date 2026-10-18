@@ -9,13 +9,16 @@ Included:
 - `blink.cmp` completion from file paths, snippets, and the current buffer
 - `gitsigns.nvim` markers for added, changed, and removed lines
 - `which-key.nvim` popup listing shortcuts after pressing `<Space>`
+- `tv.nvim` file and text search with [Television](https://github.com/alexpasmantier/television)
 - `conform.nvim` for formatting, with no formatters set up by default
 
 ## Requirements
 
 ```sh
-brew install neovim git tree-sitter-cli
+brew install neovim git tree-sitter-cli television fd ripgrep
 ```
+
+Television runs the pickers; it uses `fd` to list files and `ripgrep` to search text.
 
 `tree-sitter-cli` builds the Treesitter parsers. Without it, most languages fall back to basic highlighting. After installing it, run `:TSUpdate` once.
 
@@ -51,6 +54,9 @@ formatters_by_ft = {
 - `<Space>w`: save
 - `<Space>q`: quit
 - `<Space>f`: format
+- `<Space>p`: find files (`Ctrl+Q` sends the results to the quickfix list)
+- `<Space>/`: search text in files and jump to the match
+- `<Space>tv` or `:Tv`: pick any Television channel, such as `git-log` or `git-branch`
 - `Tab`: accept a completion suggestion (`Ctrl+N` / `Ctrl+P` move through the list)
 - `:FormatToggle`: format on save on or off
 - `:Lazy`: plugin manager

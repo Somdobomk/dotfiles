@@ -32,8 +32,8 @@ confirm-close-surface = false
 
 mouse-hide-while-typing = true
 
-# Left Option acts as Alt (for shortcuts like fzf's Alt+C); right Option
-# still types special characters like ç and é
+# Left Option acts as Alt (for shell shortcuts like Alt+B / Alt+F to jump a
+# word); right Option still types special characters like ç and é
 macos-option-as-alt = left
 
 # --- Shell integration -------------------------------------------------------
