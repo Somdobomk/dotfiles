@@ -68,14 +68,18 @@ alias wget="wget --hsts-file=\"${_tmp%/}/wget-hsts\""
 unset _tmp
 
 # Preferred commands
+# Run the original with a leading backslash or `command`: \grep, command find
 alias vim='nvim'
 alias cat='bat --paging=never'
+alias grep='rg'
+alias find='fd'
+alias du='dust'
 
 if command -v eza >/dev/null 2>&1; then
   alias ls='eza --icons --group-directories-first'
-  alias lsa='ls -a'
-  alias ll='ls -l --no-user --header --time-style long-iso'
-  alias lla='ll -a'
+  alias lsa='eza -a --icons --group-directories-first'
+  alias ll='eza -l --icons --group-directories-first --no-user --header --time-style long-iso'
+  alias lla='eza -la --icons --group-directories-first --no-user --header --time-style long-iso'
 fi
 
 # iCloud Drive: "icloud" jumps there; ~icloud works in paths (cd ~icloud/Downloads)

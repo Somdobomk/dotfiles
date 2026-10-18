@@ -26,7 +26,7 @@ My personal macOS configuration.
 1. Install [Homebrew](https://brew.sh), then the tools these configs use:
 
    ```sh
-   brew install git stow neovim tree-sitter-cli starship zoxide television fd ripgrep eza bat antidote
+   brew install git stow neovim tree-sitter-cli starship zoxide television fd ripgrep dust eza bat antidote
    brew install --cask ghostty font-geist-mono-nerd-font
    ```
 
@@ -68,6 +68,10 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `ls` / `lsa` | List files with icons / including hidden ones (eza) |
 | `ll` / `lla` | Long listing / including hidden ones |
 | `cat file` | Print with syntax highlighting (bat) |
+| `grep foo` | Search file contents in the current folder and below (ripgrep). Skips hidden and gitignored files |
+| `find foo` | Find files and folders whose name matches "foo" (fd). Skips hidden and gitignored files; add `-H` for hidden |
+| `du` | Show which folders take the most space (dust) |
+| `\grep`, `command find` | Run the original command instead of the replacement |
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
 | `notes` | Open `~/notes` in Zed |
 | `notes-sync` | Commit, pull, and push `~/notes` |
@@ -147,7 +151,7 @@ cd ~/dotfiles && stow -R -t ~ home
 
 ## What's included
 
-- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
+- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
 - **Terminal:** Ghostty with Everforest Dark Hard colors and GeistMono Nerd Font
