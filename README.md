@@ -13,6 +13,7 @@ My personal macOS configuration.
 | [`home/.config/nvim/`](home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](home/.config/nvim/README.md)) | `~/.config/nvim`          |
 | [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
+| [`home/.config/ghostty/`](home/.config/ghostty/)           | [Ghostty](https://ghostty.org) terminal config and Everforest theme          | `~/.config/ghostty`       |
 | [`home/.hyper.js`](home/.hyper.js)                         | [Hyper](https://hyper.is) terminal config                                    | `~/.hyper.js`             |
 | [`home/.hyper_plugins/`](home/.hyper_plugins/)             | Hyper plugin list                                                            | `~/.hyper_plugins`        |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
@@ -26,7 +27,7 @@ My personal macOS configuration.
    ```sh
    brew install git stow neovim tree-sitter-cli starship zoxide eza bat antidote \
      zsh-autosuggestions zsh-syntax-highlighting
-   brew install --cask hyper font-geist-mono-nerd-font
+   brew install --cask ghostty hyper font-geist-mono-nerd-font
    ```
 
 2. Clone the repo:
@@ -75,7 +76,7 @@ cd ~/dotfiles && stow -R -t ~ home
 - **Shell:** Zsh with Antidote plugins (autosuggestions, syntax highlighting, completions), [zoxide](https://github.com/ajeetdsouza/zoxide), and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
-- **Terminal:** Hyper with Everforest Dark Hard colors and GeistMono Nerd Font
+- **Terminal:** Ghostty and Hyper, both with Everforest Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
 
 ## Zen Browser

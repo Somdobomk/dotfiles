@@ -6,7 +6,7 @@ module.exports = {
 
     // Typography
     fontSize: 16,
-    fontFamily: 'GeistMono Nerd Font',
+    fontFamily: 'GeistMono Nerd Font Mono',
     fontWeight: 'normal',
     fontWeightBold: 'bold',
     lineHeight: 1,

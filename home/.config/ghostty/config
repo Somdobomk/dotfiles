@@ -1,0 +1,9 @@
+# Ghostty config. See all options with: ghostty +show-config --default --docs
+
+theme = Everforest Dark Hard Material
+
+font-family = GeistMono Nerd Font Mono
+font-size = 16
+
+window-padding-x = 14
+window-padding-y = 12
