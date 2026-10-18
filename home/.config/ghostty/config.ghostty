@@ -7,3 +7,7 @@ font-size = 16
 
 window-padding-x = 14
 window-padding-y = 12
+
+# Left Option acts as Alt (for shortcuts like fzf's Alt+C); right Option
+# still types special characters like ç and é
+macos-option-as-alt = left

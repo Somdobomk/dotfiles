@@ -1,7 +1,5 @@
 .DS_Store
 *:Zone.Identifier
-node_modules/
-**/.hyper_plugins/cache/
 .netrwhist
 fonts/private/
 .zsh_sessions/

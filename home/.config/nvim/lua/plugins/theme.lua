@@ -1,5 +1,5 @@
 -- Everforest Dark Hard, matching Zed's "Everforest Dark Hard (material)"
--- and the Hyper terminal colors
+-- and the Ghostty terminal colors
 return {
   {
     "sainnhe/everforest",

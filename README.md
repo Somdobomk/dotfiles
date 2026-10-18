@@ -16,8 +16,6 @@ My personal macOS configuration.
 | [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list                                          | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`home/.config/ghostty/`](home/.config/ghostty/)           | [Ghostty](https://ghostty.org) terminal config and Everforest theme          | `~/.config/ghostty`       |
-| [`home/.hyper.js`](home/.hyper.js)                         | [Hyper](https://hyper.is) terminal config                                    | `~/.hyper.js`             |
-| [`home/.hyper_plugins/`](home/.hyper_plugins/)             | Hyper plugin list                                                            | `~/.hyper_plugins`        |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
 | [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
@@ -28,10 +26,10 @@ My personal macOS configuration.
 
    ```sh
    brew install git stow neovim tree-sitter-cli starship zoxide fzf eza bat antidote
-   brew install --cask ghostty hyper font-geist-mono-nerd-font
+   brew install --cask ghostty font-geist-mono-nerd-font
    ```
 
-   That covers the terminals' font. The full font list is under [Fonts](#fonts).
+   That covers the terminal's font. The full font list is under [Fonts](#fonts).
 
 2. Clone the repo:
 
@@ -50,9 +48,70 @@ My personal macOS configuration.
 
 4. Restart the shell with `exec zsh`.
 
+## Cheat sheet
+
+Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to forget.
+
+### Shell
+
+| Shortcut | What it does |
+| --- | --- |
+| `cd foo` | Jump to the most-used folder matching "foo" (zoxide). Normal paths still work |
+| `foo` | Type just a folder name to `cd` into it |
+| `↑` / `↓` | Step through earlier commands that start with what's already typed |
+| `Ctrl+R` | Search all history with fzf |
+| `Ctrl+T` | Find a file with fzf and insert its path |
+| `Alt+C` | Jump to a folder with fzf. Uses the **left** Option key; the right one still types characters like `ç` |
+| ` command` | A leading space keeps the command out of history |
+| `ls` / `lsa` | List files with icons / including hidden ones (eza) |
+| `ll` / `lla` | Long listing / including hidden ones |
+| `cat file` | Print with syntax highlighting (bat) |
+| `notes` | Open `~/notes` in Zed |
+| `notes-sync` | Commit, pull, and push `~/notes` |
+
+### Neovim
+
+Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
+
+| Shortcut | What it does |
+| --- | --- |
+| `Space` | Show available shortcuts (which-key) |
+| `Space w` / `Space q` | Save / quit |
+| `Space f` | Format the buffer or selection |
+| `Tab` | Accept a completion suggestion |
+| `:FormatToggle` | Format on save on or off |
+| `:Lazy update` | Update plugins, then commit `lazy-lock.json` |
+| `:TSUpdate` | Update Treesitter parsers |
+
+### Ghostty
+
+| Shortcut | What it does |
+| --- | --- |
+| `Cmd+,` | Open the config in Zed |
+| `Cmd+Shift+,` | Reload the config after saving |
+
+### Zed
+
+| Shortcut | What it does |
+| --- | --- |
+| `Cmd+P` | Open a file by name |
+| `Cmd+Shift+F` | Search across the project |
+| `Cmd+K V` | Markdown preview beside the file |
+
+### Dotfiles
+
+Run from `~/dotfiles`.
+
+| Command | What it does |
+| --- | --- |
+| `stow -R -t ~ home` | Re-link after adding or removing files in `home/` ([more](#gnu-stow)) |
+| `zen/export.sh` | Save Zen mods and shortcuts into the repo ([more](#zen-browser)) |
+| `fonts/install.sh` | Install the fonts that aren't in Homebrew ([more](#fonts)) |
+| `brew upgrade` | Update Homebrew tools, apps, and fonts |
+
 ## GNU Stow
 
-[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.hyper.js` becomes `~/.hyper.js`. Run every command from `~/dotfiles`:
+[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.zshenv` becomes `~/.zshenv`. Run every command from `~/dotfiles`:
 
 | Command | What it does |
 | --- | --- |
@@ -79,7 +138,7 @@ cd ~/dotfiles && stow -R -t ~ home
 - **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [fzf](https://github.com/junegunn/fzf) for `Ctrl+R` history search, and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
 - **Prompt:** [Starship](https://starship.rs)
 - **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
-- **Terminal:** Ghostty and Hyper, both with Everforest Dark Hard colors and GeistMono Nerd Font
+- **Terminal:** Ghostty with Everforest Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
 
 ## Zen Browser
