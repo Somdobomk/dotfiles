@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 # Install the fonts in this folder into ~/Library/Fonts (macOS).
+# Open-source fonts come from Homebrew instead; see the README.
 #
 # Usage: ./install.sh [-n]
 #   -n  dry run: list what would be installed without copying anything
@@ -14,29 +15,11 @@ DEST="$HOME/Library/Fonts"
 DRY_RUN=false
 [[ "${1:-}" == "-n" ]] && DRY_RUN=true
 
-# Skip duplicates of fonts that are installed from elsewhere:
-# Windows-only builds, static Cascadia (variable is used), variable Inter (static is used)
-EXCLUDE=(
-  '*Windows*'
-  '*/static/*'
-  '*/Inter Variable/*'
-)
-
-excluded() {
-  local pattern
-  for pattern in "${EXCLUDE[@]}"; do
-    [[ "$1" == ${~pattern} ]] && return 0
-  done
-  return 1
-}
-
 typeset -A seen
 installed=0 skipped=0
 
 # .otf before .ttf so the OpenType version wins when a font ships as both
 for font in "$FONT_DIR"/**/*.otf(N.) "$FONT_DIR"/**/*.ttf(N.); do
-  excluded "$font" && continue
-
   name="${font:t:r}"
   [[ -n "${seen[$name]:-}" ]] && continue
   seen[$name]=1

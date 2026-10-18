@@ -19,7 +19,7 @@ My personal macOS configuration.
 | [`home/.hyper.js`](home/.hyper.js)                         | [Hyper](https://hyper.is) terminal config                                    | `~/.hyper.js`             |
 | [`home/.hyper_plugins/`](home/.hyper_plugins/)             | Hyper plugin list                                                            | `~/.hyper_plugins`        |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
-| [`fonts/`](fonts/)                                         | Font collection and [install script](fonts/install.sh)                       | `~/Library/Fonts`         |
+| [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
 | [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
 
 ## Quick start (macOS)
@@ -31,6 +31,8 @@ My personal macOS configuration.
      zsh-autosuggestions zsh-syntax-highlighting
    brew install --cask ghostty hyper font-geist-mono-nerd-font
    ```
+
+   That covers the terminals' font. The full font list is under [Fonts](#fonts).
 
 2. Clone the repo:
 
@@ -123,16 +125,33 @@ The custom UI font is GeistMono Nerd Font Mono (`brew install --cask font-geist-
 
 ## Fonts
 
-### Install
+### Open-source fonts (Homebrew)
 
-Copy every font in [`fonts/`](fonts/) to `~/Library/Fonts`:
+Open-source fonts are installed with Homebrew, so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need.
+
+```sh
+brew install --cask \
+  font-geist-mono-nerd-font \
+  font-iosevka-nerd-font font-iosevka-term-nerd-font \
+  font-jetbrains-mono-nerd-font font-victor-mono-nerd-font \
+  font-fira-code-nerd-font font-fira-mono-nerd-font \
+  font-hack-nerd-font font-inconsolata-nerd-font \
+  font-sauce-code-pro-nerd-font font-terminess-ttf-nerd-font \
+  font-ubuntu-nerd-font
+```
+
+Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `ghostty +list-fonts`.
+
+### Other fonts
+
+[`fonts/`](fonts/) holds fonts that aren't in Homebrew. Copy them to `~/Library/Fonts` with:
 
 ```sh
 ~/dotfiles/fonts/install.sh -n   # dry run: list what would be installed
 ~/dotfiles/fonts/install.sh      # install
 ```
 
-The script installs one copy of each font and leaves out web formats and Windows builds. When a font ships as both `.otf` and `.ttf`, the `.otf` is used. Fonts that are already installed are never overwritten, so the script is safe to run again.
+When a font ships as both `.otf` and `.ttf`, the `.otf` is used. Web formats are skipped. Fonts that are already installed are never overwritten, so the script is safe to run again.
 
 ### Paid fonts
 
@@ -147,7 +166,8 @@ Without access to the private repo, skip the clone. The script installs only the
 
 ### Favorites
 
+- [Geist Mono](https://vercel.com/font): terminals and editors
+- [Iosevka](https://typeof.net/Iosevka/)
+- [Victor Mono](https://rubjo.github.io/victor-mono/): cursive italics
 - [Dank Mono](https://philpl.gumroad.com/l/dank-mono) (paid)
-- [Skribble Mono](https://www.skribble.dev/)
-- [Victor Mono](https://rubjo.github.io/victor-mono/)
-- [Nerd Fonts](https://www.nerdfonts.com/), required for icons in eza and Starship
+- [Skribble Mono](https://www.skribble.dev/) (paid)
