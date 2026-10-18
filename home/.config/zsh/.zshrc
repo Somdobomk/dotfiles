@@ -78,6 +78,10 @@ if command -v eza >/dev/null 2>&1; then
   alias lla='ll -a'
 fi
 
+# iCloud Drive: "icloud" jumps there; ~icloud works in paths (cd ~icloud/Downloads)
+hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias icloud='cd ~icloud'
+
 # Notes (~/notes, private repo Somdobomk/notes)
 alias notes='zed ~/notes'
 notes-sync() {

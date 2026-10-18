@@ -66,6 +66,7 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `ls` / `lsa` | List files with icons / including hidden ones (eza) |
 | `ll` / `lla` | Long listing / including hidden ones |
 | `cat file` | Print with syntax highlighting (bat) |
+| `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
 | `notes` | Open `~/notes` in Zed |
 | `notes-sync` | Commit, pull, and push `~/notes` |
 
