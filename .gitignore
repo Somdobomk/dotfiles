@@ -7,4 +7,4 @@ fonts/private/
 .zcompdump*
 .zsh_plugins.zsh
 .zsh_sessions/
-config/zed/prompts/
+home/.config/zed/prompts/

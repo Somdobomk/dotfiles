@@ -20,11 +20,7 @@ The setup targets current Neovim releases. No LSP servers are configured: this i
 
 ## Install
 
-Symlink this folder to Neovim's default config location. If `~/.config/nvim` already exists, back it up or remove it first.
-
-```sh
-ln -s ~/dotfiles/config/nvim ~/.config/nvim
-```
+This folder is linked to `~/.config/nvim` by Stow, along with the rest of the dotfiles. See the [main README](../../../README.md#gnu-stow).
 
 Launch with `nvim`. The `vim` alias in `.zshrc` also opens it. First launch downloads the plugin manager and plugins.
 

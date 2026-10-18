@@ -4,24 +4,26 @@ My personal macOS configuration.
 
 ## Contents
 
-Everything in [`config/`](config/) is symlinked into `~/.config`.
+[`home/`](home/) mirrors `$HOME` and is linked into place with [GNU Stow](#gnu-stow).
 
-| Path                                                   | What it is                                                             | Links to                  |
-| ------------------------------------------------------ | ---------------------------------------------------------------------- | ------------------------- |
-| [`config/zsh/`](config/zsh/)                           | Zsh config and [Antidote](https://antidote.sh) plugin list             | `~/.config/zsh`           |
-| [`config/nvim/`](config/nvim/)                         | Lightweight Neovim quick-edit setup ([details](config/nvim/README.md)) | `~/.config/nvim`          |
-| [`config/zed/`](config/zed/)                           | [Zed](https://zed.dev) editor settings                                 | `~/.config/zed`           |
-| [`config/starship.toml`](config/starship.toml)         | [Starship](https://starship.rs) prompt                                 | `~/.config/starship.toml` |
-| [`hyper/.hyper.js`](hyper/.hyper.js)                   | [Hyper](https://hyper.is) terminal config                              | `~/.hyper.js`             |
-| [`fonts/`](fonts/)                                     | Font collection and [install script](fonts/install.sh)                 | `~/Library/Fonts`         |
-| [`wallpapers/`](wallpapers/)                           | Gruvbox wallpapers                                                     | —                         |
+| Path                                                       | What it is                                                                   | Links to                  |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------- |
+| [`home/.zshenv`](home/.zshenv)                             | Points zsh at `~/.config/zsh`                                                | `~/.zshenv`               |
+| [`home/.config/zsh/`](home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
+| [`home/.config/nvim/`](home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](home/.config/nvim/README.md)) | `~/.config/nvim`          |
+| [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
+| [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
+| [`home/.hyper.js`](home/.hyper.js)                         | [Hyper](https://hyper.is) terminal config                                    | `~/.hyper.js`             |
+| [`home/.hyper_plugins/`](home/.hyper_plugins/)             | Hyper plugin list                                                            | `~/.hyper_plugins`        |
+| [`fonts/`](fonts/)                                         | Font collection and [install script](fonts/install.sh)                       | `~/Library/Fonts`         |
+| [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
 
 ## Quick start (macOS)
 
 1. Install [Homebrew](https://brew.sh), then the tools these configs use:
 
    ```sh
-   brew install git neovim starship zoxide eza bat antidote \
+   brew install git stow neovim starship zoxide eza bat antidote \
      zsh-autosuggestions zsh-syntax-highlighting
    brew install --cask hyper font-geist-mono-nerd-font
    ```
@@ -34,29 +36,44 @@ Everything in [`config/`](config/) is symlinked into `~/.config`.
 
    To work from a fork, see [Fork.md](Fork.md).
 
-3. Symlink the configs into place. `ln -s` fails instead of overwriting if a file already exists, so back up or remove the existing file first.
+3. Link the configs into place with [Stow](#gnu-stow):
 
    ```sh
    mkdir -p ~/.config
-   for item in ~/dotfiles/config/*; do
-     ln -s "$item" ~/.config/
-   done
-   ln -s ~/dotfiles/hyper/.hyper.js ~/.hyper.js   # Hyper only reads ~/.hyper.js
+   cd ~/dotfiles && stow -t ~ home
    ```
 
-4. Tell zsh to look in `~/.config/zsh`. This one-line `~/.zshenv` is the only zsh file left in `$HOME`:
+4. Restart the shell with `exec zsh`.
 
-   ```sh
-   echo 'export ZDOTDIR="$HOME/.config/zsh"' > ~/.zshenv
-   ```
+## GNU Stow
 
-5. Restart the shell with `exec zsh`.
+[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.hyper.js` becomes `~/.hyper.js`. Run every command from `~/dotfiles`:
+
+| Command | What it does |
+| --- | --- |
+| `stow -t ~ home` | Create the links |
+| `stow -n -v -t ~ home` | Dry run: show what would be linked without changing anything |
+| `stow -R -t ~ home` | Re-link: run after adding or removing files in `home/` |
+| `stow -D -t ~ home` | Remove every link Stow created. Repo files are untouched |
+
+**Adding a new config:** move it into `home/` at the same path it has in `$HOME`, then re-link. For example:
+
+```sh
+mv ~/.config/ghostty ~/dotfiles/home/.config/ghostty
+cd ~/dotfiles && stow -R -t ~ home
+```
+
+**Conflicts:** Stow never overwrites. If a real file already exists where a link should go, Stow stops with `existing target is not owned by stow`. Back up or remove that file, then run the command again.
+
+**How folders are linked:** if a folder doesn't exist in `$HOME` yet, Stow links the whole folder. `~/.config/nvim`, for example, is one link to `home/.config/nvim`, so files that apps create inside it end up in the repo. Folders that already exist, like `~/.config`, stay real folders, and Stow links the items inside them.
+
+[`home/.stow-local-ignore`](home/.stow-local-ignore) lists files Stow skips, such as `.DS_Store`.
 
 ## What's included
 
 - **Shell:** Zsh with Antidote plugins (autosuggestions, syntax highlighting, completions), [zoxide](https://github.com/ajeetdsouza/zoxide), and [eza](https://github.com/eza-community/eza)/[bat](https://github.com/sharkdp/bat) aliases for `ls`/`cat`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox ([details](config/nvim/README.md))
+- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox ([details](home/.config/nvim/README.md))
 - **Terminal:** Hyper with the Everforest theme and GeistMono Nerd Font
 
 ## Fonts
