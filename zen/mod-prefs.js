@@ -35,7 +35,7 @@ user_pref("theme.better_find_bar.instant_animations", false);
 user_pref("theme.better_find_bar.textbox_width", "800");
 user_pref("theme.better_find_bar.transparent_background", true);
 user_pref("theme.better_find_bar.vertical_position", "default");
-user_pref("theme.custom_uifont.custom", "GeistMono Nerd Font");
+user_pref("theme.custom_uifont.custom", "GeistMono Nerd Font Mono");
 user_pref("theme.custom_uifont.default", "Custom");
 user_pref("theme.custom_uifont.shadow", "none");
 user_pref("uc.essentials.auto-grow", false);

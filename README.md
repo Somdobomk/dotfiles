@@ -117,7 +117,7 @@ The script uses the Zen profile that changed most recently. To choose one, pass 
    To choose a profile, add `-Profile "<folder name>"`.
 3. Start Zen and sign in to Sync.
 
-The custom UI font is GeistMono Nerd Font, so install it on Windows too, or pick another font in the mod's settings.
+The custom UI font is GeistMono Nerd Font Mono (`brew install --cask font-geist-mono-nerd-font` on macOS). Install it on Windows too, or pick another font in the mod's settings.
 
 ## Fonts
 
