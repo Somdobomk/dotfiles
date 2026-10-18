@@ -13,7 +13,7 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 | [`home/.config/zsh/`](home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
 | [`home/.config/nvim/`](home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](home/.config/nvim/README.md)) | `~/.config/nvim`          |
 | [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
-| [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list                                          | `~/.config/git`           |
+| [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list. The email is a placeholder ([details](#git-email)) | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Everforest colors     | `~/.config/wezterm`       |
 | [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Everforest theme, and zoxide channel | `~/.config/television` |
@@ -48,7 +48,13 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
    cd ~/dotfiles && stow -t ~ home
    ```
 
-4. Restart the shell with `exec zsh`.
+4. Set your Git email, which stays out of the repo (see [Git email](#git-email)):
+
+   ```sh
+   git config --file ~/.config/git/local user.email you@example.com
+   ```
+
+5. Restart the shell with `exec zsh`.
 
 ## Cheat sheet
 
@@ -126,6 +132,7 @@ Run from `~/dotfiles`.
 | `brew upgrade` | Update Homebrew tools, apps, and fonts |
 | `windows\install.ps1` | Windows: set up or update this PC from the repo ([more](#windows)) |
 | `windows\install.ps1 -SaveTerminal` | Windows: save Windows Terminal's settings into the repo |
+| `windows\install.ps1 -SaveApps` | Windows: save the list of installed apps to `windows\winget.json` |
 
 ## GNU Stow
 
@@ -162,25 +169,26 @@ cd ~/dotfiles && stow -R -t ~ home
 
 ## Windows
 
-[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, and Television configs in [`home/`](home/) are used directly, so changes to them apply to both systems.
+[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, Television, WezTerm, Zed, and Git configs in [`home/`](home/) are used directly, so changes to them apply to both systems.
 
 | Path | What it is |
 | --- | --- |
 | [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](home/.config/zsh/.zshrc) |
 | [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Everforest Dark Hard, GeistMono Nerd Font, and a separate admin profile |
+| [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import` |
 | [`windows/powertoys/`](windows/powertoys/) | PowerToys settings backup |
 | [`windows/install.ps1`](windows/install.ps1) | Setup script |
 
 ### Quick start (Windows)
 
-1. Install the tools these configs use:
+Everything else comes back from this repo, GitHub, and OneDrive. Before reinstalling Windows, only back up `~\.ssh` (somewhere private, not OneDrive or GitHub), or skip it and add a new key afterwards with `gh ssh-key add`. A separate drive like `F:` keeps its files through a reinstall.
+
+1. Install Git and the GitHub CLI, then sign in:
 
    ```powershell
-   winget install Git.Git Microsoft.PowerShell Microsoft.WindowsTerminal Neovim.Neovim Starship.Starship ajeetdsouza.zoxide alexpasmantier.television sharkdp.bat eza-community.eza BurntSushi.ripgrep.MSVC sharkdp.fd bootandy.dust ZedIndustries.Zed wez.wezterm zig.zig tree-sitter.tree-sitter-cli
-   Install-Module Terminal-Icons -Scope CurrentUser
+   winget install Git.Git GitHub.cli
+   gh auth login
    ```
-
-   Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads). Windows Terminal and the Zen mods use it.
 
 2. Clone the repo. Any folder works; this one keeps it out of OneDrive:
 
@@ -188,13 +196,24 @@ cd ~/dotfiles && stow -R -t ~ home
    git clone https://github.com/Somdobomk/dotfiles.git F:\GitHub\dotfiles
    ```
 
-3. Run the install script, then open a new tab:
+3. Reinstall every app from the saved list, including the tools these configs use:
+
+   ```powershell
+   winget import F:\GitHub\dotfiles\windows\winget.json --accept-package-agreements --accept-source-agreements
+   Install-Module Terminal-Icons -Scope CurrentUser
+   ```
+
+   Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads), then the repo's fonts with `F:\GitHub\dotfiles\fonts\install.ps1`.
+
+4. Close Zed, run the install script, then open a new tab:
 
    ```powershell
    F:\GitHub\dotfiles\windows\install.ps1
    ```
 
    If scripts are blocked, run `pwsh -ExecutionPolicy Bypass -File F:\GitHub\dotfiles\windows\install.ps1` instead.
+
+5. Set your Git email (see [Git email](#git-email)), import [Zen](#set-up-on-windows), and restore [PowerToys](#powertoys).
 
 ### What the install script does
 
@@ -204,13 +223,25 @@ cd ~/dotfiles && stow -R -t ~ home
 | Windows Terminal | `settings.json` is copied into place. It's a copy, not a link, because Terminal replaces links when it saves |
 | Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `home/.config/nvim`. Junctions need no admin rights and work across drives |
 | WezTerm | `~\.config\wezterm` becomes a junction to `home/.config/wezterm` |
+| Zed | `%APPDATA%\Zed` becomes a junction to `home/.config/zed`. Skipped while Zed is open |
+| Git | `~\.config\git` becomes a junction to `home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
 | Television | `home/.config/television` is copied to `%LOCALAPPDATA%\television\config`, and the standard channels are downloaded |
 | Starship | Nothing to copy: the profile points `STARSHIP_CONFIG` at `home/.config/starship.toml` |
 | Notes | `Somdobomk/notes` is cloned next to the dotfiles repo |
 
 Anything replaced is first renamed to `<name>.bak-<date>`. The script is safe to run again, and it lists any tools that are still missing.
 
-After changing Windows Terminal's settings in its Settings screen, save them into the repo with `windows\install.ps1 -SaveTerminal`, then commit.
+After changing Windows Terminal's settings in its Settings screen, save them into the repo with `windows\install.ps1 -SaveTerminal`, then commit. After installing or removing apps, update the app list with `windows\install.ps1 -SaveApps`, then commit.
+
+### Git email
+
+[`home/.config/git/config`](home/.config/git/config) uses `EMAIL` as a placeholder, so the real address stays out of this public repo. Each computer sets it in `~/.config/git/local`, which is gitignored:
+
+```sh
+git config --file ~/.config/git/local user.email you@example.com
+```
+
+On Windows, the install script does this from `~\.gitconfig` when it has an email. Until it's set, commits use the placeholder. Check with `git config user.email`.
 
 ### Differences from macOS
 

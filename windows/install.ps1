@@ -3,6 +3,11 @@
 # Usage: .\install.ps1                Install everything below
 #        .\install.ps1 -SaveTerminal  Copy Windows Terminal's live settings
 #                                     back into the repo, then commit them
+#        .\install.ps1 -SaveApps      Save the list of installed apps to
+#                                     windows\winget.json, then commit it
+#
+# Apps aren't installed here. On a fresh PC, run this first:
+#   winget import windows\winget.json
 #
 # - PowerShell: $PROFILE (in OneDrive Documents) becomes a one-line file that
 #   loads windows\powershell\Microsoft.PowerShell_profile.ps1 from this repo.
@@ -10,12 +15,16 @@
 #   It's a copy, not a link, because Terminal replaces links when it saves.
 # - Neovim: %LOCALAPPDATA%\nvim becomes a junction to home\.config\nvim.
 # - WezTerm: ~\.config\wezterm becomes a junction to home\.config\wezterm.
+# - Zed: %APPDATA%\Zed becomes a junction to home\.config\zed.
+# - Git: ~\.config\git becomes a junction to home\.config\git. The email goes
+#   in ~\.config\git\local (gitignored), taken from ~\.gitconfig if it has one;
+#   ~\.gitconfig is then moved aside, since it would override the shared config.
 # - Television: home\.config\television is copied into tv's config folder,
 #   next to the channels `tv update-channels` downloads.
 # - Notes: the private Somdobomk/notes repo is cloned next to this one.
 # Anything replaced is first renamed to <name>.bak-<date>.
 
-param([switch]$SaveTerminal)
+param([switch]$SaveTerminal, [switch]$SaveApps)
 
 $ErrorActionPreference = 'Stop'
 $WindowsDir = $PSScriptRoot
@@ -34,6 +43,14 @@ if ($SaveTerminal) {
   if (-not $TerminalSettings) { Write-Error 'Windows Terminal settings not found.' }
   Copy-Item $TerminalSettings[0] $RepoTerminal -Force
   Write-Host "Saved $($TerminalSettings[0]) to the repo. Review it with git diff."
+  return
+}
+
+if ($SaveApps) {
+  $Apps = Join-Path $WindowsDir 'winget.json'
+  # Apps winget can't reinstall (no package in its sources) are left out
+  winget export --output $Apps --accept-source-agreements --disable-interactivity | Out-Null
+  Write-Host "Saved the app list to $Apps. Review it with git diff."
   return
 }
 
@@ -73,7 +90,7 @@ foreach ($Target in $TerminalSettings) {
 }
 if (-not $TerminalSettings) { Write-Host 'Windows Terminal: not installed, skipped' }
 
-# Neovim and WezTerm ---------------------------------------------------------
+# Linked folders -------------------------------------------------------------
 
 function Link-Folder ($Name, $Path, $Target) {
   Write-Host "${Name}: $Path"
@@ -91,6 +108,31 @@ function Link-Folder ($Name, $Path, $Target) {
 
 Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'home\.config\nvim')
 Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'home\.config\wezterm')
+if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
+  Write-Host "Zed: running, skipped. Close it and run this again."
+} else {
+  Link-Folder 'Zed' (Join-Path $env:APPDATA 'Zed') (Join-Path $Dotfiles 'home\.config\zed')
+}
+
+# Git ------------------------------------------------------------------------
+
+Link-Folder 'Git' (Join-Path $HOME '.config\git') (Join-Path $Dotfiles 'home\.config\git')
+$GitLocal = Join-Path $HOME '.config\git\local'
+$GitConfig = Join-Path $HOME '.gitconfig'
+if (-not (Test-Path $GitLocal)) {
+  $Email = if (Test-Path $GitConfig) { git config --file $GitConfig user.email }
+  if ($Email) {
+    Set-Content $GitLocal "[user]`n`temail = $Email" -Encoding utf8
+    Write-Host "  set the email in $GitLocal from ~\.gitconfig"
+  } else {
+    Write-Host "  no email set: commits will use the EMAIL placeholder. Add yours with:"
+    Write-Host "  git config --file `"$GitLocal`" user.email you@example.com"
+  }
+}
+if (Test-Path $GitConfig) {
+  Write-Host "Git: $GitConfig overrides the shared config"
+  Backup $GitConfig
+}
 
 # Television -----------------------------------------------------------------
 

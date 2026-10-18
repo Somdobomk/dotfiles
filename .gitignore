@@ -4,3 +4,4 @@
 fonts/private/
 .zsh_sessions/
 home/.config/zed/prompts/
+home/.config/git/local

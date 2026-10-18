@@ -1,6 +1,10 @@
 [user]
 	name = somdobomk
-	email = somdobomk@gmail.com
+	# Placeholder, so the real address stays out of this public repo. Set it
+	# in ~/.config/git/local (gitignored), which is included at the end:
+	#   [user]
+	#   	email = you@example.com
+	email = EMAIL
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -10,3 +14,6 @@
 	defaultBranch = main
 [color]
 	ui = auto
+# Machine-specific settings, like the real email. Last, so it overrides the above.
+[include]
+	path = ~/.config/git/local
