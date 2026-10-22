@@ -2,48 +2,46 @@
 
 {
 	"agent_ui_font_family": "GeistMono Nerd Font Mono",
- "agent_buffer_font_size": 18.0,
- "agent_ui_font_size": 18.0,
- "agent_servers": {
-  "claude-acp": {
-   "default_config_options": {
-    "mode": "auto"
-   },
-   "type": "registry"
-  }
- },
- "context_servers": {
-  
- },
- "edit_predictions": {
-  "allow_data_collection": "no"
- },
- "collaboration_panel": {
-  "dock": "left"
- },
- "outline_panel": {
-  "dock": "left"
- },
- "git_panel": {
-  "dock": "left"
- },
- "agent": {
-  "enable_feedback": false,
-  "dock": "right",
-  "threads_sidebar": {
-   "position": "right"
-  },
-  "favorite_models": [],
-  "model_parameters": []
- },
- "window_title_format": "${projectName}${separator}${fileName}",
- "telemetry": {
-  "diagnostics": false,
-  "metrics": false,
-  "anthropic_retention": false
- },
- "on_new_window": "empty_tab",
- "theme": "Everforest Dark Hard (material)",
+	"agent_buffer_font_size": 18.0,
+	"agent_ui_font_size": 18.0,
+	"agent_servers": {
+		"claude-acp": {
+			"default_config_options": {
+				"mode": "auto",
+			},
+			"type": "registry",
+		},
+	},
+	"context_servers": {},
+	"edit_predictions": {
+		"allow_data_collection": "no",
+	},
+	"collaboration_panel": {
+		"dock": "left",
+	},
+	"outline_panel": {
+		"dock": "left",
+	},
+	"git_panel": {
+		"dock": "left",
+	},
+	"agent": {
+		"enable_feedback": false,
+		"dock": "left",
+		"threads_sidebar": {
+			"position": "right",
+		},
+		"favorite_models": [],
+		"model_parameters": [],
+	},
+	"window_title_format": "${projectName}${separator}${fileName}",
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false,
+		"anthropic_retention": false,
+	},
+	"on_new_window": "empty_tab",
+	"theme": "Everforest Dark Hard (material)",
 	"buffer_font_family": "GeistMono Nerd Font Mono",
 	"buffer_font_size": 18.0,
 	"ui_font_family": ".SystemUIFont",
@@ -54,9 +52,9 @@
 	"buffer_line_height": { "custom": 1.4 },
 	"buffer_font_features": { "calt": false },
 	"buffer_font_weight": 300,
-	"toolbar": { "breadcrumbs": false, "quick_actions": false },
-	"project_panel": { "dock": "left",
-                    "entry_spacing": "standard" },
+	"toolbar": { "selections_menu": false,
+              "breadcrumbs": false, "quick_actions": false },
+	"project_panel": { "dock": "right", "entry_spacing": "standard" },
 	"tabs": { "file_icons": true },
 	"git": { "inline_blame": { "enabled": false } },
 	"current_line_highlight": "none",
@@ -64,4 +62,27 @@
 	"tab_size": 4,
 	"hard_tabs": true,
 	"cursor_shape": "block",
+	"theme_overrides": {
+		"Everforest Dark Hard (material)": {
+			"element.selection_background": "#a7c08066",
+			"players": [
+				{
+					"background": "#e67e80",
+					"cursor": "#e67e80",
+					"selection": "#a7c08066",
+				},
+			],
+		},
+	},
+	// Settings for one platform only. They override the ones above.
+	"windows": {
+		"terminal": {
+			"shell": {
+				"with_arguments": {
+					"program": "pwsh",
+					"args": ["-NoLogo"],
+				},
+			},
+		},
+	},
 }
