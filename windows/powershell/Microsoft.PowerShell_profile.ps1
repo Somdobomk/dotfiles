@@ -17,28 +17,6 @@ $env:VISUAL = $env:EDITOR
 # Keep less's history (used by git) out of $HOME
 $env:LESSHISTFILE = Join-Path $env:TEMP 'lesshst'
 
-# Checks GitHub for a newer PowerShell and installs it with winget.
-# Run it yourself; it no longer runs on every startup.
-function Update-PowerShell {
-    try {
-        Write-Host "Checking for PowerShell updates..." -ForegroundColor Cyan
-        $gitHubApiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
-        $latestReleaseInfo = Invoke-RestMethod -Uri $gitHubApiUrl -TimeoutSec 5
-        $latestVersion = [version]$latestReleaseInfo.tag_name.Trim('v')
-        $currentVersion = [version]$PSVersionTable.PSVersion.ToString()
-
-        if ($currentVersion -lt $latestVersion) {
-            Write-Host "Updating PowerShell $currentVersion -> $latestVersion..." -ForegroundColor Yellow
-            winget upgrade "Microsoft.PowerShell" --accept-source-agreements --accept-package-agreements
-            Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
-        } else {
-            Write-Host "Your PowerShell is up to date." -ForegroundColor Green
-        }
-    } catch {
-        Write-Error "Failed to update PowerShell. Error: $_"
-    }
-}
-
 # Preferred commands, same as macOS. `ls` stays PowerShell's own, so its
 # output can still be piped as objects.
 # Run the original with its full name: Get-Content, findstr, find.exe
@@ -114,12 +92,8 @@ Set-PSReadLineOption -Colors @{
     String = 'DarkCyan'
 }
 
-# ChrisTitusTech YouTuber better ninite
-Function chrisutil {
-  irm christitus.com/win | iex
-}
-
 Function wingetup {
+  # Updates PowerShell too, since it's a winget app.
   # --include-unknown also upgrades apps whose installed version winget can't read
   winget upgrade --all --include-unknown
 }

@@ -50,6 +50,14 @@ if ($SaveApps) {
   $Apps = Join-Path $WindowsDir 'winget.json'
   # Apps winget can't reinstall (no package in its sources) are left out
   winget export --output $Apps --accept-source-agreements --disable-interactivity | Out-Null
+  # So are runtimes and libraries: apps that need them pull them in again
+  $Runtimes = '^Microsoft\.(VCRedist|VCLibs|UI\.Xaml|WindowsAppRuntime|DotNet\.(Runtime|DesktopRuntime|AspNetCore|Native)|AppInstaller)\b'
+  # -DateKind String keeps CreationDate as written instead of converting it
+  $List = Get-Content $Apps -Raw | ConvertFrom-Json -DateKind String
+  foreach ($Source in $List.Sources) {
+    $Source.Packages = @($Source.Packages | Where-Object { $_.PackageIdentifier -notmatch $Runtimes })
+  }
+  $List | ConvertTo-Json -Depth 10 | Set-Content $Apps -Encoding utf8
   Write-Host "Saved the app list to $Apps. Review it with git diff."
   return
 }
@@ -125,7 +133,7 @@ if (-not (Test-Path $GitLocal)) {
     Set-Content $GitLocal "[user]`n`temail = $Email" -Encoding utf8
     Write-Host "  set the email in $GitLocal from ~\.gitconfig"
   } else {
-    Write-Host "  no email set: commits will use the EMAIL placeholder. Add yours with:"
+    Write-Host "  no email set: Git won't commit until you add yours with:"
     Write-Host "  git config --file `"$GitLocal`" user.email you@example.com"
   }
 }

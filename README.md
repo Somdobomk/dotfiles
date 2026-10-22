@@ -13,10 +13,14 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 | [`home/.config/zsh/`](home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
 | [`home/.config/nvim/`](home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](home/.config/nvim/README.md)) | `~/.config/nvim`          |
 | [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
-| [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list. The email is a placeholder ([details](#git-email)) | `~/.config/git`           |
+| [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Everforest colors     | `~/.config/wezterm`       |
 | [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Everforest theme, and zoxide channel | `~/.config/television` |
+| [`install.sh`](install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
+| [`Brewfile`](Brewfile)                                     | Homebrew tools, apps, and fonts, for `brew bundle`                           | —                         |
+| [`macos/defaults.sh`](macos/defaults.sh)                   | macOS settings: key repeat, Finder, Dock ([details](#macos-settings))        | —                         |
+| [`.editorconfig`](.editorconfig)                           | Indentation for this repo, so every editor saves files the same way          | —                         |
 | [`windows/`](windows/)                                     | PowerShell profile, Windows Terminal settings, PowerToys backup, and install script | see [Windows](#windows) |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
@@ -24,14 +28,7 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 
 ## Quick start (macOS)
 
-1. Install [Homebrew](https://brew.sh), then the tools these configs use:
-
-   ```sh
-   brew install git stow neovim tree-sitter-cli starship zoxide television fd ripgrep dust eza bat antidote
-   brew install --cask wezterm font-geist-mono-nerd-font
-   ```
-
-   That covers the terminal's font. The full font list is under [Fonts](#fonts).
+1. Install [Homebrew](https://brew.sh). It also installs Apple's command line tools, which include Git.
 
 2. Clone the repo:
 
@@ -41,20 +38,23 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 
    To work from a fork, see [Fork.md](Fork.md).
 
-3. Link the configs into place with [Stow](#gnu-stow):
+3. Run the install script:
 
    ```sh
-   mkdir -p ~/.config
-   cd ~/dotfiles && stow -t ~ home
+   ~/dotfiles/install.sh
    ```
 
-4. Set your Git email, which stays out of the repo (see [Git email](#git-email)):
+   It installs everything in the [`Brewfile`](Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), installs the [fonts](#fonts) that aren't in Homebrew, and clones `~/notes`. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
 
-   ```sh
-   git config --file ~/.config/git/local user.email you@example.com
-   ```
+4. Optionally, apply the [macOS settings](#macos-settings) with `~/dotfiles/macos/defaults.sh`.
 
 5. Restart the shell with `exec zsh`.
+
+After installing or removing Homebrew apps, save the list with `./install.sh --save-apps`, then commit. This rewrites the `Brewfile` from what's installed, so its comments are dropped.
+
+### macOS settings
+
+[`macos/defaults.sh`](macos/defaults.sh) changes settings that aren't stored in any config file: fast key repeat, no smart quotes or autocorrect, Finder showing hidden files and extensions in list view, an auto-hiding Dock without recent apps, and Spaces that stay in order. Read it first and delete any lines you don't want. The keyboard settings need a logout.
 
 ## Cheat sheet
 
@@ -126,6 +126,9 @@ Run from `~/dotfiles`.
 
 | Command | What it does |
 | --- | --- |
+| `./install.sh` | Set up or update this Mac from the repo ([more](#quick-start-macos)) |
+| `./install.sh --save-apps` | Save the list of Homebrew apps to the `Brewfile` |
+| `macos/defaults.sh` | Apply the [macOS settings](#macos-settings) |
 | `stow -R -t ~ home` | Re-link after adding or removing files in `home/` ([more](#gnu-stow)) |
 | `zen/export.sh` | Save Zen mods and shortcuts into the repo ([more](#zen-browser)) |
 | `fonts/install.sh` | Install the fonts that aren't in Homebrew ([more](#fonts)) |
@@ -175,7 +178,7 @@ cd ~/dotfiles && stow -R -t ~ home
 | --- | --- |
 | [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](home/.config/zsh/.zshrc) |
 | [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Everforest Dark Hard, GeistMono Nerd Font, and a separate admin profile |
-| [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import` |
+| [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import`. Runtimes like VCRedist and .NET are left out, since apps that need them pull them in |
 | [`windows/powertoys/`](windows/powertoys/) | PowerToys settings backup |
 | [`windows/install.ps1`](windows/install.ps1) | Setup script |
 
@@ -235,13 +238,15 @@ After changing Windows Terminal's settings in its Settings screen, save them int
 
 ### Git email
 
-[`home/.config/git/config`](home/.config/git/config) uses `EMAIL` as a placeholder, so the real address stays out of this public repo. Each computer sets it in `~/.config/git/local`, which is gitignored:
+[`home/.config/git/config`](home/.config/git/config) has no email, so the real address stays out of this public repo. Each computer sets it in `~/.config/git/local`, which is gitignored:
 
 ```sh
 git config --file ~/.config/git/local user.email you@example.com
 ```
 
-On Windows, the install script does this from `~\.gitconfig` when it has an email. Until it's set, commits use the placeholder. Check with `git config user.email`.
+On macOS, the install script asks for it. On Windows, it's taken from `~\.gitconfig` when that has an email. Until it's set, Git refuses to commit (`useConfigOnly`) instead of guessing an address from the computer's name. Check with `git config user.email`.
+
+The config also turns on a few settings most people end up wanting: the first `git push` of a branch sets its upstream, `git pull` rebases instead of merging, remote branches deleted on the server are pruned, conflict resolutions are remembered (`rerere`), conflicts also show the original text (`zdiff3`), and `git branch` lists recent branches first. Each one is explained in the file.
 
 ### Differences from macOS
 
@@ -253,7 +258,7 @@ The [shell cheat sheet](#shell) works the same on Windows, with these difference
 | `la` lists everything, same as `lsa` | — |
 | `Get-Content`, `findstr`, `find.exe` | `\grep`, `command find` to run the originals |
 | `Tab` shows a menu of every match, with completions for winget, rg, fd, and tv | zsh completion menu |
-| `Update-PowerShell`, `wingetup`, `winup` | `brew upgrade`: update PowerShell, winget apps, and PowerShell modules |
+| `wingetup`, `winup` | `brew upgrade`: update winget apps (PowerShell included) and PowerShell modules |
 
 WezTerm uses the same config on Windows and starts PowerShell 7. Its [shortcuts](#wezterm) use `Ctrl+Shift` in place of `Cmd`, and `Ctrl+Shift+Alt` in place of `Cmd+Shift`: `Ctrl+Shift+D` splits side by side. Windows can't make WezTerm its default terminal, because that setting only accepts Windows Terminal. Pin WezTerm to the taskbar instead, or use **Open WezTerm here** in Explorer's right-click menu.
 
@@ -310,18 +315,7 @@ The custom UI font is GeistMono Nerd Font Mono (`brew install --cask font-geist-
 
 ### Open-source fonts (Homebrew)
 
-Open-source fonts are installed with Homebrew, so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need.
-
-```sh
-brew install --cask \
-  font-geist-mono-nerd-font \
-  font-iosevka-nerd-font font-iosevka-term-nerd-font \
-  font-jetbrains-mono-nerd-font font-victor-mono-nerd-font \
-  font-fira-code-nerd-font font-fira-mono-nerd-font \
-  font-hack-nerd-font font-inconsolata-nerd-font \
-  font-sauce-code-pro-nerd-font font-terminess-ttf-nerd-font \
-  font-ubuntu-nerd-font
-```
+Open-source fonts are installed with Homebrew from the [`Brewfile`](Brewfile), so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need. To add a font, put a `cask "font-..."` line in the `Brewfile` and run `brew bundle` from `~/dotfiles`.
 
 Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `wezterm ls-fonts --list-system`.
 

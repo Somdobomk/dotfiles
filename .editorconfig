@@ -1,0 +1,31 @@
+# Indentation for this repo, read by Zed, Neovim, and VS Code, so every
+# editor saves files the same way. https://editorconfig.org
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Two trailing spaces are a line break in Markdown
+[*.md]
+trim_trailing_whitespace = false
+
+[windows/powershell/*.ps1]
+indent_size = 4
+
+[windows/terminal/settings.json]
+indent_size = 4
+
+[home/.config/zed/settings.json]
+indent_style = tab
+indent_size = 4
+
+# Copied from Zen as it saves them; leave their formatting alone
+[zen/**]
+indent_style = unset
+indent_size = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset

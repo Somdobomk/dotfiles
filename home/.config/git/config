@@ -1,10 +1,11 @@
 [user]
 	name = somdobomk
-	# Placeholder, so the real address stays out of this public repo. Set it
+	# No email here, so the real address stays out of this public repo. Set it
 	# in ~/.config/git/local (gitignored), which is included at the end:
 	#   [user]
 	#   	email = you@example.com
-	email = EMAIL
+	# Until then, Git refuses to commit instead of guessing an address.
+	useConfigOnly = true
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -14,6 +15,32 @@
 	defaultBranch = main
 [color]
 	ui = auto
+# The first push of a new branch sets its upstream, no --set-upstream needed
+[push]
+	autoSetupRemote = true
+# Pull replays local commits on top instead of making merge commits, and
+# stashes uncommitted changes around the rebase
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+# Drop remote branches that were deleted on the server
+[fetch]
+	prune = true
+# Remember how a conflict was resolved and reuse it when it comes up again
+[rerere]
+	enabled = true
+# Cleaner diffs, and conflicts that also show the original text
+[diff]
+	algorithm = histogram
+[merge]
+	conflictStyle = zdiff3
+# `git branch` lists recently used branches first
+[branch]
+	sort = -committerdate
+# Show the diff in the editor while writing the commit message
+[commit]
+	verbose = true
 # Machine-specific settings, like the real email. Last, so it overrides the above.
 [include]
 	path = ~/.config/git/local
