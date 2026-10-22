@@ -120,7 +120,8 @@ Function chrisutil {
 }
 
 Function wingetup {
-  winget upgrade --all
+  # --include-unknown also upgrades apps whose installed version winget can't read
+  winget upgrade --all --include-unknown
 }
 Function winup {
   Update-Module
