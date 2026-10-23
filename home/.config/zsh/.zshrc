@@ -86,6 +86,24 @@ fi
 hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud='cd ~icloud'
 
+# Notes: ~/second-brain (private repo Somdobomk/second-brain). Obsidian's
+# per-machine files (open tabs, layout, .trash) are gitignored there.
+notes-sync() {
+  (
+    builtin cd ~/second-brain || return
+    git add -A
+    if ! git diff --cached --quiet; then
+      git status --short
+      git commit -q -m "notes $(date +%F)"
+    fi
+    if ! git pull -q --rebase; then
+      echo "Pull failed. If two machines changed the same note, fix the conflict, then run: git rebase --continue" >&2
+      return 1
+    fi
+    git push -q && git log -1 --format='Synced: %h %s'
+  )
+}
+
 # Television (tv): Ctrl+R searches history; Ctrl+T picks what fits the command
 # being typed (files, or folders after `cd`, branches after `git checkout`...)
 if command -v tv >/dev/null 2>&1; then

@@ -135,6 +135,9 @@
         },
         {
           "PackageIdentifier": "Microsoft.WindowsTerminal"
+        },
+        {
+          "PackageIdentifier": "Obsidian.Obsidian"
         }
       ],
       "SourceDetails": {

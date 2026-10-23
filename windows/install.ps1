@@ -48,7 +48,13 @@ if ($SaveTerminal) {
 if ($SaveApps) {
   $Apps = Join-Path $WindowsDir 'winget.json'
   # Apps winget can't reinstall (no package in its sources) are left out
-  winget export --output $Apps --accept-source-agreements --disable-interactivity | Out-Null
+  $Output = winget export --output $Apps --accept-source-agreements --disable-interactivity
+  # On failure winget leaves the old list in place, which would be saved again
+  # below as if nothing had changed
+  if ($LASTEXITCODE) {
+    $Output | Select-Object -Last 2 | Write-Host
+    Write-Error "winget export failed (exit code $LASTEXITCODE). The app list wasn't changed."
+  }
   # So are runtimes and libraries: apps that need them pull them in again
   $Runtimes = '^Microsoft\.(VCRedist|VCLibs|UI\.Xaml|WindowsAppRuntime|DotNet\.(Runtime|DesktopRuntime|AspNetCore|Native)|AppInstaller)\b'
   # -DateKind String keeps CreationDate as written instead of converting it

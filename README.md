@@ -80,6 +80,7 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `du` | Show which folders take the most space (dust) |
 | `\grep`, `command find` | Run the original command instead of the replacement |
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
+| `notes-sync` | Commit, pull, and push the [second-brain](https://github.com/Somdobomk/second-brain) notes: `~/second-brain` on macOS, next to the dotfiles repo on Windows |
 
 ### Neovim
 

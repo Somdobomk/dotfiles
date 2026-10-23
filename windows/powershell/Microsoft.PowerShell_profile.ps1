@@ -40,6 +40,28 @@ if (Get-Command eza -ErrorAction SilentlyContinue) {
 }
 Set-Alias la lsa
 
+# Notes: the second-brain repo next to this one (private, Somdobomk/second-brain).
+# Obsidian's per-machine files (open tabs, layout, .trash) are gitignored there.
+function notes-sync {
+    Push-Location (Join-Path (Split-Path $Dotfiles -Parent) 'second-brain') -ErrorAction Stop
+    try {
+        git add -A
+        git diff --cached --quiet
+        if ($LASTEXITCODE) {
+            git status --short
+            git commit -q -m "notes $(Get-Date -Format yyyy-MM-dd)"
+        }
+        git pull -q --rebase
+        if ($LASTEXITCODE) {
+            Write-Warning 'Pull failed. If two machines changed the same note, fix the conflict, then run: git rebase --continue'
+            return
+        }
+        git push -q
+        if (-not $LASTEXITCODE) { git log -1 --format='Synced: %h %s' }
+    } finally {
+        Pop-Location
+    }
+}
 
 # PSReadLine -----------------------------------------------------------------
 
