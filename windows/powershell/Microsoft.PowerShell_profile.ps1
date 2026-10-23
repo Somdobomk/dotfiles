@@ -40,22 +40,6 @@ if (Get-Command eza -ErrorAction SilentlyContinue) {
 }
 Set-Alias la lsa
 
-# Notes (F:\GitHub\notes, private repo Somdobomk/notes)
-$Notes = Join-Path (Split-Path $Dotfiles -Parent) 'notes'
-function notes { zed $Notes }
-function notes-sync {
-    Push-Location $Notes
-    try {
-        git add -A
-        git diff --cached --quiet
-        if ($LASTEXITCODE) { git commit -q -m "notes $(Get-Date -Format yyyy-MM-dd)" }
-        git pull -q --rebase
-        if (-not $LASTEXITCODE) { git push -q }
-        if (-not $LASTEXITCODE) { git log -1 --format='Synced: %h %s' }
-    } finally {
-        Pop-Location
-    }
-}
 
 # PSReadLine -----------------------------------------------------------------
 

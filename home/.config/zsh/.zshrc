@@ -86,17 +86,6 @@ fi
 hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud='cd ~icloud'
 
-# Notes (~/notes, private repo Somdobomk/notes)
-alias notes='zed ~/notes'
-notes-sync() {
-  (
-    builtin cd ~/notes || return
-    git add -A
-    git diff --cached --quiet || git commit -q -m "notes $(date +%F)"
-    git pull -q --rebase && git push -q && git log -1 --format='Synced: %h %s'
-  )
-}
-
 # Television (tv): Ctrl+R searches history; Ctrl+T picks what fits the command
 # being typed (files, or folders after `cd`, branches after `git checkout`...)
 if command -v tv >/dev/null 2>&1; then

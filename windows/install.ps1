@@ -21,7 +21,6 @@
 #   ~\.gitconfig is then moved aside, since it would override the shared config.
 # - Television: home\.config\television is copied into tv's config folder,
 #   next to the channels `tv update-channels` downloads.
-# - Notes: the private Somdobomk/notes repo is cloned next to this one.
 # Anything replaced is first renamed to <name>.bak-<date>.
 
 param([switch]$SaveTerminal, [switch]$SaveApps)
@@ -162,17 +161,6 @@ if ((Get-Command tv -ErrorAction SilentlyContinue) -and -not (Test-Path "$Tv\cab
   # Ctrl+R needs the pwsh-history channel
   tv update-channels | Out-Null
   Write-Host '  downloaded the standard channels'
-}
-
-# Notes ----------------------------------------------------------------------
-
-$Notes = Join-Path (Split-Path $Dotfiles -Parent) 'notes'
-Write-Host "Notes: $Notes"
-if (Test-Path $Notes) {
-  Write-Host '  already cloned'
-} else {
-  git clone -q https://github.com/Somdobomk/notes.git $Notes
-  Write-Host '  cloned'
 }
 
 # Tools ----------------------------------------------------------------------

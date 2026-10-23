@@ -10,7 +10,6 @@
 # - Configs: home/ is linked into $HOME with Stow.
 # - Git: asks for your email and saves it in ~/.config/git/local (gitignored).
 # - Fonts: fonts/install.sh installs the fonts that aren't in Homebrew.
-# - Notes: the private Somdobomk/notes repo is cloned to ~/notes.
 # macOS settings aren't changed here; run macos/defaults.sh for those.
 
 set -euo pipefail
@@ -60,15 +59,5 @@ fi
 
 echo "Fonts:"
 "$DOTFILES/fonts/install.sh"
-
-NOTES="$HOME/notes"
-echo "Notes: $NOTES"
-if [[ -d "$NOTES" ]]; then
-  echo "  already cloned"
-elif git clone -q https://github.com/Somdobomk/notes.git "$NOTES"; then
-  echo "  cloned"
-else
-  echo "  couldn't clone. Sign in with \`gh auth login\`, then run this again."
-fi
 
 echo "\nDone. Restart the shell with: exec zsh"

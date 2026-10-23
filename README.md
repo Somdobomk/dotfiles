@@ -44,7 +44,7 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
    ~/dotfiles/install.sh
    ```
 
-   It installs everything in the [`Brewfile`](Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), installs the [fonts](#fonts) that aren't in Homebrew, and clones `~/notes`. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
+   It installs everything in the [`Brewfile`](Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), and installs the [fonts](#fonts) that aren't in Homebrew. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
 
 4. Optionally, apply the [macOS settings](#macos-settings) with `~/dotfiles/macos/defaults.sh`.
 
@@ -80,8 +80,6 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `du` | Show which folders take the most space (dust) |
 | `\grep`, `command find` | Run the original command instead of the replacement |
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
-| `notes` | Open `~/notes` in Zed |
-| `notes-sync` | Commit, pull, and push `~/notes` |
 
 ### Neovim
 
@@ -230,7 +228,6 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 | Git | `~\.config\git` becomes a junction to `home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
 | Television | `home/.config/television` is copied to `%LOCALAPPDATA%\television\config`, and the standard channels are downloaded |
 | Starship | Nothing to copy: the profile points `STARSHIP_CONFIG` at `home/.config/starship.toml` |
-| Notes | `Somdobomk/notes` is cloned next to the dotfiles repo |
 
 Anything replaced is first renamed to `<name>.bak-<date>`. The script is safe to run again, and it lists any tools that are still missing.
 
