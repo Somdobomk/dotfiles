@@ -27,7 +27,7 @@ if (-not $Target -or -not (Test-Path $Target)) {
 }
 Write-Host "Importing into $(Split-Path $Target -Leaf)"
 
-foreach ($File in 'zen-themes.json', 'zen-keyboard-shortcuts.json', 'containers.json') {
+foreach ($File in 'zen-themes.json', 'zen-keyboard-shortcuts.json', 'containers.json', 'user.js') {
   $Source = Join-Path $ZenDir $File
   if (Test-Path $Source) { Copy-Item $Source $Target -Force }
 }

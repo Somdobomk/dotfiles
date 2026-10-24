@@ -1,0 +1,18 @@
+/* Gruvbox Dark, matching Obsidian, Zed, Neovim, and WezTerm. userChrome.css
+   is a user stylesheet, so its !important rules beat Zen's own and the colors
+   Zen picks from each space's theme. Private windows keep their own color,
+   since Zen's rule for them is more specific. */
+:root {
+  /* Orange accent (#d65d0e), like the cursor in the other apps. Also colors
+     the bar the Better Active Tab mod draws beside the current tab */
+  --zen-primary-color: #d65d0e !important;
+  /* Gruvbox text (#ebdbb2) on the #282828 background */
+  --toolbox-textcolor: #ebdbb2 !important;
+}
+
+/* Current tab: orange tint. Zen mixes in only 5% of the accent, which barely
+   shows */
+zen-workspace,
+.tabbrowser-tab[zen-essential="true"] {
+  --tab-background-color-selected: color-mix(in srgb, #d65d0e 30%, #282828) !important;
+}

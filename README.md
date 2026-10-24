@@ -283,6 +283,7 @@ Restore the backup in **PowerToys Settings → General → Backup & restore**. T
 | File | What it holds |
 | --- | --- |
 | `zen-themes.json`, `chrome/` | Installed mods and their CSS |
+| `chrome/userChrome.css`, `user.js` | Gruvbox orange accent color, and the setting that turns on `userChrome.css` |
 | `mod-prefs.js` | Mod settings, taken from `prefs.js` |
 | `zen-keyboard-shortcuts.json` | Keyboard shortcuts |
 | `containers.json` | Container tabs |
@@ -313,7 +314,7 @@ The script uses the Zen profile that changed most recently. To choose one, pass 
    To choose a profile, add `-Profile "<folder name>"`.
 3. Start Zen and sign in to Sync.
 
-The custom UI font is GeistMono Nerd Font Mono (`brew install --cask font-geist-mono-nerd-font` on macOS). Install it on Windows too, or pick another font in the mod's settings.
+The custom UI font is DankMono Nerd Font, the same as Zed and Obsidian. It's a paid font, so it comes from the private [fonts repo](#fonts) rather than Homebrew. Install it on Windows too, or pick another font in the mod's settings.
 
 ## Fonts
 

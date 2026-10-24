@@ -23,7 +23,7 @@ fi
 echo "Exporting from ${profile:t}"
 
 # Only customizations. Never prefs.js or signedInUser.json (login tokens).
-FILES=(zen-themes.json zen-keyboard-shortcuts.json containers.json)
+FILES=(zen-themes.json zen-keyboard-shortcuts.json containers.json user.js)
 
 for file in $FILES; do
   [[ -f "$profile/$file" ]] && cp "$profile/$file" "$ZEN_DIR/$file"
@@ -32,6 +32,7 @@ done
 rm -rf "$ZEN_DIR/chrome"
 mkdir -p "$ZEN_DIR/chrome"
 [[ -f "$profile/chrome/zen-themes.css" ]] && cp "$profile/chrome/zen-themes.css" "$ZEN_DIR/chrome/"
+[[ -f "$profile/chrome/userChrome.css" ]] && cp "$profile/chrome/userChrome.css" "$ZEN_DIR/chrome/"
 [[ -d "$profile/chrome/zen-themes" ]] && cp -R "$profile/chrome/zen-themes" "$ZEN_DIR/chrome/"
 
 # Mod settings are saved in prefs.js. Keep only the ones the installed
