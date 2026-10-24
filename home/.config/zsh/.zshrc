@@ -86,11 +86,12 @@ fi
 hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud='cd ~icloud'
 
-# Notes: ~/second-brain (private repo Somdobomk/second-brain). Obsidian's
-# per-machine files (open tabs, layout, .trash) are gitignored there.
+# Notes: ~/GitHub/second-brain, next to this repo (private repo
+# Somdobomk/second-brain). Obsidian's per-machine files (open tabs, layout,
+# .trash) are gitignored there.
 notes-sync() {
   (
-    builtin cd ~/second-brain || return
+    builtin cd ~/GitHub/second-brain || return
     git add -A
     if ! git diff --cached --quiet; then
       git status --short

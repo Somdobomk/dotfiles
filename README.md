@@ -33,7 +33,7 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 2. Clone the repo:
 
    ```sh
-   git clone https://github.com/Somdobomk/dotfiles.git ~/dotfiles
+   git clone https://github.com/Somdobomk/dotfiles.git ~/GitHub/dotfiles
    ```
 
    To work from a fork, see [Fork.md](Fork.md).
@@ -41,12 +41,12 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 3. Run the install script:
 
    ```sh
-   ~/dotfiles/install.sh
+   ~/GitHub/dotfiles/install.sh
    ```
 
    It installs everything in the [`Brewfile`](Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), and installs the [fonts](#fonts) that aren't in Homebrew. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
 
-4. Optionally, apply the [macOS settings](#macos-settings) with `~/dotfiles/macos/defaults.sh`.
+4. Optionally, apply the [macOS settings](#macos-settings) with `~/GitHub/dotfiles/macos/defaults.sh`.
 
 5. Restart the shell with `exec zsh`.
 
@@ -80,7 +80,7 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `du` | Show which folders take the most space (dust) |
 | `\grep`, `command find` | Run the original command instead of the replacement |
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
-| `notes-sync` | Commit, pull, and push the [second-brain](https://github.com/Somdobomk/second-brain) notes: `~/second-brain` on macOS, next to the dotfiles repo on Windows |
+| `notes-sync` | Commit, pull, and push the [second-brain](https://github.com/Somdobomk/second-brain) notes, cloned next to the dotfiles repo |
 
 ### Neovim
 
@@ -121,7 +121,7 @@ The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jum
 
 ### Dotfiles
 
-Run from `~/dotfiles`.
+Run from `~/GitHub/dotfiles`.
 
 | Command | What it does |
 | --- | --- |
@@ -140,7 +140,7 @@ Run from `~/dotfiles`.
 
 ## GNU Stow
 
-[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.zshenv` becomes `~/.zshenv`. Run every command from `~/dotfiles`:
+[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.zshenv` becomes `~/.zshenv`. Run every command from `~/GitHub/dotfiles`:
 
 | Command | What it does |
 | --- | --- |
@@ -152,8 +152,8 @@ Run from `~/dotfiles`.
 **Adding a new config:** move it into `home/` at the same path it has in `$HOME`, then re-link. For example:
 
 ```sh
-mv ~/.config/wezterm ~/dotfiles/home/.config/wezterm
-cd ~/dotfiles && stow -R -t ~ home
+mv ~/.config/wezterm ~/GitHub/dotfiles/home/.config/wezterm
+cd ~/GitHub/dotfiles && stow -R -t ~ home
 ```
 
 **Conflicts:** Stow never overwrites. If a real file already exists where a link should go, Stow stops with `existing target is not owned by stow`. Back up or remove that file, then run the command again.
@@ -294,7 +294,7 @@ Zen replaces files when it saves them, which would break symlinks, so this folde
 Run this after changing mods, mod settings, or shortcuts, then commit:
 
 ```sh
-~/dotfiles/zen/export.sh
+~/GitHub/dotfiles/zen/export.sh
 ```
 
 The script uses the Zen profile that changed most recently. To choose one, pass its folder name, for example `./export.sh "rhlik1qw.Default (alpha)"`. Profile folders are listed at `about:profiles`.
@@ -317,7 +317,7 @@ The custom UI font is GeistMono Nerd Font Mono (`brew install --cask font-geist-
 
 ### Open-source fonts (Homebrew)
 
-Open-source fonts are installed with Homebrew from the [`Brewfile`](Brewfile), so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need. To add a font, put a `cask "font-..."` line in the `Brewfile` and run `brew bundle` from `~/dotfiles`.
+Open-source fonts are installed with Homebrew from the [`Brewfile`](Brewfile), so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need. To add a font, put a `cask "font-..."` line in the `Brewfile` and run `brew bundle` from `~/GitHub/dotfiles`.
 
 Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `wezterm ls-fonts --list-system`.
 
@@ -326,8 +326,8 @@ Some Nerd Fonts use a different name than the original font: Source Code Pro is 
 [`fonts/`](fonts/) holds fonts that aren't in Homebrew. Copy them to `~/Library/Fonts` with:
 
 ```sh
-~/dotfiles/fonts/install.sh -n   # dry run: list what would be installed
-~/dotfiles/fonts/install.sh      # install
+~/GitHub/dotfiles/fonts/install.sh -n   # dry run: list what would be installed
+~/GitHub/dotfiles/fonts/install.sh      # install
 ```
 
 On Windows, [`fonts/install.ps1`](fonts/install.ps1) does the same for the current user, without admin rights: `fonts\install.ps1 -DryRun`, then `fonts\install.ps1`. Restart open apps to see the new fonts.
@@ -339,8 +339,8 @@ When a font ships as both `.otf` and `.ttf`, the `.otf` is used. Web formats are
 Paid fonts aren't in this repo because their licenses don't allow redistribution. They live in a separate private repo that's cloned into `fonts/private/`. That folder is gitignored, and the install script picks it up automatically when it exists:
 
 ```sh
-git clone git@github.com:Somdobomk/dotfiles-fonts.git ~/dotfiles/fonts/private
-~/dotfiles/fonts/install.sh
+git clone git@github.com:Somdobomk/dotfiles-fonts.git ~/GitHub/dotfiles/fonts/private
+~/GitHub/dotfiles/fonts/install.sh
 ```
 
 Without access to the private repo, skip the clone. The script installs only the free fonts.
