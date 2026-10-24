@@ -4,7 +4,7 @@
 
 add_newline = false
 command_timeout = 1000
-palette = "everforest"
+palette = "gruvbox"
 
 format = """
 $directory\
@@ -13,17 +13,17 @@ $git_status\
 $cmd_duration\
 $character"""
 
-# Everforest Dark, matching WezTerm, Neovim, and Zed
-[palettes.everforest]
-fg = "#d3c6aa"
-grey = "#859289"
-red = "#e67e80"
-orange = "#e69875"
-yellow = "#dbbc7f"
-green = "#a7c080"
-aqua = "#83c092"
-blue = "#7fbbb3"
-purple = "#d699b6"
+# Gruvbox Dark, matching Obsidian, WezTerm, Neovim, and Zed
+[palettes.gruvbox]
+fg = "#ebdbb2"
+grey = "#928374"
+red = "#fb4934"
+orange = "#fe8019"
+yellow = "#fabd2f"
+green = "#b8bb26"
+aqua = "#8ec07c"
+blue = "#83a598"
+purple = "#d3869b"
 
 [directory]
 format = "[ $path ]($style)[$read_only]($read_only_style)"

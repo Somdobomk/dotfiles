@@ -15,8 +15,8 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 | [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
 | [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
 | [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
-| [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Everforest colors     | `~/.config/wezterm`       |
-| [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Everforest theme, and zoxide channel | `~/.config/television` |
+| [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
+| [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |
 | [`install.sh`](install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
 | [`Brewfile`](Brewfile)                                     | Homebrew tools, apps, and fonts, for `brew bundle`                           | —                         |
 | [`macos/defaults.sh`](macos/defaults.sh)                   | macOS settings: key repeat, Finder, Dock ([details](#macos-settings))        | —                         |
@@ -167,8 +167,8 @@ cd ~/GitHub/dotfiles && stow -R -t ~ home
 
 - **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Everforest Dark Hard ([details](home/.config/nvim/README.md))
-- **Terminal:** WezTerm with Everforest Dark Hard colors and GeistMono Nerd Font
+- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark ([details](home/.config/nvim/README.md))
+- **Terminal:** WezTerm with Gruvbox Dark colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
 - **Windows:** PowerShell 7 and Windows Terminal set up to match, sharing the Starship, Neovim, and Television configs ([details](#windows))
 
@@ -179,7 +179,7 @@ cd ~/GitHub/dotfiles && stow -R -t ~ home
 | Path | What it is |
 | --- | --- |
 | [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](home/.config/zsh/.zshrc) |
-| [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Everforest Dark Hard, GeistMono Nerd Font, and a separate admin profile |
+| [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Gruvbox Dark, GeistMono Nerd Font, and a separate admin profile |
 | [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import`. Runtimes like VCRedist and .NET are left out, since apps that need them pull them in |
 | [`windows/powertoys/`](windows/powertoys/) | PowerToys settings backup |
 | [`windows/install.ps1`](windows/install.ps1) | Setup script |

@@ -1,27 +1,23 @@
--- Everforest Dark Hard, matching Zed's "Everforest Dark Hard (material)"
--- and the WezTerm terminal colors
+-- Gruvbox Dark, matching Obsidian's "Obsidian gruvbox" theme, Zed's
+-- "Gruvbox Dark", and the WezTerm terminal colors
 return {
   {
-    "sainnhe/everforest",
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
       vim.o.background = "dark"
-      vim.g.everforest_background = "hard"
-      vim.g.everforest_enable_italic = 1
-      -- "material": popups share the editor background, separated by a border
-      vim.g.everforest_float_style = "blend"
       vim.o.winborder = "rounded"
-
-      -- Zed's Everforest theme colors strings aqua; the Neovim theme uses green
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "everforest",
-        callback = function()
-          vim.api.nvim_set_hl(0, "String", { fg = "#83c092" })
-          vim.api.nvim_set_hl(0, "@string", { link = "String" })
-        end,
+      require("gruvbox").setup({
+        contrast = "", -- medium (#282828), like Obsidian
+        overrides = {
+          -- Obsidian's red text selection
+          Visual = { bg = "#8a2621" },
+          -- Popups share the editor background, separated by a border
+          NormalFloat = { bg = "#282828" },
+          FloatBorder = { bg = "#282828" },
+        },
       })
-
-      vim.cmd.colorscheme("everforest")
+      vim.cmd.colorscheme("gruvbox")
     end,
   },
 }

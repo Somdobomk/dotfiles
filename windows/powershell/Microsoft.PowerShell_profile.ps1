@@ -24,6 +24,7 @@ Set-Alias vim nvim
 if (Get-Command bat -ErrorAction SilentlyContinue) {
     Remove-Alias cat -Force -ErrorAction SilentlyContinue
     function cat { bat --paging=never @args }
+    $env:BAT_THEME = 'gruvbox-dark' # matches the Gruvbox theme in the other apps
 }
 if (Get-Command rg -ErrorAction SilentlyContinue) { Set-Alias grep rg } else { Set-Alias grep findstr }
 if (Get-Command fd -ErrorAction SilentlyContinue) { Set-Alias find fd }

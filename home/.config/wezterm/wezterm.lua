@@ -14,21 +14,22 @@ end
 
 -- Theme ----------------------------------------------------------------------
 
--- Everforest Dark Hard, copied from Zed's "Everforest Dark Hard (material)"
-local bg, bg_dim, bg_tab = "#272e33", "#1e2326", "#2e383c"
-local fg, grey, green = "#d3c6aa", "#859289", "#a7c080"
+-- Gruvbox Dark, matching Obsidian's "Obsidian gruvbox" theme and Zed's "Gruvbox Dark"
+local bg, bg_dim, bg_tab = "#282828", "#1d2021", "#3c3836"
+local fg, grey, orange = "#ebdbb2", "#928374", "#d65d0e"
 
 config.colors = {
 	background = bg,
 	foreground = fg,
-	cursor_bg = "#e67e80",
+	cursor_bg = orange,
 	cursor_fg = bg,
-	cursor_border = "#e67e80",
-	selection_bg = "#4c3743",
+	cursor_border = orange,
+	-- Obsidian's red text selection
+	selection_bg = "#8a2621",
 	selection_fg = fg,
-	split = "#495156",
-	ansi = { bg_dim, "#e67e80", green, "#dbbc7f", "#7fbbb3", "#d699b6", "#83c092", fg },
-	brights = { grey, "#e67e80", green, "#dbbc7f", "#7fbbb3", "#d699b6", "#83c092", fg },
+	split = "#504945",
+	ansi = { bg_dim, "#cc241d", "#98971a", "#d79921", "#458588", "#b16286", "#689d6a", "#a89984" },
+	brights = { grey, "#fb4934", "#b8bb26", "#fabd2f", "#83a598", "#d3869b", "#8ec07c", fg },
 	tab_bar = {
 		inactive_tab_edge = bg_dim,
 		active_tab = { bg_color = bg, fg_color = fg },

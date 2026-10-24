@@ -71,6 +71,7 @@ unset _tmp
 # Run the original with a leading backslash or `command`: \grep, command find
 alias vim='nvim'
 alias cat='bat --paging=never'
+export BAT_THEME='gruvbox-dark' # matches the Gruvbox theme in the other apps
 alias grep='rg'
 alias find='fd'
 alias du='dust'

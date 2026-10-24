@@ -2,7 +2,7 @@
 # All options: https://alexpasmantier.github.io/television/docs/Users/configuration
 
 [ui]
-theme = "everforest"
+theme = "gruvbox"
 
 [ui.input_bar]
 prompt = "❯"

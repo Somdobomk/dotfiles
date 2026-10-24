@@ -11,27 +11,30 @@
 	"autosave": { "after_delay": { "milliseconds": 1000 } },
 
 	// ── Appearance ──────────────────────────────────────────
-	"theme": "Everforest Dark Hard (material)",
+	"theme": "Gruvbox Dark",
 	"icon_theme": "Colored Zed Icons Theme Dark",
 	"theme_overrides": {
-		"Everforest Dark Hard (material)": {
-			// Match editor.background (#272e33) so borders and chrome blend in
-			"border": "#272e33",
-			"border.variant": "#272e33",
-			"title_bar.background": "#272e33",
-			"panel.background": "#272e33",
-			"panel.focused_border": "#272e33",
-			"element.selection_background": "#a7c08066",
+		// Match Obsidian's "Obsidian gruvbox" theme (dark mode)
+		"Gruvbox Dark": {
+			// Match editor.background (#282828) so borders and chrome blend in
+			"background": "#282828",
+			"border": "#282828",
+			"border.variant": "#282828",
+			"title_bar.background": "#282828",
+			"panel.background": "#282828",
+			"panel.focused_border": "#282828",
+			// Obsidian's red text selection and orange accent
+			"element.selection_background": "#cc241d99",
 			"players": [
 				{
-					"background": "#e67e80",
-					"cursor": "#e67e80",
-					"selection": "#a7c08066",
+					"background": "#d65d0e",
+					"cursor": "#d65d0e",
+					"selection": "#cc241d99",
 				},
 			],
 			"syntax": {
-				"comment": { "color": "#859289", "font_style": "italic" },
-				"comment.doc": { "color": "#9da9a0", "font_style": "italic" },
+				"comment": { "color": "#928374", "font_style": "italic" },
+				"comment.doc": { "color": "#a89984", "font_style": "italic" },
 			},
 		},
 	},

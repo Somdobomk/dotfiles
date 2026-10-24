@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = { { import = "plugins" } },
-  install = { colorscheme = { "everforest" } },
+  install = { colorscheme = { "gruvbox" } },
   checker = { enabled = false },
   change_detection = { notify = false },
   -- No plugins here need luarocks
