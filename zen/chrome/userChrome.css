@@ -16,3 +16,30 @@ zen-workspace,
 .tabbrowser-tab[zen-essential="true"] {
   --tab-background-color-selected: color-mix(in srgb, #d65d0e 30%, #282828) !important;
 }
+
+/* Right-click menus and popup panels: #282828 with Gruvbox dark1/dark2 for
+   hover and pressed items */
+menupopup,
+panel {
+  --arrowpanel-background: #282828 !important;
+  --panel-background: #282828 !important;
+  --panel-background-color: #282828 !important;
+  --arrowpanel-color: #ebdbb2 !important;
+  --panel-color: #ebdbb2 !important;
+  --panel-text-color: #ebdbb2 !important;
+  --arrowpanel-border-color: #504945 !important;
+  --panel-border-color: #504945 !important;
+  --panel-separator-color: #504945 !important;
+  --panel-item-hover-bgcolor: #3c3836 !important;
+  --panel-item-active-bgcolor: #504945 !important;
+}
+
+/* Highlighted menu item. Firefox paints it with a system color (blue by
+   default), not a variable, so it's set directly. Same orange tint as the
+   selected tab */
+menu[_moz-menuactive]:not([disabled]),
+menuitem[_moz-menuactive]:not([disabled]),
+menucaption[_moz-menuactive]:not([disabled]) {
+  background-color: color-mix(in srgb, #d65d0e 30%, #282828) !important;
+  color: #ebdbb2 !important;
+}
