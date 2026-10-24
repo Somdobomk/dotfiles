@@ -98,12 +98,28 @@ Set-PSReadLineOption -Colors @{
     String = 'DarkCyan'
 }
 
+# Updates. Run them all with: wingetup; powershellup; winosup
 Function wingetup {
-  # Updates PowerShell too, since it's a winget app.
-  # --include-unknown also upgrades apps whose installed version winget can't read
+  # Refresh the package lists, like `brew update`
+  winget source update
+  # Updates PowerShell and winget itself (App Installer) too, since they're
+  # winget apps. --include-unknown also upgrades apps whose installed version
+  # winget can't read
   winget upgrade --all --include-unknown
 }
-Function winup {
+# Only lists Windows updates; install them from Settings > Windows Update
+Function winosup {
+  Write-Host 'Checking Windows Update (this can take a minute)...'
+  $searcher = (New-Object -ComObject Microsoft.Update.Session).CreateUpdateSearcher()
+  $updates = $searcher.Search('IsInstalled=0 and IsHidden=0').Updates
+  if ($updates.Count) {
+    $updates | ForEach-Object { $_.Title }
+    Write-Host 'Install them with: start ms-settings:windowsupdate'
+  } else {
+    Write-Host 'Windows is up to date.'
+  }
+}
+Function powershellup {
   Update-Module
 }
 

@@ -104,6 +104,19 @@ notes-sync() {
   )
 }
 
+# Updates. Run all three with: brewup && macosstore && macosup
+brewup() {
+  brew update && brew upgrade && brew cleanup
+}
+# Mac App Store apps (needs the App Store signed in)
+macosstore() {
+  mas outdated && mas upgrade
+}
+# Only lists macOS updates; install them with: sudo softwareupdate --install --all
+macosup() {
+  softwareupdate --list
+}
+
 # Television (tv): Ctrl+R searches history; Ctrl+T picks what fits the command
 # being typed (files, or folders after `cd`, branches after `git checkout`...)
 if command -v tv >/dev/null 2>&1; then

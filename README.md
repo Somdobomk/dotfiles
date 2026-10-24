@@ -131,7 +131,9 @@ Run from `~/dotfiles`.
 | `stow -R -t ~ home` | Re-link after adding or removing files in `home/` ([more](#gnu-stow)) |
 | `zen/export.sh` | Save Zen mods and shortcuts into the repo ([more](#zen-browser)) |
 | `fonts/install.sh` | Install the fonts that aren't in Homebrew ([more](#fonts)) |
-| `brew upgrade` | Update Homebrew tools, apps, and fonts |
+| `brewup` | Update Homebrew tools, apps, and fonts, then clean up old versions |
+| `macosstore` | Update Mac App Store apps (mas) |
+| `macosup` | Check for macOS updates. Install them with `sudo softwareupdate --install --all` |
 | `windows\install.ps1` | Windows: set up or update this PC from the repo ([more](#windows)) |
 | `windows\install.ps1 -SaveTerminal` | Windows: save Windows Terminal's settings into the repo |
 | `windows\install.ps1 -SaveApps` | Windows: save the list of installed apps to `windows\winget.json` |
@@ -256,7 +258,9 @@ The [shell cheat sheet](#shell) works the same on Windows, with these difference
 | `la` lists everything, same as `lsa` | — |
 | `Get-Content`, `findstr`, `find.exe` | `\grep`, `command find` to run the originals |
 | `Tab` shows a menu of every match, with completions for winget, rg, fd, and tv | zsh completion menu |
-| `wingetup`, `winup` | `brew upgrade`: update winget apps (PowerShell included) and PowerShell modules |
+| `wingetup` | `brewup`: update winget apps (PowerShell and winget included) |
+| `powershellup` updates PowerShell modules installed from the PowerShell Gallery | — |
+| `winosup` | `macosup`: check for Windows updates. Install them from Settings > Windows Update |
 
 WezTerm uses the same config on Windows and starts PowerShell 7. Its [shortcuts](#wezterm) use `Ctrl+Shift` in place of `Cmd`, and `Ctrl+Shift+Alt` in place of `Cmd+Shift`: `Ctrl+Shift+D` splits side by side. Windows can't make WezTerm its default terminal, because that setting only accepts Windows Terminal. Pin WezTerm to the taskbar instead, or use **Open WezTerm here** in Explorer's right-click menu.
 
