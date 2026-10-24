@@ -122,6 +122,16 @@ The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jum
 | `Cmd+Shift+F` | Search across the project |
 | `Cmd+K V` | Markdown preview beside the file |
 
+### Command palette
+
+| App | Shortcut |
+| --- | --- |
+| Zed | `Cmd+Shift+P` |
+| WezTerm | `Cmd+Shift+P` |
+| Obsidian | `Cmd+Shift+P` (set in [`obsidian/hotkeys.json`](obsidian/hotkeys.json); `Cmd+O` is the quick switcher) |
+| Neovim | `Space P` for Television's channel list, or `:` for commands. `Cmd+Shift+P` can't reach Neovim, because WezTerm uses it |
+| Zen | `Cmd+T` opens the new-tab search, which also works as its command palette. Zen has no `Cmd+Shift+P` palette, and Firefox uses that shortcut for a private window |
+
 ### Dotfiles
 
 Run from `~/GitHub/dotfiles`.
