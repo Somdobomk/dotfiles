@@ -1,0 +1,4 @@
+/* Match the sidebar to the editor background (#282828) instead of gruvbox dark0-hard (#1d2021) */
+.theme-dark {
+    --background-secondary: var(--dark0);
+}

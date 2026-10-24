@@ -1,0 +1,11 @@
+{
+  "theme": "obsidian",
+  "interfaceFontFamily": "DankMono Nerd Font",
+  "textFontFamily": "DankMono Nerd Font",
+  "monospaceFontFamily": "DankMono Nerd Font Mono",
+  "translucency": false,
+  "cssTheme": "Obsidian gruvbox",
+  "enabledCssSnippets": [
+    "sidebar-background"
+  ]
+}

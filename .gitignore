@@ -5,3 +5,6 @@ fonts/private/
 .zsh_sessions/
 home/.config/zed/prompts/
 home/.config/git/local
+# Obsidian's per-machine files: open tabs, layout, cache
+obsidian/workspace*.json
+obsidian/cache

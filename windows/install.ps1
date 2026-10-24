@@ -16,6 +16,8 @@
 # - Neovim: %LOCALAPPDATA%\nvim becomes a junction to home\.config\nvim.
 # - WezTerm: ~\.config\wezterm becomes a junction to home\.config\wezterm.
 # - Zed: %APPDATA%\Zed becomes a junction to home\.config\zed.
+# - Obsidian: second-brain\.obsidian becomes a junction to obsidian\, if the
+#   second-brain notes are cloned next to this repo.
 # - Git: ~\.config\git becomes a junction to home\.config\git. The email goes
 #   in ~\.config\git\local (gitignored), taken from ~\.gitconfig if it has one;
 #   ~\.gitconfig is then moved aside, since it would override the shared config.
@@ -125,6 +127,15 @@ if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
   Write-Host "Zed: running, skipped. Close it and run this again."
 } else {
   Link-Folder 'Zed' (Join-Path $env:APPDATA 'Zed') (Join-Path $Dotfiles 'home\.config\zed')
+}
+
+$Vault = Join-Path (Split-Path $Dotfiles -Parent) 'second-brain'
+if (-not (Test-Path $Vault)) {
+  Write-Host "Obsidian: $Vault isn't cloned, skipped"
+} elseif (Get-Process -Name Obsidian -ErrorAction SilentlyContinue) {
+  Write-Host "Obsidian: running, skipped. Close it and run this again."
+} else {
+  Link-Folder 'Obsidian' (Join-Path $Vault '.obsidian') (Join-Path $Dotfiles 'obsidian')
 }
 
 # Git ------------------------------------------------------------------------

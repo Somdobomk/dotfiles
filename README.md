@@ -22,6 +22,7 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 | [`macos/defaults.sh`](macos/defaults.sh)                   | macOS settings: key repeat, Finder, Dock ([details](#macos-settings))        | —                         |
 | [`.editorconfig`](.editorconfig)                           | Indentation for this repo, so every editor saves files the same way          | —                         |
 | [`windows/`](windows/)                                     | PowerShell profile, Windows Terminal settings, PowerToys backup, and install script | see [Windows](#windows) |
+| [`obsidian/`](obsidian/) | [Obsidian](https://obsidian.md) settings, Gruvbox theme, and CSS snippets for the second-brain notes | `~/GitHub/second-brain/.obsidian` |
 | [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
 | [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
 | [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
@@ -173,7 +174,7 @@ cd ~/GitHub/dotfiles && stow -R -t ~ home
 
 ## Windows
 
-[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, Television, WezTerm, Zed, and Git configs in [`home/`](home/) are used directly, so changes to them apply to both systems.
+[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, Television, WezTerm, Zed, and Git configs in [`home/`](home/), and the Obsidian settings in [`obsidian/`](obsidian/), are used directly, so changes to them apply to both systems.
 
 | Path | What it is |
 | --- | --- |
@@ -209,7 +210,7 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 
    Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads), then the repo's fonts with `F:\GitHub\dotfiles\fonts\install.ps1`.
 
-4. Close Zed, run the install script, then open a new tab:
+4. Close Zed and Obsidian, run the install script, then open a new tab:
 
    ```powershell
    F:\GitHub\dotfiles\windows\install.ps1
@@ -228,6 +229,7 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 | Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `home/.config/nvim`. Junctions need no admin rights and work across drives |
 | WezTerm | `~\.config\wezterm` becomes a junction to `home/.config/wezterm` |
 | Zed | `%APPDATA%\Zed` becomes a junction to `home/.config/zed`. Skipped while Zed is open |
+| Obsidian | `second-brain\.obsidian` becomes a junction to `obsidian/`, if the [second-brain](https://github.com/Somdobomk/second-brain) notes are cloned next to the dotfiles repo. Skipped while Obsidian is open |
 | Git | `~\.config\git` becomes a junction to `home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
 | Television | `home/.config/television` is copied to `%LOCALAPPDATA%\television\config`, and the standard channels are downloaded |
 | Starship | Nothing to copy: the profile points `STARSHIP_CONFIG` at `home/.config/starship.toml` |

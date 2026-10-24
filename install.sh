@@ -9,6 +9,8 @@
 #   be installed (https://brew.sh).
 # - Configs: home/ is linked into $HOME with Stow.
 # - Git: asks for your email and saves it in ~/.config/git/local (gitignored).
+# - Obsidian: ~/GitHub/second-brain/.obsidian becomes a link to obsidian/,
+#   if the second-brain notes are cloned next to this repo.
 # - Fonts: fonts/install.sh installs the fonts that aren't in Homebrew.
 # macOS settings aren't changed here; run macos/defaults.sh for those.
 
@@ -55,6 +57,22 @@ else
     echo "  skipped: Git won't commit until you add it with:"
     echo "  git config --file $GIT_LOCAL user.email you@example.com"
   fi
+fi
+
+VAULT_CONFIG="${DOTFILES:h}/second-brain/.obsidian"
+echo "Obsidian: $VAULT_CONFIG"
+if [[ ! -d "${VAULT_CONFIG:h}" ]]; then
+  echo "  second-brain isn't cloned next to this repo, skipped"
+elif [[ -L "$VAULT_CONFIG" && "$(readlink "$VAULT_CONFIG")" == "$DOTFILES/obsidian" ]]; then
+  echo "  already linked"
+else
+  if [[ -e "$VAULT_CONFIG" || -L "$VAULT_CONFIG" ]]; then
+    backup="$VAULT_CONFIG.bak-$(date +%Y%m%d-%H%M%S)"
+    mv "$VAULT_CONFIG" "$backup"
+    echo "  backed up to ${backup:t}"
+  fi
+  ln -s "$DOTFILES/obsidian" "$VAULT_CONFIG"
+  echo "  linked to $DOTFILES/obsidian"
 fi
 
 echo "Fonts:"
