@@ -104,7 +104,9 @@ Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
 | --- | --- |
 | `Cmd+,` | Open the config in Zed. Saving reloads it automatically |
 | `Cmd+Shift+P` | Command palette: search every WezTerm action |
+| `Cmd+E` | List the open tabs, like the buffer list. Pick one with the arrows or number keys and `Enter` |
 | `Cmd+T` / `Cmd+Shift+[` / `Cmd+Shift+]` | New tab / previous tab / next tab |
+| `Cmd+1` to `Cmd+9` | Go to that tab |
 | `Cmd+D` / `Cmd+Shift+D` | Split side by side / split stacked |
 | `Cmd+[` / `Cmd+]` | Previous split / next split |
 | `Cmd+Shift+Enter` | Zoom the current split to full size and back |

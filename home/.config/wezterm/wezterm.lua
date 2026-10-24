@@ -50,14 +50,20 @@ config.font_size = is_windows and 12 or 20
 
 config.window_padding = { left = 14, right = 14, top = 12, bottom = 12 }
 
--- Tabs inside the title bar, like Zed
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+-- No tab bar; Cmd+E lists the open tabs instead
+config.enable_tab_bar = false
+config.window_decorations = "TITLE|RESIZE"
 config.window_frame = {
 	font = wezterm.font("DankMono Nerd Font", { weight = "Medium" }),
 	font_size = is_windows and 10 or 18,
 	active_titlebar_bg = bg_dim,
 	inactive_titlebar_bg = bg_dim,
 }
+
+-- Leave the title bar text empty instead of showing the running program
+wezterm.on("format-window-title", function()
+	return " "
+end)
 
 -- Close tabs and windows without asking, even with something running
 config.window_close_confirmation = "NeverPrompt"
@@ -87,6 +93,7 @@ config.keys = {
 	{ key = "Enter", mods = cmd_shift, action = act.TogglePaneZoomState },
 	{ key = "w",     mods = cmd,       action = act.CloseCurrentPane({ confirm = false }) },
 	{ key = "p",     mods = cmd_shift, action = act.ActivateCommandPalette },
+	{ key = "e",     mods = cmd,       action = act.ShowTabNavigator },
 	-- Open this config in Zed
 	{
 		key = ",",
