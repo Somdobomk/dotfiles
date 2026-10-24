@@ -1,69 +1,26 @@
 // Zed settings
 
 {
-	"agent_ui_font_family": "GeistMono Nerd Font Mono",
-	"agent_buffer_font_size": 18.0,
-	"agent_ui_font_size": 18.0,
-	"agent_servers": {
-		"claude-acp": {
-			"default_config_options": {
-				"mode": "auto",
-			},
-			"type": "registry",
-		},
-	},
-	"context_servers": {},
-	"edit_predictions": {
-		"allow_data_collection": "no",
-	},
-	"collaboration_panel": {
-		"dock": "left",
-	},
-	"outline_panel": {
-		"dock": "left",
-	},
-	"git_panel": {
-		"dock": "left",
-	},
-	"agent": {
-		"enable_feedback": false,
-		"dock": "left",
-		"threads_sidebar": {
-			"position": "right",
-		},
-		"favorite_models": [],
-		"model_parameters": [],
-	},
-	"window_title_format": "${projectName}${separator}${fileName}",
-	"telemetry": {
-		"diagnostics": false,
-		"metrics": false,
-		"anthropic_retention": false,
-	},
-	"on_new_window": "empty_tab",
-	"theme": "Everforest Dark Hard (material)",
-	"buffer_font_family": "GeistMono Nerd Font Mono",
-	"buffer_font_size": 18.0,
-	"ui_font_family": ".SystemUIFont",
-	"ui_font_size": 18.0,
-	"icon_theme": "Colored Zed Icons Theme Dark",
-	"base_keymap": "VSCode",
+	// ── General ─────────────────────────────────────────────
 	// "vim_mode": true,
-	"buffer_line_height": { "custom": 1.4 },
-	"buffer_font_features": { "calt": false },
-	"buffer_font_weight": 300,
-	"toolbar": { "selections_menu": false,
-              "breadcrumbs": false, "quick_actions": false },
-	"project_panel": { "dock": "right", "entry_spacing": "standard" },
-	"tabs": { "file_icons": true },
-	"git": { "inline_blame": { "enabled": false } },
-	"current_line_highlight": "none",
-	"format_on_save": "on",
-	"tab_size": 4,
-	"hard_tabs": true,
-	"cursor_shape": "block",
+	"restore_on_startup": "empty_tab",
+	"restore_on_file_reopen": false,
+	"session": { "restore_unsaved_buffers": false },
+	"when_closing_with_no_tabs": "keep_window_open",
+	"close_on_file_delete": true,
+	"autosave": { "after_delay": { "milliseconds": 1000 } },
+
+	// ── Appearance ──────────────────────────────────────────
+	"theme": "Everforest Dark Hard (material)",
+	"icon_theme": "Colored Zed Icons Theme Dark",
 	"theme_overrides": {
 		"Everforest Dark Hard (material)": {
+			// Match editor.background (#272e33) so borders and chrome blend in
+			"border": "#272e33",
+			"border.variant": "#272e33",
+			"title_bar.background": "#272e33",
+			"panel.background": "#272e33",
+			"panel.focused_border": "#272e33",
 			"element.selection_background": "#a7c08066",
 			"players": [
 				{
@@ -72,9 +29,120 @@
 					"selection": "#a7c08066",
 				},
 			],
+			"syntax": {
+				"comment": { "color": "#859289", "font_style": "italic" },
+				"comment.doc": { "color": "#9da9a0", "font_style": "italic" },
+			},
 		},
 	},
-	// Settings for one platform only. They override the ones above.
+
+	// ── Fonts ───────────────────────────────────────────────
+	"ui_font_family": "Dank Mono",
+	"ui_font_size": 18.0,
+	"buffer_font_family": "Dank Mono",
+	"buffer_font_size": 18.0,
+	"buffer_font_features": { "calt": false },
+	"buffer_line_height": { "custom": 1.4 },
+
+	// ── Editor ──────────────────────────────────────────────
+	"cursor_shape": "block",
+	"current_line_highlight": "none",
+	"selection_highlight": false,
+	"show_whitespaces": "none",
+	"tab_size": 4,
+	"hard_tabs": true,
+	"format_on_save": "on",
+	"extend_comment_on_newline": false,
+	"drag_and_drop_selection": { "enabled": false },
+	"seed_search_query_from_cursor": "never",
+	"horizontal_scroll_margin": 1,
+	"vertical_scroll_margin": 1,
+	"scrollbar": { "show": "never" },
+	"indent_guides": { "enabled": false },
+	"gutter": {
+		"min_line_number_digits": 0,
+		"folds": false,
+		"runnables": false,
+	},
+	"centered_layout": {
+		"left_padding": 0.15,
+		"right_padding": 0.15,
+	},
+
+	// ── Completions, hovers, LSP ────────────────────────────
+	"show_completions_on_input": false,
+	"show_completion_documentation": false,
+	"hover_popover_enabled": false,
+	"inline_code_actions": false,
+	"lsp_document_colors": "none",
+
+	// ── Layout: bars, tabs, panels ──────────────────────────
+	"title_bar": {
+		"show_onboarding_banner": false,
+		"show_project_items": false,
+		"show_branch_name": false,
+		"show_user_menu": false,
+	},
+	"toolbar": {
+		"breadcrumbs": false,
+		"quick_actions": false,
+		"selections_menu": false,
+	},
+	"tab_bar": { "show": false },
+	"tabs": { "file_icons": true },
+	"status_bar": { "experimental.show": false },
+	"file_finder": { "modal_max_width": "large" },
+	"project_panel": {
+		"dock": "right",
+		"default_width": 400,
+		"entry_spacing": "standard",
+		"hide_root": true,
+		"auto_fold_dirs": false,
+		"starts_open": false,
+		"git_status": false,
+		"sticky_scroll": false,
+		"scrollbar": { "show": "never" },
+		"indent_guides": { "show": "never" },
+	},
+	"outline_panel": {
+		"default_width": 300,
+		"indent_guides": { "show": "never" },
+	},
+
+	// ── Git ─────────────────────────────────────────────────
+	"git": {
+		"git_gutter": "hide",
+		"inline_blame": { "enabled": false },
+	},
+
+	// ── AI / Agent ──────────────────────────────────────────
+	"agent": {
+		"dock": "left",
+		"enable_feedback": false,
+		"threads_sidebar": { "position": "right" },
+		"favorite_models": [],
+		"model_parameters": [],
+	},
+	"agent_ui_font_family": "GeistMono Nerd Font Mono",
+	"agent_ui_font_size": 18.0,
+	"agent_buffer_font_size": 18.0,
+	"agent_servers": {
+		"claude-acp": {
+			"type": "registry",
+			"default_config_options": { "mode": "auto" },
+		},
+	},
+	"context_servers": {},
+	"edit_predictions": { "allow_data_collection": "no" },
+
+	// ── Privacy ─────────────────────────────────────────────
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false,
+		"anthropic_retention": false,
+	},
+
+	// ── Platform overrides (override the settings above) ────
 	"windows": {
 		"terminal": {
 			"shell": {
