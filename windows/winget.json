@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-10-18T15:48:15.525-00:00",
+  "CreationDate": "2026-10-24T19:30:54.410-00:00",
   "Sources": [
     {
       "Packages": [
@@ -23,6 +23,9 @@
           "PackageIdentifier": "Inkscape.Inkscape"
         },
         {
+          "PackageIdentifier": "Starship.Starship"
+        },
+        {
           "PackageIdentifier": "GitHub.GitLFS"
         },
         {
@@ -30,9 +33,6 @@
         },
         {
           "PackageIdentifier": "GitHub.cli"
-        },
-        {
-          "PackageIdentifier": "Starship.Starship"
         },
         {
           "PackageIdentifier": "Nvidia.PhysX"
@@ -95,6 +95,9 @@
           "PackageIdentifier": "Balena.Etcher"
         },
         {
+          "PackageIdentifier": "Obsidian.Obsidian"
+        },
+        {
           "PackageIdentifier": "bootandy.dust"
         },
         {
@@ -135,9 +138,6 @@
         },
         {
           "PackageIdentifier": "Microsoft.WindowsTerminal"
-        },
-        {
-          "PackageIdentifier": "Obsidian.Obsidian"
         }
       ],
       "SourceDetails": {
