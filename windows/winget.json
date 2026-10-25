@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-10-25T09:26:59.065-00:00",
+  "CreationDate": "2026-10-25T09:50:59.193-00:00",
   "Sources": [
     {
       "Packages": [
@@ -71,6 +71,9 @@
           "PackageIdentifier": "Autodesk.Fusion"
         },
         {
+          "PackageIdentifier": "Anthropic.ClaudeCode"
+        },
+        {
           "PackageIdentifier": "BurntSushi.ripgrep.MSVC"
         },
         {
@@ -129,9 +132,6 @@
         },
         {
           "PackageIdentifier": "Canva.Affinity"
-        },
-        {
-          "PackageIdentifier": "Anthropic.Claude"
         }
       ],
       "SourceDetails": {

@@ -1,0 +1,10 @@
+// Zed keybindings
+[
+	{
+		// Send these keys to the shell instead of letting Zed use them
+		"context": "Terminal",
+		"bindings": {
+			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+		},
+	},
+]
