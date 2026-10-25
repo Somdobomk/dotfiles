@@ -217,7 +217,6 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 
    ```powershell
    winget import F:\GitHub\dotfiles\windows\winget.json --accept-package-agreements --accept-source-agreements
-   Install-Module Terminal-Icons -Scope CurrentUser
    ```
 
    Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads), then the repo's fonts with `F:\GitHub\dotfiles\fonts\install.ps1`.
@@ -268,7 +267,7 @@ The [shell cheat sheet](#shell) works the same on Windows, with these difference
 
 | On Windows | Instead of |
 | --- | --- |
-| `ls` is PowerShell's own, so its output can still be piped as objects. Icons come from Terminal-Icons | `ls` with eza |
+| `ls` and `dir` run eza, same as macOS. `Get-ChildItem` is PowerShell's own, for piping files as objects | — |
 | `la` lists everything, same as `lsa` | — |
 | `Get-Content`, `findstr`, `find.exe` | `\grep`, `command find` to run the originals |
 | `Tab` shows a menu of every match, with completions for winget, rg, fd, and tv | zsh completion menu |

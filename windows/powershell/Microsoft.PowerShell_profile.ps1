@@ -2,8 +2,7 @@
 # Documents) at this file, so edit it here. Mirrors home\.config\zsh\.zshrc
 # on macOS where PowerShell allows.
 #
-# Startup is kept fast: no network calls, tool init scripts are cached, and
-# Terminal-Icons loads right after the first prompt.
+# Startup is kept fast: no network calls, and tool init scripts are cached.
 
 $Dotfiles = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
@@ -17,9 +16,8 @@ $env:VISUAL = $env:EDITOR
 # Keep less's history (used by git) out of $HOME
 $env:LESSHISTFILE = Join-Path $env:TEMP 'lesshst'
 
-# Preferred commands, same as macOS. `ls` stays PowerShell's own, so its
-# output can still be piped as objects.
-# Run the original with its full name: Get-Content, findstr, find.exe
+# Preferred commands, same as macOS. `ls` and `dir` use eza when it's installed.
+# Run the original with its full name: Get-ChildItem, Get-Content, findstr, find.exe
 Set-Alias vim nvim
 if (Get-Command bat -ErrorAction SilentlyContinue) {
     Remove-Alias cat -Force -ErrorAction SilentlyContinue
@@ -31,6 +29,14 @@ if (Get-Command fd -ErrorAction SilentlyContinue) { Set-Alias find fd }
 if (Get-Command dust -ErrorAction SilentlyContinue) { Set-Alias du dust }
 
 if (Get-Command eza -ErrorAction SilentlyContinue) {
+    # Gruvbox colors for eza (same string as home\.config\zsh\.zshrc):
+    # directories blue, executables green, symlinks aqua, broken links red
+    $env:EZA_COLORS = 'di=1;38;2;131;165;152:ex=38;2;184;187;38:ln=38;2;142;192;124:or=38;2;251;73;52:so=38;2;211;134;155:pi=38;2;250;189;47:bd=38;2;254;128;25:cd=38;2;254;128;25:ur=38;2;250;189;47:uw=38;2;251;73;52:ux=38;2;184;187;38:ue=38;2;184;187;38:gr=38;2;250;189;47:gw=38;2;251;73;52:gx=38;2;184;187;38:tr=38;2;250;189;47:tw=38;2;251;73;52:tx=38;2;184;187;38:sn=38;2;184;187;38:sb=38;2;184;187;38:uu=38;2;250;189;47:un=38;2;250;189;47:da=38;2;142;192;124:hd=4;38;2;146;131;116:xx=38;2;146;131;116'
+    # `ls` and `dir` run eza too, so they look the same as ll. They no longer
+    # give PowerShell objects: use Get-ChildItem to pipe files to other commands
+    Remove-Alias ls, dir -Force -ErrorAction SilentlyContinue
+    function ls { eza --icons --group-directories-first @args }
+    function dir { eza --icons --group-directories-first @args }
     function lsa { eza -a --icons --group-directories-first @args }
     function ll { eza -l --icons --group-directories-first --no-user --header --time-style long-iso @args }
     function lla { eza -la --icons --group-directories-first --no-user --header --time-style long-iso @args }
@@ -105,8 +111,8 @@ Function wingetup {
   winget source update
   # Updates PowerShell and winget itself (App Installer) too, since they're
   # winget apps. --include-unknown also upgrades apps whose installed version
-  # winget can't read
-  winget upgrade --all --include-unknown
+  # winget can't read. Runs without prompts
+  winget upgrade --all --include-unknown --silent --disable-interactivity --accept-package-agreements --accept-source-agreements
 }
 # Only lists Windows updates; install them from Settings > Windows Update
 Function winosup {
@@ -184,25 +190,6 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     }
 }
 
-# Directories in bold blue instead of PowerShell's blue background. Matters
-# until Terminal-Icons loads, which colors them itself.
-$PSStyle.FileInfo.Directory = "`e[34;1m"
-
-# Load Terminal-Icons once the first prompt is up. It rewrites its theme files
-# on every import, so tabs opening together could corrupt them: the mutex
-# makes them take turns, and a corrupted copy is moved aside and rebuilt.
-$null = Register-EngineEvent -SourceIdentifier PowerShell.OnIdle -MaxTriggerCount 1 -Action {
-    $mutex = [System.Threading.Mutex]::new($false, 'Local\TerminalIconsImport')
-    $locked = $mutex.WaitOne(10000)
-    try {
-        Import-Module Terminal-Icons -Global -ErrorVariable importErrors -ErrorAction SilentlyContinue
-        if ($importErrors) {
-            $themes = Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'powershell\Community\Terminal-Icons'
-            Rename-Item $themes "Terminal-Icons.bak-$(Get-Date -Format yyyyMMdd-HHmmss)" -ErrorAction SilentlyContinue
-            Import-Module Terminal-Icons -Global -Force
-        }
-    } finally {
-        if ($locked) { $mutex.ReleaseMutex() }
-        $mutex.Dispose()
-    }
-}
+# Directories in bold Gruvbox blue (same as eza) for Get-ChildItem, instead of
+# PowerShell's blue background
+$PSStyle.FileInfo.Directory = "`e[1;38;2;131;165;152m"

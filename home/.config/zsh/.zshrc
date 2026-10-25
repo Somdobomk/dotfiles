@@ -77,6 +77,9 @@ alias find='fd'
 alias du='dust'
 
 if command -v eza >/dev/null 2>&1; then
+  # Gruvbox colors for eza (same string as windows\powershell profile):
+  # directories blue, executables green, symlinks aqua, broken links red
+  export EZA_COLORS='di=1;38;2;131;165;152:ex=38;2;184;187;38:ln=38;2;142;192;124:or=38;2;251;73;52:so=38;2;211;134;155:pi=38;2;250;189;47:bd=38;2;254;128;25:cd=38;2;254;128;25:ur=38;2;250;189;47:uw=38;2;251;73;52:ux=38;2;184;187;38:ue=38;2;184;187;38:gr=38;2;250;189;47:gw=38;2;251;73;52:gx=38;2;184;187;38:tr=38;2;250;189;47:tw=38;2;251;73;52:tx=38;2;184;187;38:sn=38;2;184;187;38:sb=38;2;184;187;38:uu=38;2;250;189;47:un=38;2;250;189;47:da=38;2;142;192;124:hd=4;38;2;146;131;116:xx=38;2;146;131;116'
   alias ls='eza --icons --group-directories-first'
   alias lsa='eza -a --icons --group-directories-first'
   alias ll='eza -l --icons --group-directories-first --no-user --header --time-style long-iso'

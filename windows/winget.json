@@ -1,6 +1,6 @@
 {
   "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-  "CreationDate": "2026-10-24T19:30:54.410-00:00",
+  "CreationDate": "2026-10-25T09:26:59.065-00:00",
   "Sources": [
     {
       "Packages": [
@@ -29,12 +29,6 @@
           "PackageIdentifier": "GitHub.GitLFS"
         },
         {
-          "PackageIdentifier": "OpenJS.NodeJS"
-        },
-        {
-          "PackageIdentifier": "GitHub.cli"
-        },
-        {
           "PackageIdentifier": "Nvidia.PhysX"
         },
         {
@@ -45,6 +39,12 @@
         },
         {
           "PackageIdentifier": "Intel.IntelExtremeTuningUtility"
+        },
+        {
+          "PackageIdentifier": "GitHub.cli"
+        },
+        {
+          "PackageIdentifier": "OpenJS.NodeJS"
         },
         {
           "PackageIdentifier": "Microsoft.Edge"
@@ -59,13 +59,10 @@
           "PackageIdentifier": "Ubisoft.Connect"
         },
         {
-          "PackageIdentifier": "Microsoft.PowerShell"
-        },
-        {
           "PackageIdentifier": "TechPowerUp.GPU-Z"
         },
         {
-          "PackageIdentifier": "ElectronicArts.EADesktop"
+          "PackageIdentifier": "Microsoft.PowerShell"
         },
         {
           "PackageIdentifier": "WowUp.CF"
@@ -135,9 +132,6 @@
         },
         {
           "PackageIdentifier": "Anthropic.Claude"
-        },
-        {
-          "PackageIdentifier": "Microsoft.WindowsTerminal"
         }
       ],
       "SourceDetails": {

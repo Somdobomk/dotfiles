@@ -198,11 +198,6 @@ $Tools = [ordered]@{
   'tree-sitter' = 'tree-sitter.tree-sitter-cli'
 }
 $Missing = $Tools.Keys | Where-Object { -not (Get-Command $_ -ErrorAction SilentlyContinue) }
-foreach ($Module in 'Terminal-Icons') {
-  if (-not (Get-Module -ListAvailable -Name $Module)) {
-    Write-Host "Missing module $Module. Install it with: Install-Module $Module -Scope CurrentUser"
-  }
-}
 if ($Missing) {
   Write-Host "`nMissing tools (Neovim's treesitter needs tree-sitter, plus zig as its C compiler):"
   foreach ($Name in $Missing) { Write-Host "  winget install $($Tools[$Name])" }
