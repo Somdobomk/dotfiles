@@ -313,6 +313,10 @@ Run this after changing mods, mod settings, or shortcuts, then commit:
 
 The script uses the Zen profile that changed most recently. To choose one, pass its folder name, for example `./export.sh "rhlik1qw.Default (alpha)"`. Profile folders are listed at `about:profiles`.
 
+### Pages show gray or dark gaps
+
+The Transparent Zen mod sets `browser.tabs.allow_transparent_browser`, which lets the window color show through any page with no background of its own. The mod is removed from this repo, and `user.js` turns the setting off. On a profile that still has the mod (macOS before the next export), remove it in **Zen Settings → Mods**, then copy `user.js` into the profile folder (`about:support` → Profile Folder) and restart Zen.
+
 ### Set up on Windows
 
 1. Install Zen, open it once so it creates a profile, then **close it**.
