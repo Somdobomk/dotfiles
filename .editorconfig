@@ -1,4 +1,4 @@
-# Indentation for this repo, read by Zed, Neovim, and VS Code, so every
+# Indentation for this repo, read by Zed and Neovim, so every
 # editor saves files the same way. https://editorconfig.org
 
 root = true

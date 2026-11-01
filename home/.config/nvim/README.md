@@ -1,6 +1,6 @@
 # Neovim Quick Edit
 
-A small Neovim setup for opening files quickly while using Zed or VS Code for primary development.
+A small Neovim setup for opening files quickly while using Zed for primary development.
 
 Included:
 - `lazy.nvim` plugin manager, with versions pinned in `lazy-lock.json`
