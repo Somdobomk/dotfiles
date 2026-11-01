@@ -73,10 +73,10 @@
 	},
 
 	// ── Completions, hovers, LSP ────────────────────────────
-	"show_completions_on_input": false,
+	"show_completions_on_input": true,
 	"show_completion_documentation": false,
-	"hover_popover_enabled": false,
-	"inline_code_actions": false,
+	"hover_popover_enabled": true,
+	"inline_code_actions": true,
 	"lsp_document_colors": "none",
 
 	// ── Layout: bars, tabs, panels ──────────────────────────

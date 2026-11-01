@@ -10,7 +10,7 @@ $Dotfiles = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $env:STARSHIP_CONFIG = Join-Path $Dotfiles 'shared\home\.config\starship.toml'
 
 # Editor: Zed locally, Neovim over SSH (no window to open there)
-$env:EDITOR = if ($env:SSH_CONNECTION) { 'nvim' } else { 'zed --wait' }
+$env:EDITOR = if ($env:SSH_CONNECTION) { 'hx' } else { 'zed --wait' }
 $env:VISUAL = $env:EDITOR
 
 # Keep less's history (used by git) out of $HOME

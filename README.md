@@ -24,6 +24,7 @@ Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 | [`macos/home/.zshenv`](macos/home/.zshenv)                             | Points zsh at `~/.config/zsh`                                                | `~/.zshenv`               |
 | [`macos/home/.hushlogin`](macos/home/.hushlogin)                       | Empty file that hides the "Last login" line in new terminals                 | `~/.hushlogin`            |
 | [`macos/home/.config/zsh/`](macos/home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
+| [`shared/home/.config/helix/`](shared/home/.config/helix/)               | [Helix](https://helix-editor.com) editor config: Gruvbox Dark Hard theme with the orange cursor and red selection | `~/.config/helix`         |
 | [`shared/home/.config/nvim/`](shared/home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](shared/home/.config/nvim/README.md)) | `~/.config/nvim`          |
 | [`shared/home/.config/nushell/`](shared/home/.config/nushell/)         | [Nushell](https://www.nushell.sh) config, the default shell in WezTerm on macOS ([details](#nushell)) | `~/.config/nushell`       |
 | [`shared/home/.config/zed/`](shared/home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
@@ -112,6 +113,20 @@ Only WezTerm starts Nushell. Other terminals, Zed's terminal, and `ssh` still us
 Nushell on macOS looks in `~/Library/Application Support/nushell`, so WezTerm starts it with `--config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu`. Do the same when running `nu` by hand, or set `XDG_CONFIG_HOME=~/.config`.
 
 What differs from zsh: no Antidote plugins (highlighting, suggestions, and completions are built in), no leading-space history trick, no `~icloud` path, and Nushell's own `ls`, `find`, and `du` stay as they are, since they return tables. Run `eza`, `fd`, or `dust` by name instead. Commands that only exist on one system live in [`macos.nu`](shared/home/.config/nushell/macos.nu) and [`windows.nu`](shared/home/.config/nushell/windows.nu).
+
+### Helix
+
+The default terminal editor, used over SSH (`EDITOR`). Zed is the main editor locally. Neovim stays installed as a backup: run `nvim`. Helix selects first, then acts: `w` selects a word, then `d` deletes it.
+
+| Shortcut | What it does |
+| --- | --- |
+| `hx file` | Open a file |
+| `Space f` / `Space /` | Pick a file / search text in files |
+| `Space b` | Pick an open buffer |
+| `Space ?` | Command palette: search every command |
+| `:w` / `:q` / `:wq` | Save / quit / save and quit |
+| `:theme <name>` | Change the theme for this session. The default is set in [`config.toml`](shared/home/.config/helix/config.toml) |
+| `hx --tutor` | Interactive tutorial |
 
 ### Neovim
 
@@ -211,7 +226,7 @@ The `.stow-local-ignore` file in each `home/` folder lists files Stow skips, suc
 
 - **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](macos/home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark Hard ([details](shared/home/.config/nvim/README.md))
+- **Editor:** Zed for projects. [Helix](https://helix-editor.com) in the terminal, with the same Gruvbox Dark Hard colors plus the orange cursor and red selection ([`shared/home/.config/helix/`](shared/home/.config/helix/)). Neovim is a backup: lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark Hard ([details](shared/home/.config/nvim/README.md))
 - **Terminal:** WezTerm with Gruvbox Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`shared/zen/`](shared/zen/)
 - **Windows:** PowerShell 7 and Windows Terminal set up to match, sharing the Starship, Neovim, and Television configs ([details](#windows))
@@ -269,6 +284,7 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 | --- | --- |
 | PowerShell | `$PROFILE` becomes a one-line file that loads the profile from the repo. This works even when OneDrive backs up Documents |
 | Windows Terminal | `settings.json` is copied into place. It's a copy, not a link, because Terminal replaces links when it saves |
+| Helix | `%APPDATA%\helix` becomes a junction to `shared/home/.config/helix`. Install Helix with `winget install Helix.Helix` |
 | Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `shared/home/.config/nvim`. Junctions need no admin rights and work across drives |
 | WezTerm | `~\.config\wezterm` becomes a junction to `shared/home/.config/wezterm` |
 | Nushell | `~\.config\nushell` becomes a junction to `shared/home/.config/nushell` |

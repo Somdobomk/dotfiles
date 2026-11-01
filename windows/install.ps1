@@ -15,6 +15,7 @@
 #   It's a copy, not a link, because Terminal replaces links when it saves.
 # - Neovim: %LOCALAPPDATA%\nvim becomes a junction to shared\home\.config\nvim.
 # - WezTerm: ~\.config\wezterm becomes a junction to shared\home\.config\wezterm.
+# - Helix: %APPDATA%\helix becomes a junction to shared\home\.config\helix.
 # - Nushell: ~\.config\nushell becomes a junction to shared\home\.config\nushell (used
 #   only once Nushell is installed; PowerShell stays the default).
 # - Zed: %APPDATA%\Zed becomes a junction to shared\home\.config\zed.
@@ -125,6 +126,7 @@ function Link-Folder ($Name, $Path, $Target) {
 
 Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'shared\home\.config\nvim')
 Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'shared\home\.config\wezterm')
+Link-Folder 'Helix' (Join-Path $env:APPDATA 'helix') (Join-Path $Dotfiles 'shared\home\.config\helix')
 Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'shared\home\.config\nushell')
 if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
   Write-Host "Zed: running, skipped. Close it and run this again."
@@ -197,6 +199,7 @@ $Tools = [ordered]@{
   dust          = 'bootandy.dust'
   zed           = 'ZedIndustries.Zed'
   wezterm       = 'wez.wezterm'
+  hx            = 'Helix.Helix'
   zig           = 'zig.zig'
   'tree-sitter' = 'tree-sitter.tree-sitter-cli'
 }

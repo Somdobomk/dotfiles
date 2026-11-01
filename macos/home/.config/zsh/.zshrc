@@ -53,9 +53,10 @@ bindkey '^[OA' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 bindkey '^[OB' down-line-or-beginning-search
 
-# Editor: Zed locally, Neovim over SSH (no window to open there)
+# Editor: Zed locally, Helix over SSH (no window to open there). Neovim is
+# still installed as a backup: run nvim
 if [[ -n "$SSH_CONNECTION" ]]; then
-  export EDITOR="nvim"
+  export EDITOR="hx"
 else
   export EDITOR="zed --wait"
 fi

@@ -13,8 +13,8 @@ if $os == "macos" {
   $env.HOMEBREW_NO_ANALYTICS = "1"
 }
 
-# Editor: Zed locally, Neovim over SSH (no window to open there)
-$env.EDITOR = if ($env.SSH_CONNECTION? | is-not-empty) { "nvim" } else { "zed --wait" }
+# Editor: Zed locally, Helix over SSH (no window to open there)
+$env.EDITOR = if ($env.SSH_CONNECTION? | is-not-empty) { "hx" } else { "zed --wait" }
 $env.VISUAL = $env.EDITOR
 
 # bat's theme matches the Gruvbox theme in the other apps

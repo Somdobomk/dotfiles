@@ -1,0 +1,9 @@
+# Gruvbox Dark Hard with the orange cursor and red selection used in the other apps
+inherits = "gruvbox_dark_hard"
+
+"ui.cursor.primary" = { fg = "#1d2021", bg = "#d65d0e" }
+"ui.cursor.primary.normal" = { fg = "#1d2021", bg = "#d65d0e" }
+"ui.cursor.primary.insert" = { fg = "#1d2021", bg = "#d65d0e" }
+"ui.cursor.primary.select" = { fg = "#1d2021", bg = "#d65d0e" }
+"ui.selection" = { bg = "#8a2621" }
+"ui.selection.primary" = { bg = "#8a2621" }
