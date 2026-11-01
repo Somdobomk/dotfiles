@@ -11,18 +11,18 @@
 	"autosave": { "after_delay": { "milliseconds": 1000 } },
 
 	// ── Appearance ──────────────────────────────────────────
-	"theme": "Gruvbox Dark",
+	"theme": "Gruvbox Dark Hard",
 	"icon_theme": "Colored Zed Icons Theme Dark",
 	"theme_overrides": {
-		// Match Obsidian's "Obsidian gruvbox" theme (dark mode)
-		"Gruvbox Dark": {
-			// Match editor.background (#282828) so borders and chrome blend in
-			"background": "#282828",
-			"border": "#282828",
-			"border.variant": "#282828",
-			"title_bar.background": "#282828",
-			"panel.background": "#282828",
-			"panel.focused_border": "#282828",
+		// Gruvbox Dark Hard, matching the other apps
+		"Gruvbox Dark Hard": {
+			// Match editor.background (#1d2021) so borders and chrome blend in
+			"background": "#1d2021",
+			"border": "#1d2021",
+			"border.variant": "#1d2021",
+			"title_bar.background": "#1d2021",
+			"panel.background": "#1d2021",
+			"panel.focused_border": "#1d2021",
 			// Obsidian's red text selection and orange accent
 			"element.selection_background": "#cc241d99",
 			"players": [

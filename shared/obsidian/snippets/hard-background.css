@@ -1,0 +1,5 @@
+/* Gruvbox dark0-hard (#1d2021) for the editor too. The theme only uses it for the sidebar */
+.theme-dark {
+    --background-primary: var(--dark0-hard);
+    --background-primary-alt: var(--dark0-hard);
+}

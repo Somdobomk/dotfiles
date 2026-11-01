@@ -211,8 +211,8 @@ The `.stow-local-ignore` file in each `home/` folder lists files Stow skips, suc
 
 - **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](macos/home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark ([details](shared/home/.config/nvim/README.md))
-- **Terminal:** WezTerm with Gruvbox Dark colors and GeistMono Nerd Font
+- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark Hard ([details](shared/home/.config/nvim/README.md))
+- **Terminal:** WezTerm with Gruvbox Dark Hard colors and GeistMono Nerd Font
 - **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`shared/zen/`](shared/zen/)
 - **Windows:** PowerShell 7 and Windows Terminal set up to match, sharing the Starship, Neovim, and Television configs ([details](#windows))
 
@@ -223,7 +223,7 @@ The `.stow-local-ignore` file in each `home/` folder lists files Stow skips, suc
 | Path | What it is |
 | --- | --- |
 | [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](macos/home/.config/zsh/.zshrc) |
-| [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Gruvbox Dark, GeistMono Nerd Font, and a separate admin profile |
+| [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Gruvbox Dark Hard, GeistMono Nerd Font, and a separate admin profile |
 | [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import`. Runtimes like VCRedist and .NET are left out, since apps that need them pull them in |
 | [`windows/powertoys/`](windows/powertoys/) | PowerToys settings backup |
 | [`windows/install.ps1`](windows/install.ps1) | Setup script |

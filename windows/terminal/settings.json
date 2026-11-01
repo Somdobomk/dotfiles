@@ -88,7 +88,7 @@
     [
         {
             "name": "Gruvbox Dark",
-            "background": "#282828",
+            "background": "#1D2021",
             "foreground": "#EBDBB2",
             "cursorColor": "#D65D0E",
             "selectionBackground": "#8A2621",

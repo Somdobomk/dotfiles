@@ -1,6 +1,6 @@
 # Gruvbox Dark, matching Obsidian, WezTerm, Neovim, Starship, and Zed
 # general
-background = '#282828'
+background = '#1d2021'
 border_fg = '#504945'
 text_fg = '#ebdbb2'
 dimmed_text_fg = '#928374'
@@ -17,9 +17,9 @@ match_fg = '#fe8019'
 # preview
 preview_title_fg = '#b8bb26'
 # modes
-channel_mode_fg = '#282828'
+channel_mode_fg = '#1d2021'
 channel_mode_bg = '#b8bb26'
-remote_control_mode_fg = '#282828'
+remote_control_mode_fg = '#1d2021'
 remote_control_mode_bg = '#8ec07c'
-action_picker_mode_fg = '#282828'
+action_picker_mode_fg = '#1d2021'
 action_picker_mode_bg = '#83a598'

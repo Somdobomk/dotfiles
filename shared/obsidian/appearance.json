@@ -6,6 +6,6 @@
   "translucency": false,
   "cssTheme": "Obsidian gruvbox",
   "enabledCssSnippets": [
-    "sidebar-background"
+    "hard-background"
   ]
 }

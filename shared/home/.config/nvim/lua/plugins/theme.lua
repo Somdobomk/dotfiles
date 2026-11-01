@@ -8,13 +8,13 @@ return {
       vim.o.background = "dark"
       vim.o.winborder = "rounded"
       require("gruvbox").setup({
-        contrast = "", -- medium (#282828), like Obsidian
+        contrast = "hard", -- #1d2021, like the other apps
         overrides = {
           -- Obsidian's red text selection
           Visual = { bg = "#8a2621" },
           -- Popups share the editor background, separated by a border
-          NormalFloat = { bg = "#282828" },
-          FloatBorder = { bg = "#282828" },
+          NormalFloat = { bg = "#1d2021" },
+          FloatBorder = { bg = "#1d2021" },
         },
       })
       vim.cmd.colorscheme("gruvbox")

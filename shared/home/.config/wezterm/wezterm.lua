@@ -30,7 +30,7 @@ end
 -- Theme ----------------------------------------------------------------------
 
 -- Gruvbox Dark, matching Obsidian's "Obsidian gruvbox" theme and Zed's "Gruvbox Dark"
-local bg, bg_dim, bg_tab = "#282828", "#1d2021", "#3c3836"
+local bg, bg_dim, bg_tab = "#1d2021", "#1d2021", "#3c3836"
 local fg, grey, orange = "#ebdbb2", "#928374", "#d65d0e"
 
 config.colors = {
