@@ -11,6 +11,7 @@
 # - Git: asks for your email and saves it in ~/.config/git/local (gitignored).
 # - Obsidian: ~/GitHub/second-brain/.obsidian becomes a link to shared/obsidian/,
 #   if the second-brain notes are cloned next to this repo.
+# - Nushell: links its config files into ~/Library/Application Support/nushell.
 # - Fonts: shared/fonts/install.sh installs the fonts that aren't in Homebrew.
 # macOS settings aren't changed here; run macos/defaults.sh for those.
 
@@ -76,6 +77,16 @@ else
   ln -s "$DOTFILES/shared/obsidian" "$VAULT_CONFIG"
   echo "  linked to $DOTFILES/shared/obsidian"
 fi
+
+# Nushell on macOS looks in ~/Library/Application Support/nushell, not
+# ~/.config, so link its files from there (history files stay in that folder)
+NU_DIR="$HOME/Library/Application Support/nushell"
+echo "Nushell: $NU_DIR"
+mkdir -p "$NU_DIR"
+for f in config.nu env.nu macos.nu windows.nu; do
+  ln -sfn "$HOME/.config/nushell/$f" "$NU_DIR/$f"
+done
+echo "  linked config.nu, env.nu, macos.nu, windows.nu"
 
 echo "Fonts:"
 "$DOTFILES/shared/fonts/install.sh"

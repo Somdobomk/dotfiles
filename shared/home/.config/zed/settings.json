@@ -149,8 +149,12 @@
 	"macos": {
 		"terminal": {
 			"font_size": 18.0,
+			"shell": {
+				"program": "/opt/homebrew/bin/nu",
+			},
 		},
 	},
+
 	"windows": {
 		"terminal": {
 			"shell": {

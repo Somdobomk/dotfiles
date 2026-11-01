@@ -110,7 +110,7 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 
 Only WezTerm starts Nushell. Other terminals, Zed's terminal, and `ssh` still use zsh, since the login shell is unchanged. To make Nushell the login shell everywhere, add `/opt/homebrew/bin/nu` to `/etc/shells` and run `chsh -s /opt/homebrew/bin/nu`. Zsh no longer reads its config files then, and programs that expect a POSIX shell can misbehave, so I'd keep the WezTerm-only setup.
 
-Nushell on macOS looks in `~/Library/Application Support/nushell`, so WezTerm starts it with `--config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu`. Do the same when running `nu` by hand, or set `XDG_CONFIG_HOME=~/.config`.
+Nushell on macOS looks in `~/Library/Application Support/nushell`, not `~/.config`. `macos/install.sh` links `config.nu`, `env.nu`, `macos.nu` and `windows.nu` from `~/.config/nushell` into that folder, so plain `nu` loads your config with no flags. Nushell keeps its history files there too.
 
 What differs from zsh: no Antidote plugins (highlighting, suggestions, and completions are built in), no leading-space history trick, no `~icloud` path, and Nushell's own `ls`, `find`, and `du` stay as they are, since they return tables. Run `eza`, `fd`, or `dust` by name instead. Commands that only exist on one system live in [`macos.nu`](shared/home/.config/nushell/macos.nu) and [`windows.nu`](shared/home/.config/nushell/windows.nu).
 

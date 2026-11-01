@@ -8,9 +8,9 @@ local config = wezterm.config_builder()
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
 -- Shell: Nushell on macOS, with zsh as the fallback. Cmd+Shift+Z opens a zsh tab.
--- Nushell is given its config path, since macOS has it look in
--- ~/Library/Application Support/nushell. Windows starts PowerShell 7 instead of
--- cmd.exe; to try Nushell there, see the Windows section of the README.
+-- macos/install.sh links Nushell's config into ~/Library/Application Support/nushell,
+-- where it looks. Windows starts PowerShell 7 instead of cmd.exe; to try
+-- Nushell there, see the Windows section of the README.
 local function exists(path)
 	local f = io.open(path, "r")
 	if f then
@@ -20,11 +20,11 @@ local function exists(path)
 end
 
 local nu = "/opt/homebrew/bin/nu"
-local nu_dir = wezterm.home_dir .. "/.config/nushell"
+local nu_config = wezterm.home_dir .. "/Library/Application Support/nushell/config.nu"
 if is_windows then
 	config.default_prog = { "pwsh.exe", "-NoLogo" }
-elseif exists(nu) and exists(nu_dir .. "/config.nu") then
-	config.default_prog = { nu, "--config", nu_dir .. "/config.nu", "--env-config", nu_dir .. "/env.nu" }
+elseif exists(nu) and exists(nu_config) then
+	config.default_prog = { nu }
 end
 
 -- Theme ----------------------------------------------------------------------
