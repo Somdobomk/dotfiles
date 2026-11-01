@@ -15,6 +15,8 @@
 #   It's a copy, not a link, because Terminal replaces links when it saves.
 # - Neovim: %LOCALAPPDATA%\nvim becomes a junction to home\.config\nvim.
 # - WezTerm: ~\.config\wezterm becomes a junction to home\.config\wezterm.
+# - Nushell: ~\.config\nushell becomes a junction to home\.config\nushell (used
+#   only once Nushell is installed; PowerShell stays the default).
 # - Zed: %APPDATA%\Zed becomes a junction to home\.config\zed.
 # - Obsidian: second-brain\.obsidian becomes a junction to obsidian\, if the
 #   second-brain notes are cloned next to this repo.
@@ -123,6 +125,7 @@ function Link-Folder ($Name, $Path, $Target) {
 
 Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'home\.config\nvim')
 Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'home\.config\wezterm')
+Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'home\.config\nushell')
 if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
   Write-Host "Zed: running, skipped. Close it and run this again."
 } else {

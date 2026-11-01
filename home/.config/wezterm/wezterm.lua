@@ -7,9 +7,24 @@ local config = wezterm.config_builder()
 -- Shared with Windows, where the differences are marked "Windows"
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
--- Windows: start PowerShell 7 instead of cmd.exe
+-- Shell: Nushell on macOS, with zsh as the fallback. Cmd+Shift+Z opens a zsh tab.
+-- Nushell is given its config path, since macOS has it look in
+-- ~/Library/Application Support/nushell. Windows starts PowerShell 7 instead of
+-- cmd.exe; to try Nushell there, see the Windows section of the README.
+local function exists(path)
+	local f = io.open(path, "r")
+	if f then
+		f:close()
+	end
+	return f ~= nil
+end
+
+local nu = "/opt/homebrew/bin/nu"
+local nu_dir = wezterm.home_dir .. "/.config/nushell"
 if is_windows then
 	config.default_prog = { "pwsh.exe", "-NoLogo" }
+elseif exists(nu) and exists(nu_dir .. "/config.nu") then
+	config.default_prog = { nu, "--config", nu_dir .. "/config.nu", "--env-config", nu_dir .. "/env.nu" }
 end
 
 -- Theme ----------------------------------------------------------------------
@@ -94,6 +109,12 @@ config.keys = {
 	{ key = "w",     mods = cmd,       action = act.CloseCurrentPane({ confirm = false }) },
 	{ key = "p",     mods = cmd_shift, action = act.ActivateCommandPalette },
 	{ key = "e",     mods = cmd,       action = act.ShowTabNavigator },
+	-- The shell that was the default before Nushell
+	{
+		key = "z",
+		mods = cmd_shift,
+		action = act.SpawnCommandInNewTab({ args = is_windows and { "pwsh.exe", "-NoLogo" } or { "/bin/zsh", "-l" } }),
+	},
 	-- Open this config in Zed
 	{
 		key = ",",

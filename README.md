@@ -83,6 +83,23 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
 | `notes-sync` | Commit, pull, and push the [second-brain](https://github.com/Somdobomk/second-brain) notes, cloned next to the dotfiles repo |
 
+### Nushell
+
+[Nushell](https://www.nushell.sh) is the default shell in WezTerm on macOS, configured in [`home/.config/nushell/`](home/.config/nushell/) to match the zsh setup: the same Starship prompt, zoxide, Television, aliases, and `EDITOR`. Zsh is still the login shell and everything in [`home/.config/zsh/`](home/.config/zsh/) is unchanged, so it works as a backup.
+
+| Shortcut | What it does |
+| --- | --- |
+| `Cmd+Shift+Z` | Open a zsh tab in WezTerm |
+| `zsh` | Switch to zsh inside the current tab. `exit` returns to Nushell |
+
+**Go back to zsh:** delete the `default_prog` block near the top of [`wezterm.lua`](home/.config/wezterm/wezterm.lua), or uninstall Nushell with `brew uninstall nushell`. WezTerm falls back to zsh if Nushell or its config is missing. Remove [`home/.config/nushell/`](home/.config/nushell/) and the `nushell` line in the Brewfile to clean up fully.
+
+Only WezTerm starts Nushell. Other terminals, Zed's terminal, and `ssh` still use zsh, since the login shell is unchanged. To make Nushell the login shell everywhere, add `/opt/homebrew/bin/nu` to `/etc/shells` and run `chsh -s /opt/homebrew/bin/nu`. Zsh no longer reads its config files then, and programs that expect a POSIX shell can misbehave, so I'd keep the WezTerm-only setup.
+
+Nushell on macOS looks in `~/Library/Application Support/nushell`, so WezTerm starts it with `--config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu`. Do the same when running `nu` by hand, or set `XDG_CONFIG_HOME=~/.config`.
+
+What differs from zsh: no Antidote plugins (highlighting, suggestions, and completions are built in), no leading-space history trick, no `~icloud` path, and Nushell's own `ls`, `find`, and `du` stay as they are, since they return tables. Run `eza`, `fd`, or `dust` by name instead. Commands that only exist on one system live in [`macos.nu`](home/.config/nushell/macos.nu) and [`windows.nu`](home/.config/nushell/windows.nu).
+
 ### Neovim
 
 Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
@@ -239,6 +256,7 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 | Windows Terminal | `settings.json` is copied into place. It's a copy, not a link, because Terminal replaces links when it saves |
 | Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `home/.config/nvim`. Junctions need no admin rights and work across drives |
 | WezTerm | `~\.config\wezterm` becomes a junction to `home/.config/wezterm` |
+| Nushell | `~\.config\nushell` becomes a junction to `home/.config/nushell` |
 | Zed | `%APPDATA%\Zed` becomes a junction to `home/.config/zed`. Skipped while Zed is open |
 | Obsidian | `second-brain\.obsidian` becomes a junction to `obsidian/`, if the [second-brain](https://github.com/Somdobomk/second-brain) notes are cloned next to the dotfiles repo. Skipped while Obsidian is open |
 | Git | `~\.config\git` becomes a junction to `home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
@@ -260,6 +278,32 @@ git config --file ~/.config/git/local user.email you@example.com
 On macOS, the install script asks for it. On Windows, it's taken from `~\.gitconfig` when that has an email. Until it's set, Git refuses to commit (`useConfigOnly`) instead of guessing an address from the computer's name. Check with `git config user.email`.
 
 The config also turns on a few settings most people end up wanting: the first `git push` of a branch sets its upstream, `git pull` rebases instead of merging, remote branches deleted on the server are pruned, conflict resolutions are remembered (`rerere`), conflicts also show the original text (`zdiff3`), and `git branch` lists recent branches first. Each one is explained in the file.
+
+### Nushell on Windows
+
+[`home/.config/nushell/`](home/.config/nushell/) works on Windows too, but I haven't tested it there. PowerShell 7 stays the default in WezTerm until you switch. To try Nushell:
+
+1. Install it and open a new PowerShell window:
+
+   ```powershell
+   winget install Nushell.Nushell
+   ```
+
+2. Try it with the repo config. `install.ps1` links `~\.config\nushell` to the repo, so run it again if that folder is missing:
+
+   ```powershell
+   nu --config ~\.config\nushell\config.nu --env-config ~\.config\nushell\env.nu
+   ```
+
+3. To make it the WezTerm default, replace the `default_prog` line for Windows in [`wezterm.lua`](home/.config/wezterm/wezterm.lua) with:
+
+   ```lua
+   config.default_prog = { "nu.exe", "--config", wezterm.home_dir .. "/.config/nushell/config.nu", "--env-config", wezterm.home_dir .. "/.config/nushell/env.nu" }
+   ```
+
+   `Ctrl+Shift+Alt+Z` still opens a PowerShell tab.
+
+The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds `wingetup`; the macOS-only commands (`brewup`, `icloud`) don't load there.
 
 ### Differences from macOS
 
