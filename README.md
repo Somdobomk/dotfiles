@@ -4,28 +4,42 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 
 ## Contents
 
-[`home/`](home/) mirrors `$HOME` and is linked into place with [GNU Stow](#gnu-stow).
+The repo is split by system:
+
+```
+dotfiles/
+├── shared/      Used on both macOS and Windows
+│   ├── home/    Mirrors $HOME: git, nvim, nushell, starship, television, wezterm, zed
+│   ├── obsidian/  zen/  fonts/  wallpapers/
+├── macos/       macOS only
+│   ├── home/    Mirrors $HOME: zsh, .zshenv, .hushlogin
+│   └── install.sh  Brewfile  defaults.sh
+└── windows/     Windows only: PowerShell profile, Windows Terminal, PowerToys, winget, install.ps1
+```
+
+Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 
 | Path                                                       | What it is                                                                   | Links to                  |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------------------- |
-| [`home/.zshenv`](home/.zshenv)                             | Points zsh at `~/.config/zsh`                                                | `~/.zshenv`               |
-| [`home/.hushlogin`](home/.hushlogin)                       | Empty file that hides the "Last login" line in new terminals                 | `~/.hushlogin`            |
-| [`home/.config/zsh/`](home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
-| [`home/.config/nvim/`](home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](home/.config/nvim/README.md)) | `~/.config/nvim`          |
-| [`home/.config/zed/`](home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
-| [`home/.config/git/`](home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
-| [`home/.config/starship.toml`](home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
-| [`home/.config/wezterm/`](home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
-| [`home/.config/television/`](home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |
-| [`install.sh`](install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
-| [`Brewfile`](Brewfile)                                     | Homebrew tools, apps, and fonts, for `brew bundle`                           | —                         |
+| [`macos/home/.zshenv`](macos/home/.zshenv)                             | Points zsh at `~/.config/zsh`                                                | `~/.zshenv`               |
+| [`macos/home/.hushlogin`](macos/home/.hushlogin)                       | Empty file that hides the "Last login" line in new terminals                 | `~/.hushlogin`            |
+| [`macos/home/.config/zsh/`](macos/home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
+| [`shared/home/.config/nvim/`](shared/home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](shared/home/.config/nvim/README.md)) | `~/.config/nvim`          |
+| [`shared/home/.config/nushell/`](shared/home/.config/nushell/)         | [Nushell](https://www.nushell.sh) config, the default shell in WezTerm on macOS ([details](#nushell)) | `~/.config/nushell`       |
+| [`shared/home/.config/zed/`](shared/home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
+| [`shared/home/.config/git/`](shared/home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
+| [`shared/home/.config/starship.toml`](shared/home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
+| [`shared/home/.config/wezterm/`](shared/home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
+| [`shared/home/.config/television/`](shared/home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |
+| [`macos/install.sh`](macos/install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
+| [`macos/Brewfile`](macos/Brewfile)                                     | Homebrew tools, apps, and fonts, for `brew bundle`                           | —                         |
 | [`macos/defaults.sh`](macos/defaults.sh)                   | macOS settings: key repeat, Finder, Dock ([details](#macos-settings))        | —                         |
 | [`.editorconfig`](.editorconfig)                           | Indentation for this repo, so every editor saves files the same way          | —                         |
 | [`windows/`](windows/)                                     | PowerShell profile, Windows Terminal settings, PowerToys backup, and install script | see [Windows](#windows) |
-| [`obsidian/`](obsidian/) | [Obsidian](https://obsidian.md) settings, Gruvbox theme, and CSS snippets for the second-brain notes | `~/GitHub/second-brain/.obsidian` |
-| [`zen/`](zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
-| [`fonts/`](fonts/)                                         | Fonts not in Homebrew, and [install script](fonts/install.sh)                | `~/Library/Fonts`         |
-| [`wallpapers/`](wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
+| [`shared/obsidian/`](shared/obsidian/) | [Obsidian](https://obsidian.md) settings, Gruvbox theme, and CSS snippets for the second-brain notes | `~/GitHub/second-brain/.obsidian` |
+| [`shared/zen/`](shared/zen/)                                             | [Zen Browser](https://zen-browser.app) mods, mod settings, and shortcuts     | copied, see [Zen Browser](#zen-browser) |
+| [`shared/fonts/`](shared/fonts/)                                         | Fonts not in Homebrew, and [install script](shared/fonts/install.sh)                | `~/Library/Fonts`         |
+| [`shared/wallpapers/`](shared/wallpapers/)                               | Gruvbox wallpapers                                                           | —                         |
 
 ## Quick start (macOS)
 
@@ -42,16 +56,16 @@ My personal macOS configuration, plus a matching PowerShell setup for [Windows](
 3. Run the install script:
 
    ```sh
-   ~/GitHub/dotfiles/install.sh
+   ~/GitHub/dotfiles/macos/install.sh
    ```
 
-   It installs everything in the [`Brewfile`](Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), and installs the [fonts](#fonts) that aren't in Homebrew. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
+   It installs everything in the [`macos/Brewfile`](macos/Brewfile), links the configs into place with [Stow](#gnu-stow), asks for your [Git email](#git-email), and installs the [fonts](#fonts) that aren't in Homebrew. It's safe to run again. If Stow stops with `existing target is not owned by stow`, see [Conflicts](#gnu-stow).
 
 4. Optionally, apply the [macOS settings](#macos-settings) with `~/GitHub/dotfiles/macos/defaults.sh`.
 
 5. Restart the shell with `exec zsh`.
 
-After installing or removing Homebrew apps, save the list with `./install.sh --save-apps`, then commit. This rewrites the `Brewfile` from what's installed, so its comments are dropped.
+After installing or removing Homebrew apps, save the list with `macos/install.sh --save-apps`, then commit. This rewrites the `Brewfile` from what's installed, so its comments are dropped.
 
 ### macOS settings
 
@@ -81,28 +95,27 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 | `du` | Show which folders take the most space (dust) |
 | `\grep`, `command find` | Run the original command instead of the replacement |
 | `icloud` | Go to iCloud Drive. In paths, use `~icloud`: `cd ~icloud/Downloads` |
-| `notes-sync` | Commit, pull, and push the [second-brain](https://github.com/Somdobomk/second-brain) notes, cloned next to the dotfiles repo |
 
 ### Nushell
 
-[Nushell](https://www.nushell.sh) is the default shell in WezTerm on macOS, configured in [`home/.config/nushell/`](home/.config/nushell/) to match the zsh setup: the same Starship prompt, zoxide, Television, aliases, and `EDITOR`. Zsh is still the login shell and everything in [`home/.config/zsh/`](home/.config/zsh/) is unchanged, so it works as a backup.
+[Nushell](https://www.nushell.sh) is the default shell in WezTerm on macOS, configured in [`shared/home/.config/nushell/`](shared/home/.config/nushell/) to match the zsh setup: the same Starship prompt, zoxide, Television, aliases, and `EDITOR`. Zsh is still the login shell and everything in [`macos/home/.config/zsh/`](macos/home/.config/zsh/) is unchanged, so it works as a backup.
 
 | Shortcut | What it does |
 | --- | --- |
 | `Cmd+Shift+Z` | Open a zsh tab in WezTerm |
 | `zsh` | Switch to zsh inside the current tab. `exit` returns to Nushell |
 
-**Go back to zsh:** delete the `default_prog` block near the top of [`wezterm.lua`](home/.config/wezterm/wezterm.lua), or uninstall Nushell with `brew uninstall nushell`. WezTerm falls back to zsh if Nushell or its config is missing. Remove [`home/.config/nushell/`](home/.config/nushell/) and the `nushell` line in the Brewfile to clean up fully.
+**Go back to zsh:** delete the `default_prog` block near the top of [`wezterm.lua`](shared/home/.config/wezterm/wezterm.lua), or uninstall Nushell with `brew uninstall nushell`. WezTerm falls back to zsh if Nushell or its config is missing. Remove [`shared/home/.config/nushell/`](shared/home/.config/nushell/) and the `nushell` line in the Brewfile to clean up fully.
 
 Only WezTerm starts Nushell. Other terminals, Zed's terminal, and `ssh` still use zsh, since the login shell is unchanged. To make Nushell the login shell everywhere, add `/opt/homebrew/bin/nu` to `/etc/shells` and run `chsh -s /opt/homebrew/bin/nu`. Zsh no longer reads its config files then, and programs that expect a POSIX shell can misbehave, so I'd keep the WezTerm-only setup.
 
 Nushell on macOS looks in `~/Library/Application Support/nushell`, so WezTerm starts it with `--config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu`. Do the same when running `nu` by hand, or set `XDG_CONFIG_HOME=~/.config`.
 
-What differs from zsh: no Antidote plugins (highlighting, suggestions, and completions are built in), no leading-space history trick, no `~icloud` path, and Nushell's own `ls`, `find`, and `du` stay as they are, since they return tables. Run `eza`, `fd`, or `dust` by name instead. Commands that only exist on one system live in [`macos.nu`](home/.config/nushell/macos.nu) and [`windows.nu`](home/.config/nushell/windows.nu).
+What differs from zsh: no Antidote plugins (highlighting, suggestions, and completions are built in), no leading-space history trick, no `~icloud` path, and Nushell's own `ls`, `find`, and `du` stay as they are, since they return tables. Run `eza`, `fd`, or `dust` by name instead. Commands that only exist on one system live in [`macos.nu`](shared/home/.config/nushell/macos.nu) and [`windows.nu`](shared/home/.config/nushell/windows.nu).
 
 ### Neovim
 
-Full list in the [Neovim README](home/.config/nvim/README.md#basic-commands).
+Full list in the [Neovim README](shared/home/.config/nvim/README.md#basic-commands).
 
 | Shortcut | What it does |
 | --- | --- |
@@ -145,7 +158,7 @@ The left Option key acts as Alt, for shell shortcuts like `Alt+B` / `Alt+F` (jum
 | --- | --- |
 | Zed | `Cmd+Shift+P` |
 | WezTerm | `Cmd+Shift+P` |
-| Obsidian | `Cmd+Shift+P` (set in [`obsidian/hotkeys.json`](obsidian/hotkeys.json); `Cmd+O` is the quick switcher) |
+| Obsidian | `Cmd+Shift+P` (set in [`shared/obsidian/hotkeys.json`](shared/obsidian/hotkeys.json); `Cmd+O` is the quick switcher) |
 | Neovim | `Space P` for Television's channel list, or `:` for commands. `Cmd+Shift+P` can't reach Neovim, because WezTerm uses it |
 | Zen | `Cmd+T` opens the new-tab search, which also works as its command palette. Zen has no `Cmd+Shift+P` palette, and Firefox uses that shortcut for a private window |
 
@@ -155,12 +168,12 @@ Run from `~/GitHub/dotfiles`.
 
 | Command | What it does |
 | --- | --- |
-| `./install.sh` | Set up or update this Mac from the repo ([more](#quick-start-macos)) |
-| `./install.sh --save-apps` | Save the list of Homebrew apps to the `Brewfile` |
+| `macos/install.sh` | Set up or update this Mac from the repo ([more](#quick-start-macos)) |
+| `macos/install.sh --save-apps` | Save the list of Homebrew apps to the `Brewfile` |
 | `macos/defaults.sh` | Apply the [macOS settings](#macos-settings) |
-| `stow -R -t ~ home` | Re-link after adding or removing files in `home/` ([more](#gnu-stow)) |
-| `zen/export.sh` | Save Zen mods and shortcuts into the repo ([more](#zen-browser)) |
-| `fonts/install.sh` | Install the fonts that aren't in Homebrew ([more](#fonts)) |
+| `macos/install.sh` | Re-link after adding or removing files in `shared/home/` or `macos/home/` ([more](#gnu-stow)) |
+| `shared/zen/export.sh` | Save Zen mods and shortcuts into the repo ([more](#zen-browser)) |
+| `shared/fonts/install.sh` | Install the fonts that aren't in Homebrew ([more](#fonts)) |
 | `brewup` | Update Homebrew tools, apps, and fonts, then clean up old versions |
 | `macosstore` | Update Mac App Store apps (mas) |
 | `macosup` | Check for macOS updates. Install them with `sudo softwareupdate --install --all` |
@@ -170,44 +183,46 @@ Run from `~/GitHub/dotfiles`.
 
 ## GNU Stow
 
-[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Everything in [`home/`](home/) has the same path it would have in `$HOME`: `home/.config/nvim` becomes `~/.config/nvim`, and `home/.zshenv` becomes `~/.zshenv`. Run every command from `~/GitHub/dotfiles`:
+[GNU Stow](https://www.gnu.org/software/stow/) creates the symlinks. Each of [`shared/home/`](shared/home/) (both systems) and [`macos/home/`](macos/home/) (macOS only) has the same paths it would have in `$HOME`: `shared/home/.config/nvim` becomes `~/.config/nvim`, and `macos/home/.zshenv` becomes `~/.zshenv`. Run every command from `~/GitHub/dotfiles`:
 
 | Command | What it does |
 | --- | --- |
-| `stow -t ~ home` | Create the links |
-| `stow -n -v -t ~ home` | Dry run: show what would be linked without changing anything |
-| `stow -R -t ~ home` | Re-link: run after adding or removing files in `home/` |
-| `stow -D -t ~ home` | Remove every link Stow created. Repo files are untouched |
+| `stow -d shared -t ~ home` and `stow -d macos -t ~ home` | Create the links, one command per folder |
+| `stow -n -v -d shared -t ~ home` | Dry run: show what would be linked without changing anything |
+| `stow -R -d shared -t ~ home` | Re-link: run after adding or removing files in `shared/home/` |
+| `stow -D -d shared -t ~ home` | Remove every link Stow created from that folder. Repo files are untouched |
 
-**Adding a new config:** move it into `home/` at the same path it has in `$HOME`, then re-link. For example:
+`macos/install.sh` runs the re-link for both folders.
+
+**Adding a new config:** move it into `shared/home/` (or `macos/home/` if it only applies to macOS) at the same path it has in `$HOME`, then re-link. For example:
 
 ```sh
-mv ~/.config/wezterm ~/GitHub/dotfiles/home/.config/wezterm
-cd ~/GitHub/dotfiles && stow -R -t ~ home
+mv ~/.config/wezterm ~/GitHub/dotfiles/shared/home/.config/wezterm
+cd ~/GitHub/dotfiles && stow -R -d shared -t ~ home
 ```
 
 **Conflicts:** Stow never overwrites. If a real file already exists where a link should go, Stow stops with `existing target is not owned by stow`. Back up or remove that file, then run the command again.
 
-**How folders are linked:** if a folder doesn't exist in `$HOME` yet, Stow links the whole folder. `~/.config/nvim`, for example, is one link to `home/.config/nvim`, so files that apps create inside it end up in the repo. Folders that already exist, like `~/.config`, stay real folders, and Stow links the items inside them.
+**How folders are linked:** if a folder doesn't exist in `$HOME` yet, Stow links the whole folder. `~/.config/nvim`, for example, is one link to `shared/home/.config/nvim`, so files that apps create inside it end up in the repo. Folders that already exist, like `~/.config`, stay real folders, and Stow links the items inside them.
 
-[`home/.stow-local-ignore`](home/.stow-local-ignore) lists files Stow skips, such as `.DS_Store`.
+The `.stow-local-ignore` file in each `home/` folder lists files Stow skips, such as `.DS_Store`.
 
 ## What's included
 
-- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
+- **Shell:** Zsh with plugins (autosuggestions, syntax highlighting, completions) managed by Antidote: add them to [`.zsh_plugins.txt`](macos/home/.config/zsh/.zsh_plugins.txt), not Homebrew. Also [zoxide](https://github.com/ajeetdsouza/zoxide) as `cd`, [Television](https://github.com/alexpasmantier/television) for `Ctrl+R` history search and `Ctrl+T` pickers, and aliases that swap in [eza](https://github.com/eza-community/eza) for `ls`, [bat](https://github.com/sharkdp/bat) for `cat`, [ripgrep](https://github.com/BurntSushi/ripgrep) for `grep`, [fd](https://github.com/sharkdp/fd) for `find`, and [dust](https://github.com/bootandy/dust) for `du`
 - **Prompt:** [Starship](https://starship.rs)
-- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark ([details](home/.config/nvim/README.md))
+- **Editor:** Neovim with lazy.nvim, Treesitter, blink.cmp, and Gruvbox Dark ([details](shared/home/.config/nvim/README.md))
 - **Terminal:** WezTerm with Gruvbox Dark colors and GeistMono Nerd Font
-- **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`zen/`](zen/)
+- **Browser:** Zen with mods, mod settings, and keyboard shortcuts in [`shared/zen/`](shared/zen/)
 - **Windows:** PowerShell 7 and Windows Terminal set up to match, sharing the Starship, Neovim, and Television configs ([details](#windows))
 
 ## Windows
 
-[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, Television, WezTerm, Zed, and Git configs in [`home/`](home/), and the Obsidian settings in [`obsidian/`](obsidian/), are used directly, so changes to them apply to both systems.
+[`windows/`](windows/) sets up the same shell on Windows with PowerShell 7 and Windows Terminal. The Starship, Neovim, Television, WezTerm, Zed, and Git configs in [`shared/home/`](shared/home/), and the Obsidian settings in [`shared/obsidian/`](shared/obsidian/), are used directly, so changes to them apply to both systems.
 
 | Path | What it is |
 | --- | --- |
-| [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](home/.config/zsh/.zshrc) |
+| [`windows/powershell/Microsoft.PowerShell_profile.ps1`](windows/powershell/Microsoft.PowerShell_profile.ps1) | PowerShell profile, mirroring [`.zshrc`](macos/home/.config/zsh/.zshrc) |
 | [`windows/terminal/settings.json`](windows/terminal/settings.json) | Windows Terminal: Gruvbox Dark, GeistMono Nerd Font, and a separate admin profile |
 | [`windows/winget.json`](windows/winget.json) | Every installed app winget can reinstall, for `winget import`. Runtimes like VCRedist and .NET are left out, since apps that need them pull them in |
 | [`windows/powertoys/`](windows/powertoys/) | PowerToys settings backup |
@@ -236,7 +251,7 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
    winget import F:\GitHub\dotfiles\windows\winget.json --accept-package-agreements --accept-source-agreements
    ```
 
-   Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads), then the repo's fonts with `F:\GitHub\dotfiles\fonts\install.ps1`.
+   Also install GeistMono Nerd Font from [nerdfonts.com](https://www.nerdfonts.com/font-downloads), then the repo's fonts with `F:\GitHub\dotfiles\shared\fonts\install.ps1`.
 
 4. Close Zed and Obsidian, run the install script, then open a new tab:
 
@@ -254,14 +269,14 @@ Everything else comes back from this repo, GitHub, and OneDrive. Before reinstal
 | --- | --- |
 | PowerShell | `$PROFILE` becomes a one-line file that loads the profile from the repo. This works even when OneDrive backs up Documents |
 | Windows Terminal | `settings.json` is copied into place. It's a copy, not a link, because Terminal replaces links when it saves |
-| Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `home/.config/nvim`. Junctions need no admin rights and work across drives |
-| WezTerm | `~\.config\wezterm` becomes a junction to `home/.config/wezterm` |
-| Nushell | `~\.config\nushell` becomes a junction to `home/.config/nushell` |
-| Zed | `%APPDATA%\Zed` becomes a junction to `home/.config/zed`. Skipped while Zed is open |
-| Obsidian | `second-brain\.obsidian` becomes a junction to `obsidian/`, if the [second-brain](https://github.com/Somdobomk/second-brain) notes are cloned next to the dotfiles repo. Skipped while Obsidian is open |
-| Git | `~\.config\git` becomes a junction to `home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
-| Television | `home/.config/television` is copied to `%LOCALAPPDATA%\television\config`, and the standard channels are downloaded |
-| Starship | Nothing to copy: the profile points `STARSHIP_CONFIG` at `home/.config/starship.toml` |
+| Neovim | `%LOCALAPPDATA%\nvim` becomes a junction to `shared/home/.config/nvim`. Junctions need no admin rights and work across drives |
+| WezTerm | `~\.config\wezterm` becomes a junction to `shared/home/.config/wezterm` |
+| Nushell | `~\.config\nushell` becomes a junction to `shared/home/.config/nushell` |
+| Zed | `%APPDATA%\Zed` becomes a junction to `shared/home/.config/zed`. Skipped while Zed is open |
+| Obsidian | `second-brain\.obsidian` becomes a junction to `shared/obsidian/`, if the [second-brain](https://github.com/Somdobomk/second-brain) notes are cloned next to the dotfiles repo. Skipped while Obsidian is open |
+| Git | `~\.config\git` becomes a junction to `shared/home/.config/git`. Your email moves from `~\.gitconfig` to `~\.config\git\local`, then `~\.gitconfig` is moved aside, since it would override the shared config |
+| Television | `shared/home/.config/television` is copied to `%LOCALAPPDATA%\television\config`, and the standard channels are downloaded |
+| Starship | Nothing to copy: the profile points `STARSHIP_CONFIG` at `shared/home/.config/starship.toml` |
 
 Anything replaced is first renamed to `<name>.bak-<date>`. The script is safe to run again, and it lists any tools that are still missing.
 
@@ -269,7 +284,7 @@ After changing Windows Terminal's settings in its Settings screen, save them int
 
 ### Git email
 
-[`home/.config/git/config`](home/.config/git/config) has no email, so the real address stays out of this public repo. Each computer sets it in `~/.config/git/local`, which is gitignored:
+[`shared/home/.config/git/config`](shared/home/.config/git/config) has no email, so the real address stays out of this public repo. Each computer sets it in `~/.config/git/local`, which is gitignored:
 
 ```sh
 git config --file ~/.config/git/local user.email you@example.com
@@ -281,7 +296,7 @@ The config also turns on a few settings most people end up wanting: the first `g
 
 ### Nushell on Windows
 
-[`home/.config/nushell/`](home/.config/nushell/) works on Windows too, but I haven't tested it there. PowerShell 7 stays the default in WezTerm until you switch. To try Nushell:
+[`shared/home/.config/nushell/`](shared/home/.config/nushell/) works on Windows too, but I haven't tested it there. PowerShell 7 stays the default in WezTerm until you switch. To try Nushell:
 
 1. Install it and open a new PowerShell window:
 
@@ -295,7 +310,7 @@ The config also turns on a few settings most people end up wanting: the first `g
    nu --config ~\.config\nushell\config.nu --env-config ~\.config\nushell\env.nu
    ```
 
-3. To make it the WezTerm default, replace the `default_prog` line for Windows in [`wezterm.lua`](home/.config/wezterm/wezterm.lua) with:
+3. To make it the WezTerm default, replace the `default_prog` line for Windows in [`wezterm.lua`](shared/home/.config/wezterm/wezterm.lua) with:
 
    ```lua
    config.default_prog = { "nu.exe", "--config", wezterm.home_dir .. "/.config/nushell/config.nu", "--env-config", wezterm.home_dir .. "/.config/nushell/env.nu" }
@@ -325,7 +340,7 @@ Typing a folder name alone to `cd` into it, and `icloud`, are macOS only. As on 
 
 ### Neovim on Windows
 
-Treesitter needs Neovim 0.12 or later, the tree-sitter CLI, and a C compiler. Windows has no compiler by default, so [`treesitter.lua`](home/.config/nvim/lua/plugins/treesitter.lua) builds parsers with Zig on Windows. If a parser fails with `Lock file ... appears stale`, a build was interrupted: delete that file from `%LOCALAPPDATA%\tree-sitter\lock` and run `:TSUpdate` again.
+Treesitter needs Neovim 0.12 or later, the tree-sitter CLI, and a C compiler. Windows has no compiler by default, so [`treesitter.lua`](shared/home/.config/nvim/lua/plugins/treesitter.lua) builds parsers with Zig on Windows. If a parser fails with `Lock file ... appears stale`, a build was interrupted: delete that file from `%LOCALAPPDATA%\tree-sitter\lock` and run `:TSUpdate` again.
 
 ### PowerToys
 
@@ -333,7 +348,7 @@ Restore the backup in **PowerToys Settings → General → Backup & restore**. T
 
 ## Zen Browser
 
-[`zen/`](zen/) holds Zen's customizations, so they can be set up on another computer, including Windows:
+[`shared/zen/`](shared/zen/) holds Zen's customizations, so they can be set up on another computer, including Windows:
 
 | File | What it holds |
 | --- | --- |
@@ -352,7 +367,7 @@ Zen replaces files when it saves them, which would break symlinks, so this folde
 Run this after changing mods, mod settings, or shortcuts, then commit:
 
 ```sh
-~/GitHub/dotfiles/zen/export.sh
+~/GitHub/dotfiles/shared/zen/export.sh
 ```
 
 The script uses the Zen profile that changed most recently. To choose one, pass its folder name, for example `./export.sh "rhlik1qw.Default (alpha)"`. Profile folders are listed at `about:profiles`.
@@ -367,7 +382,7 @@ The Transparent Zen mod sets `browser.tabs.allow_transparent_browser`, which let
 2. Clone the repo (see [Quick start (Windows)](#quick-start-windows)) and run the import script in PowerShell:
 
    ```powershell
-   powershell -ExecutionPolicy Bypass -File F:\GitHub\dotfiles\zen\import.ps1
+   powershell -ExecutionPolicy Bypass -File F:\GitHub\dotfiles\shared\zen\import.ps1
    ```
 
    To choose a profile, add `-Profile "<folder name>"`.
@@ -379,30 +394,30 @@ The custom UI font is DankMono Nerd Font, the same as Zed and Obsidian. It's a p
 
 ### Open-source fonts (Homebrew)
 
-Open-source fonts are installed with Homebrew from the [`Brewfile`](Brewfile), so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need. To add a font, put a `cask "font-..."` line in the `Brewfile` and run `brew bundle` from `~/GitHub/dotfiles`.
+Open-source fonts are installed with Homebrew from the [`macos/Brewfile`](macos/Brewfile), so `brew upgrade` keeps them current. All Nerd Fonts are version 3, which the icons in Starship, eza, and Neovim need. To add a font, put a `cask "font-..."` line in the `Brewfile` and run `brew bundle` from `~/GitHub/dotfiles`.
 
 Some Nerd Fonts use a different name than the original font: Source Code Pro is **SauceCodePro**, Terminus is **Terminess**, and Cascadia Code is **CaskaydiaCove**. In app settings, use the full family name, such as `GeistMono Nerd Font Mono`. List the installed names with `wezterm ls-fonts --list-system`.
 
 ### Other fonts
 
-[`fonts/`](fonts/) holds fonts that aren't in Homebrew. Copy them to `~/Library/Fonts` with:
+[`shared/fonts/`](shared/fonts/) holds fonts that aren't in Homebrew. Copy them to `~/Library/Fonts` with:
 
 ```sh
-~/GitHub/dotfiles/fonts/install.sh -n   # dry run: list what would be installed
-~/GitHub/dotfiles/fonts/install.sh      # install
+~/GitHub/dotfiles/shared/fonts/install.sh -n   # dry run: list what would be installed
+~/GitHub/dotfiles/shared/fonts/install.sh      # install
 ```
 
-On Windows, [`fonts/install.ps1`](fonts/install.ps1) does the same for the current user, without admin rights: `fonts\install.ps1 -DryRun`, then `fonts\install.ps1`. Restart open apps to see the new fonts.
+On Windows, [`shared/fonts/install.ps1`](shared/fonts/install.ps1) does the same for the current user, without admin rights: `shared\fonts\install.ps1 -DryRun`, then `shared\fonts\install.ps1`. Restart open apps to see the new fonts.
 
 When a font ships as both `.otf` and `.ttf`, the `.otf` is used. Web formats are skipped. Fonts that are already installed are never overwritten, so the script is safe to run again.
 
 ### Paid fonts
 
-Paid fonts aren't in this repo because their licenses don't allow redistribution. They live in a separate private repo that's cloned into `fonts/private/`. That folder is gitignored, and the install script picks it up automatically when it exists:
+Paid fonts aren't in this repo because their licenses don't allow redistribution. They live in a separate private repo that's cloned into `shared/fonts/private/`. That folder is gitignored, and the install script picks it up automatically when it exists:
 
 ```sh
-git clone git@github.com:Somdobomk/dotfiles-fonts.git ~/GitHub/dotfiles/fonts/private
-~/GitHub/dotfiles/fonts/install.sh
+git clone git@github.com:Somdobomk/dotfiles-fonts.git ~/GitHub/dotfiles/shared/fonts/private
+~/GitHub/dotfiles/shared/fonts/install.sh
 ```
 
 Without access to the private repo, skip the clone. The script installs only the free fonts.

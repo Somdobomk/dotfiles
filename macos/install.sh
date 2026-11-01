@@ -1,22 +1,23 @@
 #!/usr/bin/env zsh
 # Set up this Mac from the dotfiles repo. Safe to run again.
 #
-# Usage: ./install.sh              Install everything below
-#        ./install.sh --save-apps  Save the list of Homebrew apps to Brewfile,
-#                                  then commit it
+# Usage: macos/install.sh              Install everything below
+#        macos/install.sh --save-apps  Save the list of Homebrew apps to
+#                                      macos/Brewfile, then commit it
 #
-# - Homebrew: installs everything in Brewfile. Homebrew itself must already
+# - Homebrew: installs everything in macos/Brewfile. Homebrew itself must already
 #   be installed (https://brew.sh).
-# - Configs: home/ is linked into $HOME with Stow.
+# - Configs: shared/home/ and macos/home/ are linked into $HOME with Stow.
 # - Git: asks for your email and saves it in ~/.config/git/local (gitignored).
-# - Obsidian: ~/GitHub/second-brain/.obsidian becomes a link to obsidian/,
+# - Obsidian: ~/GitHub/second-brain/.obsidian becomes a link to shared/obsidian/,
 #   if the second-brain notes are cloned next to this repo.
-# - Fonts: fonts/install.sh installs the fonts that aren't in Homebrew.
+# - Fonts: shared/fonts/install.sh installs the fonts that aren't in Homebrew.
 # macOS settings aren't changed here; run macos/defaults.sh for those.
 
 set -euo pipefail
 
-DOTFILES="${0:A:h}"
+MACOS="${0:A:h}"
+DOTFILES="${MACOS:h}"
 
 # Homebrew isn't on PATH yet in a brand-new shell
 if ! command -v brew >/dev/null 2>&1 && [[ -x /opt/homebrew/bin/brew ]]; then
@@ -28,21 +29,22 @@ if ! command -v brew >/dev/null 2>&1; then
 fi
 
 if [[ "${1:-}" == "--save-apps" ]]; then
-  brew bundle dump --file "$DOTFILES/Brewfile" --force
-  echo "Saved the app list to $DOTFILES/Brewfile. Review it with git diff."
+  brew bundle dump --file "$MACOS/Brewfile" --force
+  echo "Saved the app list to $MACOS/Brewfile. Review it with git diff."
   exit 0
 fi
 
 echo "Homebrew: installing apps from Brewfile"
-brew bundle --file "$DOTFILES/Brewfile"
+brew bundle --file "$MACOS/Brewfile"
 
 # ~/.config must be a real folder first, or Stow links the whole folder and
 # files that apps create there end up in the repo
-echo "Configs: linking home/ into $HOME"
+echo "Configs: linking shared/home/ and macos/home/ into $HOME"
 mkdir -p "$HOME/.config"
 # Stops without changing anything if a real file is in the way: back it up or
 # remove it, then run this again
-stow -R -d "$DOTFILES" -t "$HOME" home
+stow -R -d "$DOTFILES/shared" -t "$HOME" home
+stow -R -d "$MACOS" -t "$HOME" home
 
 GIT_LOCAL="$HOME/.config/git/local"
 echo "Git: $GIT_LOCAL"
@@ -63,7 +65,7 @@ VAULT_CONFIG="${DOTFILES:h}/second-brain/.obsidian"
 echo "Obsidian: $VAULT_CONFIG"
 if [[ ! -d "${VAULT_CONFIG:h}" ]]; then
   echo "  second-brain isn't cloned next to this repo, skipped"
-elif [[ -L "$VAULT_CONFIG" && "$(readlink "$VAULT_CONFIG")" == "$DOTFILES/obsidian" ]]; then
+elif [[ -L "$VAULT_CONFIG" && "$(readlink "$VAULT_CONFIG")" == "$DOTFILES/shared/obsidian" ]]; then
   echo "  already linked"
 else
   if [[ -e "$VAULT_CONFIG" || -L "$VAULT_CONFIG" ]]; then
@@ -71,11 +73,11 @@ else
     mv "$VAULT_CONFIG" "$backup"
     echo "  backed up to ${backup:t}"
   fi
-  ln -s "$DOTFILES/obsidian" "$VAULT_CONFIG"
-  echo "  linked to $DOTFILES/obsidian"
+  ln -s "$DOTFILES/shared/obsidian" "$VAULT_CONFIG"
+  echo "  linked to $DOTFILES/shared/obsidian"
 fi
 
 echo "Fonts:"
-"$DOTFILES/fonts/install.sh"
+"$DOTFILES/shared/fonts/install.sh"
 
 echo "\nDone. Restart the shell with: exec zsh"

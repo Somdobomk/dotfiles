@@ -90,25 +90,6 @@ fi
 hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud='cd ~icloud'
 
-# Notes: ~/GitHub/second-brain, next to this repo (private repo
-# Somdobomk/second-brain). Obsidian's per-machine files (open tabs, layout,
-# .trash) are gitignored there.
-notes-sync() {
-  (
-    builtin cd ~/GitHub/second-brain || return
-    git add -A
-    if ! git diff --cached --quiet; then
-      git status --short
-      git commit -q -m "notes $(date +%F)"
-    fi
-    if ! git pull -q --rebase; then
-      echo "Pull failed. If two machines changed the same note, fix the conflict, then run: git rebase --continue" >&2
-      return 1
-    fi
-    git push -q && git log -1 --format='Synced: %h %s'
-  )
-}
-
 # Updates. Run all three with: brewup && macosstore && macosup
 brewup() {
   brew update && brew upgrade && brew cleanup

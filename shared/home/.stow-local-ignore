@@ -1,0 +1,10 @@
+# Stow's default ignore list, plus macOS Finder files
+\.git
+\.gitignore
+\.gitmodules
+.+~
+\#.*\#
+^/README.*
+^/LICENSE.*
+\.DS_Store
+\.stow-local-ignore

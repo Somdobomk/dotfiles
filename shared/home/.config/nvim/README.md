@@ -26,7 +26,7 @@ No LSP servers are configured: this is intentionally a lightweight quick editor,
 
 ## Install
 
-This folder is linked to `~/.config/nvim` by Stow, along with the rest of the dotfiles. See the [main README](../../../README.md#gnu-stow).
+This folder is linked to `~/.config/nvim` by Stow, along with the rest of the dotfiles. See the [main README](../../../../README.md#gnu-stow).
 
 Launch with `nvim`. The `vim` alias in `.zshrc` also opens it. First launch installs the plugins at the versions in `lazy-lock.json`.
 

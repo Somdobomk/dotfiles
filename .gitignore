@@ -1,10 +1,10 @@
 .DS_Store
 *:Zone.Identifier
 .netrwhist
-fonts/private/
+shared/fonts/private/
 .zsh_sessions/
-home/.config/zed/prompts/
-home/.config/git/local
+shared/home/.config/zed/prompts/
+shared/home/.config/git/local
 # Obsidian's per-machine files: open tabs, layout, cache
-obsidian/workspace*.json
-obsidian/cache
+shared/obsidian/workspace*.json
+shared/obsidian/cache

@@ -1,5 +1,5 @@
 # Homebrew apps for macOS. Install with `brew bundle` from this folder.
-# After installing or removing apps, `./install.sh --save-apps` rewrites this
+# After installing or removing apps, `macos/install.sh --save-apps` rewrites this
 # file from what's installed (dropping these comments), then commit it.
 
 # Tools these configs use

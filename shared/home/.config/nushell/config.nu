@@ -22,22 +22,6 @@ alias lsa = eza -a --icons --group-directories-first
 alias ll = eza -l --icons --group-directories-first --no-user --header --time-style long-iso
 alias lla = eza -la --icons --group-directories-first --no-user --header --time-style long-iso
 
-# Notes: ~/GitHub/second-brain, next to the dotfiles repo
-def notes-sync [] {
-  cd ($nu.home-dir | path join "GitHub" "second-brain")
-  ^git add -A
-  if (do { ^git diff --cached --quiet } | complete).exit_code != 0 {
-    ^git status --short
-    ^git commit -q -m $"notes (date now | format date '%F')"
-  }
-  if (^git pull -q --rebase | complete).exit_code != 0 {
-    print -e "Pull failed. If two machines changed the same note, fix the conflict, then run: git rebase --continue"
-    return
-  }
-  ^git push -q
-  ^git log -1 --format='Synced: %h %s'
-}
-
 # Television (Ctrl+R history, Ctrl+T pickers), zoxide (`cd foo`), and the Starship
 # prompt. Written by env.nu.
 source ~/.cache/nushell/tv.nu

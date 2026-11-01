@@ -1,13 +1,13 @@
 # PowerShell 7 profile. windows\install.ps1 points $PROFILE (in OneDrive
-# Documents) at this file, so edit it here. Mirrors home\.config\zsh\.zshrc
+# Documents) at this file, so edit it here. Mirrors macos\home\.config\zsh\.zshrc
 # on macOS where PowerShell allows.
 #
 # Startup is kept fast: no network calls, and tool init scripts are cached.
 
 $Dotfiles = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 
-# Shared with macOS: home\.config\starship.toml
-$env:STARSHIP_CONFIG = Join-Path $Dotfiles 'home\.config\starship.toml'
+# Shared with macOS: shared\home\.config\starship.toml
+$env:STARSHIP_CONFIG = Join-Path $Dotfiles 'shared\home\.config\starship.toml'
 
 # Editor: Zed locally, Neovim over SSH (no window to open there)
 $env:EDITOR = if ($env:SSH_CONNECTION) { 'nvim' } else { 'zed --wait' }
@@ -29,7 +29,7 @@ if (Get-Command fd -ErrorAction SilentlyContinue) { Set-Alias find fd }
 if (Get-Command dust -ErrorAction SilentlyContinue) { Set-Alias du dust }
 
 if (Get-Command eza -ErrorAction SilentlyContinue) {
-    # Gruvbox colors for eza (same string as home\.config\zsh\.zshrc):
+    # Gruvbox colors for eza (same string as macos\home\.config\zsh\.zshrc):
     # directories blue, executables green, symlinks aqua, broken links red
     $env:EZA_COLORS = 'di=1;38;2;131;165;152:ex=38;2;184;187;38:ln=38;2;142;192;124:or=38;2;251;73;52:so=38;2;211;134;155:pi=38;2;250;189;47:bd=38;2;254;128;25:cd=38;2;254;128;25:ur=38;2;250;189;47:uw=38;2;251;73;52:ux=38;2;184;187;38:ue=38;2;184;187;38:gr=38;2;250;189;47:gw=38;2;251;73;52:gx=38;2;184;187;38:tr=38;2;250;189;47:tw=38;2;251;73;52:tx=38;2;184;187;38:sn=38;2;184;187;38:sb=38;2;184;187;38:uu=38;2;250;189;47:un=38;2;250;189;47:da=38;2;142;192;124:hd=4;38;2;146;131;116:xx=38;2;146;131;116'
     # `ls` and `dir` run eza too, so they look the same as ll. They no longer
@@ -46,29 +46,6 @@ if (Get-Command eza -ErrorAction SilentlyContinue) {
     function lla { Get-ChildItem -Force @args | Format-Table -AutoSize }
 }
 Set-Alias la lsa
-
-# Notes: the second-brain repo next to this one (private, Somdobomk/second-brain).
-# Obsidian's per-machine files (open tabs, layout, .trash) are gitignored there.
-function notes-sync {
-    Push-Location (Join-Path (Split-Path $Dotfiles -Parent) 'second-brain') -ErrorAction Stop
-    try {
-        git add -A
-        git diff --cached --quiet
-        if ($LASTEXITCODE) {
-            git status --short
-            git commit -q -m "notes $(Get-Date -Format yyyy-MM-dd)"
-        }
-        git pull -q --rebase
-        if ($LASTEXITCODE) {
-            Write-Warning 'Pull failed. If two machines changed the same note, fix the conflict, then run: git rebase --continue'
-            return
-        }
-        git push -q
-        if (-not $LASTEXITCODE) { git log -1 --format='Synced: %h %s' }
-    } finally {
-        Pop-Location
-    }
-}
 
 # PSReadLine -----------------------------------------------------------------
 

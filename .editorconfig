@@ -19,12 +19,12 @@ indent_size = 4
 [windows/terminal/settings.json]
 indent_size = 4
 
-[home/.config/zed/settings.json]
+[shared/home/.config/zed/settings.json]
 indent_style = tab
 indent_size = 4
 
 # Copied from Zen as it saves them; leave their formatting alone
-[zen/**]
+[shared/zen/**]
 indent_style = unset
 indent_size = unset
 insert_final_newline = unset

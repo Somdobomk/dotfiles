@@ -13,17 +13,17 @@
 #   loads windows\powershell\Microsoft.PowerShell_profile.ps1 from this repo.
 # - Windows Terminal: windows\terminal\settings.json is copied into place.
 #   It's a copy, not a link, because Terminal replaces links when it saves.
-# - Neovim: %LOCALAPPDATA%\nvim becomes a junction to home\.config\nvim.
-# - WezTerm: ~\.config\wezterm becomes a junction to home\.config\wezterm.
-# - Nushell: ~\.config\nushell becomes a junction to home\.config\nushell (used
+# - Neovim: %LOCALAPPDATA%\nvim becomes a junction to shared\home\.config\nvim.
+# - WezTerm: ~\.config\wezterm becomes a junction to shared\home\.config\wezterm.
+# - Nushell: ~\.config\nushell becomes a junction to shared\home\.config\nushell (used
 #   only once Nushell is installed; PowerShell stays the default).
-# - Zed: %APPDATA%\Zed becomes a junction to home\.config\zed.
-# - Obsidian: second-brain\.obsidian becomes a junction to obsidian\, if the
+# - Zed: %APPDATA%\Zed becomes a junction to shared\home\.config\zed.
+# - Obsidian: second-brain\.obsidian becomes a junction to shared\obsidian\, if the
 #   second-brain notes are cloned next to this repo.
-# - Git: ~\.config\git becomes a junction to home\.config\git. The email goes
+# - Git: ~\.config\git becomes a junction to shared\home\.config\git. The email goes
 #   in ~\.config\git\local (gitignored), taken from ~\.gitconfig if it has one;
 #   ~\.gitconfig is then moved aside, since it would override the shared config.
-# - Television: home\.config\television is copied into tv's config folder,
+# - Television: shared\home\.config\television is copied into tv's config folder,
 #   next to the channels `tv update-channels` downloads.
 # Anything replaced is first renamed to <name>.bak-<date>.
 
@@ -123,13 +123,13 @@ function Link-Folder ($Name, $Path, $Target) {
   Write-Host "  linked to $Target"
 }
 
-Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'home\.config\nvim')
-Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'home\.config\wezterm')
-Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'home\.config\nushell')
+Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles 'shared\home\.config\nvim')
+Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'shared\home\.config\wezterm')
+Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'shared\home\.config\nushell')
 if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
   Write-Host "Zed: running, skipped. Close it and run this again."
 } else {
-  Link-Folder 'Zed' (Join-Path $env:APPDATA 'Zed') (Join-Path $Dotfiles 'home\.config\zed')
+  Link-Folder 'Zed' (Join-Path $env:APPDATA 'Zed') (Join-Path $Dotfiles 'shared\home\.config\zed')
 }
 
 $Vault = Join-Path (Split-Path $Dotfiles -Parent) 'second-brain'
@@ -138,12 +138,12 @@ if (-not (Test-Path $Vault)) {
 } elseif (Get-Process -Name Obsidian -ErrorAction SilentlyContinue) {
   Write-Host "Obsidian: running, skipped. Close it and run this again."
 } else {
-  Link-Folder 'Obsidian' (Join-Path $Vault '.obsidian') (Join-Path $Dotfiles 'obsidian')
+  Link-Folder 'Obsidian' (Join-Path $Vault '.obsidian') (Join-Path $Dotfiles 'shared\obsidian')
 }
 
 # Git ------------------------------------------------------------------------
 
-Link-Folder 'Git' (Join-Path $HOME '.config\git') (Join-Path $Dotfiles 'home\.config\git')
+Link-Folder 'Git' (Join-Path $HOME '.config\git') (Join-Path $Dotfiles 'shared\home\.config\git')
 $GitLocal = Join-Path $HOME '.config\git\local'
 $GitConfig = Join-Path $HOME '.gitconfig'
 if (-not (Test-Path $GitLocal)) {
@@ -163,7 +163,7 @@ if (Test-Path $GitConfig) {
 
 # Television -----------------------------------------------------------------
 
-$RepoTv = Join-Path $Dotfiles 'home\.config\television'
+$RepoTv = Join-Path $Dotfiles 'shared\home\.config\television'
 $Tv = Join-Path $env:LOCALAPPDATA 'television\config'
 Write-Host "Television: $Tv"
 New-Item -ItemType Directory -Path "$Tv\cable", "$Tv\themes" -Force | Out-Null
