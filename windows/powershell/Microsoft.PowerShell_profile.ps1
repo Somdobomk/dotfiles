@@ -107,6 +107,12 @@ Function powershellup {
   Update-Module
 }
 
+# Back up WoW's addon settings (the WTF folders) to the private wow-settings
+# repo. The script lives in the WoW folder and refuses to run while WoW is open
+Function wowbackup {
+  & 'C:\Program Files (x86)\World of Warcraft\backup.ps1'
+}
+
 # Utility Command that tells you where the absolute path of commandlets are
 function which ($command) {
   Get-Command -Name $command -ErrorAction SilentlyContinue |

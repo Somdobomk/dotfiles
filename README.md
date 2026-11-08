@@ -324,7 +324,7 @@ The config also turns on a few settings most people end up wanting: the first `g
 
 3. Open a new WezTerm window. It starts Nushell from `%LOCALAPPDATA%\Programs\nu\bin\nu.exe`, where winget installs it.
 
-The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds `wingetup`; the macOS-only commands (`brewup`, `icloud`) don't load there.
+The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds `wingetup` and `wowbackup`; the macOS-only commands (`brewup`, `icloud`) don't load there.
 
 ### Differences from macOS
 
@@ -339,8 +339,9 @@ The [shell cheat sheet](#shell) works the same on Windows, with these difference
 | `wingetup` | `brewup`: update winget apps (PowerShell and winget included) |
 | `powershellup` updates PowerShell modules installed from the PowerShell Gallery | — |
 | `winosup` | `macosup`: check for Windows updates. Install them from Settings > Windows Update |
+| `wowbackup` backs up WoW's addon settings (the `WTF` folders) to the private `wow-settings` repo. Close WoW first | — |
 
-WezTerm uses the same config on Windows and starts PowerShell 7. Its [shortcuts](#wezterm) use `Ctrl+Shift` in place of `Cmd`, and `Ctrl+Shift+Alt` in place of `Cmd+Shift`: `Ctrl+Shift+D` splits side by side. Windows can't make WezTerm its default terminal, because that setting only accepts Windows Terminal. Pin WezTerm to the taskbar instead, or use **Open WezTerm here** in Explorer's right-click menu.
+WezTerm uses the same config on Windows and starts Nushell, or PowerShell 7 if Nushell isn't installed ([details](#nushell-on-windows)). Its [shortcuts](#wezterm) use `Ctrl+Shift` in place of `Cmd`, and `Ctrl+Shift+Alt` in place of `Cmd+Shift`: `Ctrl+Shift+D` splits side by side. Windows can't make WezTerm its default terminal, because that setting only accepts Windows Terminal. Pin WezTerm to the taskbar instead, or use **Open WezTerm here** in Explorer's right-click menu.
 
 Typing a folder name alone to `cd` into it, and `icloud`, are macOS only. As on macOS, commands with a leading space stay out of history. PowerShell also keeps lines that look like they contain a password out of the history file.
 

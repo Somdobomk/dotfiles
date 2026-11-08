@@ -4,3 +4,8 @@
 def wingetup [] {
   ^winget upgrade --all
 }
+
+# Back up WoW's addon settings, like `wowbackup` in the PowerShell profile
+def wowbackup [] {
+  ^pwsh -NoProfile -File 'C:\Program Files (x86)\World of Warcraft\backup.ps1'
+}
