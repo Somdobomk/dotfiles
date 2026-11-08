@@ -17,7 +17,8 @@
 # - WezTerm: ~\.config\wezterm becomes a junction to shared\home\.config\wezterm.
 # - Helix: %APPDATA%\helix becomes a junction to shared\home\.config\helix.
 # - Nushell: ~\.config\nushell becomes a junction to shared\home\.config\nushell (used
-#   only once Nushell is installed; PowerShell stays the default).
+#   only once Nushell is installed; PowerShell stays the default). %APPDATA%\nushell
+#   gets env.nu and config.nu files that load it, so plain `nu` needs no flags.
 # - Zed: %APPDATA%\Zed becomes a junction to shared\home\.config\zed.
 # - Obsidian: second-brain\.obsidian becomes a junction to shared\obsidian\, if the
 #   second-brain notes are cloned next to this repo.
@@ -128,6 +129,21 @@ Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles '
 Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'shared\home\.config\wezterm')
 Link-Folder 'Helix' (Join-Path $env:APPDATA 'helix') (Join-Path $Dotfiles 'shared\home\.config\helix')
 Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'shared\home\.config\nushell')
+
+# Plain `nu` reads %APPDATA%\nushell, not ~\.config. File symlinks need admin or
+# Developer Mode, and hard links can't cross drives, so write one-line files that
+# load the linked config instead (history files stay in that folder)
+$NuDir = Join-Path $env:APPDATA 'nushell'
+Write-Host "Nushell: $NuDir"
+New-Item -ItemType Directory -Path $NuDir -Force | Out-Null
+foreach ($Name in 'env.nu', 'config.nu') {
+  $File = Join-Path $NuDir $Name
+  $Line = "source ~/.config/nushell/$Name"
+  if ((Test-Path $File) -and (Get-Content $File -Raw).Trim() -eq $Line) { continue }
+  if (Test-Path $File) { Backup $File }
+  Set-Content $File $Line -Encoding utf8
+  Write-Host "  $Name now loads ~\.config\nushell\$Name"
+}
 if (Get-Process -Name Zed -ErrorAction SilentlyContinue) {
   Write-Host "Zed: running, skipped. Close it and run this again."
 } else {
