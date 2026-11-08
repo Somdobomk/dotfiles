@@ -7,10 +7,10 @@ local config = wezterm.config_builder()
 -- Shared with Windows, where the differences are marked "Windows"
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
--- Shell: Nushell on macOS, with zsh as the fallback. Cmd+Shift+Z opens a zsh tab.
+-- Shell: Nushell, with zsh (macOS) or PowerShell 7 (Windows) as the fallback.
+-- Cmd+Shift+Z (Windows: Ctrl+Shift+Alt+Z) opens a zsh or PowerShell tab.
 -- macos/install.sh links Nushell's config into ~/Library/Application Support/nushell,
--- where it looks. Windows starts PowerShell 7 instead of cmd.exe; to try
--- Nushell there, see the Windows section of the README.
+-- and windows\install.ps1 writes files into %APPDATA%\nushell that load it.
 local function exists(path)
 	local f = io.open(path, "r")
 	if f then
@@ -22,8 +22,12 @@ end
 local nu = "/opt/homebrew/bin/nu"
 local nu_config = wezterm.home_dir .. "/Library/Application Support/nushell/config.nu"
 if is_windows then
+	-- Where `winget install Nushell.Nushell` puts it
+	nu = os.getenv("LOCALAPPDATA") .. "\\Programs\\nu\\bin\\nu.exe"
+	nu_config = os.getenv("APPDATA") .. "\\nushell\\config.nu"
 	config.default_prog = { "pwsh.exe", "-NoLogo" }
-elseif exists(nu) and exists(nu_config) then
+end
+if exists(nu) and exists(nu_config) then
 	config.default_prog = { nu }
 end
 

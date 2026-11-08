@@ -26,7 +26,7 @@ Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 | [`macos/home/.config/zsh/`](macos/home/.config/zsh/)                   | Zsh config and [Antidote](https://antidote.sh) plugin list                   | `~/.config/zsh`           |
 | [`shared/home/.config/helix/`](shared/home/.config/helix/)               | [Helix](https://helix-editor.com) editor config: Gruvbox Dark Hard theme with the orange cursor and red selection | `~/.config/helix`         |
 | [`shared/home/.config/nvim/`](shared/home/.config/nvim/)                 | Lightweight Neovim quick-edit setup ([details](shared/home/.config/nvim/README.md)) | `~/.config/nvim`          |
-| [`shared/home/.config/nushell/`](shared/home/.config/nushell/)         | [Nushell](https://www.nushell.sh) config, the default shell in WezTerm on macOS ([details](#nushell)) | `~/.config/nushell`       |
+| [`shared/home/.config/nushell/`](shared/home/.config/nushell/)         | [Nushell](https://www.nushell.sh) config, the default shell in WezTerm ([details](#nushell)) | `~/.config/nushell`       |
 | [`shared/home/.config/zed/`](shared/home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
 | [`shared/home/.config/git/`](shared/home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
 | [`shared/home/.config/starship.toml`](shared/home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
@@ -99,7 +99,7 @@ Shortcuts set up by these dotfiles, plus a few built-in ones that are easy to fo
 
 ### Nushell
 
-[Nushell](https://www.nushell.sh) is the default shell in WezTerm on macOS, configured in [`shared/home/.config/nushell/`](shared/home/.config/nushell/) to match the zsh setup: the same Starship prompt, zoxide, Television, aliases, and `EDITOR`. Zsh is still the login shell and everything in [`macos/home/.config/zsh/`](macos/home/.config/zsh/) is unchanged, so it works as a backup.
+[Nushell](https://www.nushell.sh) is the default shell in WezTerm (on Windows too, see [Nushell on Windows](#nushell-on-windows)), configured in [`shared/home/.config/nushell/`](shared/home/.config/nushell/) to match the zsh setup: the same Starship prompt, zoxide, Television, aliases, and `EDITOR`. Zsh is still the login shell and everything in [`macos/home/.config/zsh/`](macos/home/.config/zsh/) is unchanged, so it works as a backup.
 
 | Shortcut | What it does |
 | --- | --- |
@@ -312,7 +312,7 @@ The config also turns on a few settings most people end up wanting: the first `g
 
 ### Nushell on Windows
 
-[`shared/home/.config/nushell/`](shared/home/.config/nushell/) works on Windows too, but I haven't tested it there. PowerShell 7 stays the default in WezTerm until you switch. To try Nushell:
+[`shared/home/.config/nushell/`](shared/home/.config/nushell/) works on Windows too (tested with Nushell 0.116.1), and it's the default shell in WezTerm there as well. WezTerm falls back to PowerShell 7 if Nushell or `%APPDATA%\nushell\config.nu` is missing, and `Ctrl+Shift+Alt+Z` opens a PowerShell tab. Zed's terminal and Windows' own login shell are unchanged. To set it up:
 
 1. Install it and open a new PowerShell window:
 
@@ -320,19 +320,9 @@ The config also turns on a few settings most people end up wanting: the first `g
    winget install Nushell.Nushell
    ```
 
-2. Try it with the repo config. `install.ps1` links `~\.config\nushell` to the repo, so run it again if that folder is missing:
+2. Run `windows\install.ps1` again, then start `nu`. The script links `~\.config\nushell` to the repo and writes `env.nu` and `config.nu` into `%APPDATA%\nushell` (where Nushell looks on Windows) that `source` the linked files, so plain `nu` loads your config. Nushell keeps its history files in `%APPDATA%\nushell` too.
 
-   ```powershell
-   nu --config ~\.config\nushell\config.nu --env-config ~\.config\nushell\env.nu
-   ```
-
-3. To make it the WezTerm default, replace the `default_prog` line for Windows in [`wezterm.lua`](shared/home/.config/wezterm/wezterm.lua) with:
-
-   ```lua
-   config.default_prog = { "nu.exe", "--config", wezterm.home_dir .. "/.config/nushell/config.nu", "--env-config", wezterm.home_dir .. "/.config/nushell/env.nu" }
-   ```
-
-   `Ctrl+Shift+Alt+Z` still opens a PowerShell tab.
+3. Open a new WezTerm window. It starts Nushell from `%LOCALAPPDATA%\Programs\nu\bin\nu.exe`, where winget installs it.
 
 The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds `wingetup`; the macOS-only commands (`brewup`, `icloud`) don't load there.
 
