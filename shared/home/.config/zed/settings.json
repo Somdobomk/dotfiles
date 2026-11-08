@@ -3,6 +3,7 @@
 {
 	// ── General ─────────────────────────────────────────────
 	// "vim_mode": true,
+	"helix_mode": false,
 	"restore_on_startup": "empty_tab",
 	"restore_on_file_reopen": false,
 	"session": { "restore_unsaved_buffers": false },
