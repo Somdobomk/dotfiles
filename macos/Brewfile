@@ -21,7 +21,12 @@ brew "television"
 brew "tree-sitter-cli"
 brew "zoxide"
 
+# Third-party tap for Asyar. It needs `brew trust --tap xoshbin/asyar` before
+# the cask will install (Homebrew 6+).
+tap "xoshbin/asyar"
+
 # Apps
+cask "asyar"
 cask "wezterm"
 cask "zed"
 cask "zen"

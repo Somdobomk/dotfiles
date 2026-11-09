@@ -33,7 +33,7 @@ Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 | [`shared/home/.config/wezterm/`](shared/home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
 | [`shared/home/.config/television/`](shared/home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |
 | [`macos/install.sh`](macos/install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
-| [`macos/Brewfile`](macos/Brewfile)                                     | Homebrew tools, apps, and fonts, for `brew bundle`                           | —                         |
+| [`macos/Brewfile`](macos/Brewfile)                                     | Homebrew tools, apps (including [Asyar](#asyar)), and fonts, for `brew bundle` | —                         |
 | [`macos/defaults.sh`](macos/defaults.sh)                   | macOS settings: key repeat, Finder, Dock ([details](#macos-settings))        | —                         |
 | [`.editorconfig`](.editorconfig)                           | Indentation for this repo, so every editor saves files the same way          | —                         |
 | [`windows/`](windows/)                                     | PowerShell profile, Windows Terminal settings, PowerToys backup, and install script | see [Windows](#windows) |
@@ -195,6 +195,18 @@ Run from `~/GitHub/dotfiles`.
 | `windows\install.ps1` | Windows: set up or update this PC from the repo ([more](#windows)) |
 | `windows\install.ps1 -SaveTerminal` | Windows: save Windows Terminal's settings into the repo |
 | `windows\install.ps1 -SaveApps` | Windows: save the list of installed apps to `windows\winget.json` |
+
+## Asyar
+
+[Asyar](https://github.com/Xoshbin/asyar) is an open-source launcher, an alternative to Raycast. It comes from a third-party tap, so the [`Brewfile`](macos/Brewfile) taps `xoshbin/asyar`. On a new Mac, trust the tap once before `brew bundle` (Homebrew 6+ refuses untrusted taps):
+
+```sh
+brew tap xoshbin/asyar
+brew trust --tap xoshbin/asyar
+brew install --cask asyar
+```
+
+Asyar has no config in this repo; its settings stay in the app. Its AI extension builder ("Build Extension with AI") needs an Anthropic API key in Settings → AI and the `claude` binary installed.
 
 ## GNU Stow
 
