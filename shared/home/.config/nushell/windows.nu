@@ -1,4 +1,9 @@
 # Windows-only commands. env.nu copies this file to the cache that config.nu loads.
+
+# Prompt markers (OSC 133) confuse Windows' console layer under WezTerm: after a
+# command the prompt is drawn one line off, so the command line gets overwritten
+# and Backspace on an empty prompt wipes or adds lines
+$env.config.shell_integration.osc133 = false
 # The update commands match the PowerShell profile's. Run them all with:
 # wingetup; powershellup; winosup
 
