@@ -336,7 +336,7 @@ The config also turns on a few settings most people end up wanting: the first `g
 
 3. Open a new WezTerm window. It starts Nushell from `%LOCALAPPDATA%\Programs\nu\bin\nu.exe`, where winget installs it.
 
-The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds `wingetup` and `wowbackup`; the macOS-only commands (`brewup`, `icloud`) don't load there.
+The Starship, zoxide, and Television tools need to be installed, which `install.ps1` already reports. `windows.nu` adds the same `wingetup`, `powershellup`, `winosup` and `wowbackup` as the PowerShell profile; the macOS-only commands (`brewup`, `icloud`) don't load there.
 
 ### Differences from macOS
 
