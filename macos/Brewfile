@@ -27,6 +27,7 @@ tap "xoshbin/asyar"
 
 # Apps
 cask "asyar"
+cask "claude-code"
 cask "wezterm"
 cask "zed"
 cask "zen"
