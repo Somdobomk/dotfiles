@@ -9,7 +9,7 @@ The repo is split by system:
 ```
 dotfiles/
 ├── shared/      Used on both macOS and Windows
-│   ├── home/    Mirrors $HOME: codex, git, nvim, nushell, starship, television, wezterm, zed
+│   ├── home/    Mirrors $HOME: codex, git, nvim, nushell, rex, starship, television, wezterm, zed
 │   ├── obsidian/  zen/  fonts/  wallpapers/
 ├── macos/       macOS only
 │   ├── home/    Mirrors $HOME: zsh, .zshenv, .hushlogin
@@ -32,6 +32,7 @@ Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 | [`shared/home/.codex/AGENTS.md`](shared/home/.codex/AGENTS.md)       | Rules for the [Codex](https://github.com/openai/codex) CLI, copied from the Claude Code handoff (copied on Windows) | `~/.codex/AGENTS.md`      |
 | [`shared/home/.config/starship.toml`](shared/home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`shared/home/.config/wezterm/`](shared/home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
+| [`shared/home/.config/rex/`](shared/home/.config/rex/)                   | [Rex](https://www.superlogical.com/rex) multiplexer config (`init.lua`) and the Gruvbox theme file to import in Rex Settings > Themes | `~/.config/rex` (`%AppData%\rex` on Windows) |
 | [`shared/home/.config/television/`](shared/home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |
 | [`macos/install.sh`](macos/install.sh)                                 | macOS setup script ([details](#quick-start-macos))                           | —                         |
 | [`macos/Brewfile`](macos/Brewfile)                                     | Homebrew tools, apps (including [Asyar](#asyar)), and fonts, for `brew bundle` | —                         |

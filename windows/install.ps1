@@ -129,6 +129,8 @@ Link-Folder 'Neovim' (Join-Path $env:LOCALAPPDATA 'nvim') (Join-Path $Dotfiles '
 Link-Folder 'WezTerm' (Join-Path $HOME '.config\wezterm') (Join-Path $Dotfiles 'shared\home\.config\wezterm')
 Link-Folder 'Helix' (Join-Path $env:APPDATA 'helix') (Join-Path $Dotfiles 'shared\home\.config\helix')
 Link-Folder 'Nushell' (Join-Path $HOME '.config\nushell') (Join-Path $Dotfiles 'shared\home\.config\nushell')
+# Rex reads %AppData%\rex. Linked ahead of the Windows app, which is still enroll-only in the beta
+Link-Folder 'Rex' (Join-Path $env:APPDATA 'rex') (Join-Path $Dotfiles 'shared\home\.config\rex')
 
 # Plain `nu` reads %APPDATA%\nushell, not ~\.config. File symlinks need admin or
 # Developer Mode, and hard links can't cross drives, so write one-line files that
