@@ -6,6 +6,13 @@ fi
 # Drop duplicate entries from PATH and fpath automatically
 typeset -U path fpath
 
+# Rex: interactive Rex terminals start nushell (Rex has no default-shell setting and
+# runs the login shell, zsh). REX_SESSION is only set by Rex; NU_VERSION stops a loop
+# when zsh is started from inside nu. Placed early so zsh skips the rest of its setup.
+if [[ -n $REX_SESSION && -o interactive && -z $NU_VERSION && -x /opt/homebrew/bin/nu ]]; then
+  exec /opt/homebrew/bin/nu
+fi
+
 # Shell state and cache live outside $HOME and the repo
 mkdir -p "$HOME/.local/state/zsh" "$HOME/.cache/zsh"
 
