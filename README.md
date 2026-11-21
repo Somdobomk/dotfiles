@@ -9,7 +9,7 @@ The repo is split by system:
 ```
 dotfiles/
 ├── shared/      Used on both macOS and Windows
-│   ├── home/    Mirrors $HOME: git, nvim, nushell, starship, television, wezterm, zed
+│   ├── home/    Mirrors $HOME: codex, git, nvim, nushell, starship, television, wezterm, zed
 │   ├── obsidian/  zen/  fonts/  wallpapers/
 ├── macos/       macOS only
 │   ├── home/    Mirrors $HOME: zsh, .zshenv, .hushlogin
@@ -29,6 +29,7 @@ Both `home/` folders are linked into place with [GNU Stow](#gnu-stow).
 | [`shared/home/.config/nushell/`](shared/home/.config/nushell/)         | [Nushell](https://www.nushell.sh) config, the default shell in WezTerm ([details](#nushell)) | `~/.config/nushell`       |
 | [`shared/home/.config/zed/`](shared/home/.config/zed/)                   | [Zed](https://zed.dev) editor settings                                       | `~/.config/zed`           |
 | [`shared/home/.config/git/`](shared/home/.config/git/)                   | Git settings and global ignore list. The email is set per computer ([details](#git-email)) | `~/.config/git`           |
+| [`shared/home/.codex/AGENTS.md`](shared/home/.codex/AGENTS.md)       | Rules for the [Codex](https://github.com/openai/codex) CLI, copied from the Claude Code handoff (copied on Windows) | `~/.codex/AGENTS.md`      |
 | [`shared/home/.config/starship.toml`](shared/home/.config/starship.toml) | [Starship](https://starship.rs) prompt                                       | `~/.config/starship.toml` |
 | [`shared/home/.config/wezterm/`](shared/home/.config/wezterm/)           | [WezTerm](https://wezterm.org) terminal config with the Gruvbox colors        | `~/.config/wezterm`       |
 | [`shared/home/.config/television/`](shared/home/.config/television/)     | [Television](https://github.com/alexpasmantier/television) fuzzy finder config, Gruvbox theme, and zoxide channel | `~/.config/television` |

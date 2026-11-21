@@ -201,6 +201,21 @@ if ((Get-Command tv -ErrorAction SilentlyContinue) -and -not (Test-Path "$Tv\cab
   Write-Host '  downloaded the standard channels'
 }
 
+# Codex ----------------------------------------------------------------------
+
+# Codex reads its rules from ~/.codex/AGENTS.md. A file can't be a junction, and the
+# repo is on another drive, so it's a copy: rerun this script after the rules change.
+$RepoCodex = Join-Path $Dotfiles 'shared\home\.codex\AGENTS.md'
+$CodexDir = Join-Path $HOME '.codex'
+Write-Host "Codex: $CodexDir\AGENTS.md"
+New-Item -ItemType Directory -Path $CodexDir -Force | Out-Null
+if ((Test-Path "$CodexDir\AGENTS.md") -and (Get-FileHash "$CodexDir\AGENTS.md").Hash -ne (Get-FileHash $RepoCodex).Hash) {
+  Copy-Item "$CodexDir\AGENTS.md" "$CodexDir\AGENTS.md.bak-$Stamp"
+  Write-Host "  backed up AGENTS.md to AGENTS.md.bak-$Stamp"
+}
+Copy-Item $RepoCodex $CodexDir -Force
+Write-Host '  copied rules'
+
 # Tools ----------------------------------------------------------------------
 
 # Tools the configs above use, with their winget IDs
