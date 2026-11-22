@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent claude --feature-session-naming=false 2>/dev/null || true'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "i-have-adhd@i-have-adhd": true,
+    "small-business@synced": false,
+    "cc-plugin-telemetry@builtin": false,
+    "sales@synced": false,
+    "productivity@synced": false,
+    "product-management@synced": false,
+    "marketing@synced": false,
+    "liquid-skills@synced": false,
+    "operations@synced": false
+  },
+  "extraKnownMarketplaces": {
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
+    }
+  },
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "autoCompactWindow": 400000
+    }
+  },
+  "theme": "dark-ansi",
+  "preferredNotifChannel": "auto"
+}

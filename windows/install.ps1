@@ -218,6 +218,28 @@ if ((Test-Path "$CodexDir\AGENTS.md") -and (Get-FileHash "$CodexDir\AGENTS.md").
 Copy-Item $RepoCodex $CodexDir -Force
 Write-Host '  copied rules'
 
+# Claude Code ----------------------------------------------------------------
+
+# Only the shared setup: subagents, settings (plugins, hooks, theme) and the ADHD-mode
+# switch. Never the rest of ~/.claude: it holds sign-in, history and transcripts.
+# agents\ is a junction, so new agents from the Mac show up after a pull. The two files
+# are copies (a file can't be a junction): rerun this script after they change.
+$RepoClaude = Join-Path $Dotfiles 'shared\home\.claude'
+$ClaudeDir = Join-Path $HOME '.claude'
+New-Item -ItemType Directory -Path $ClaudeDir -Force | Out-Null
+Link-Folder 'Claude Code agents' (Join-Path $ClaudeDir 'agents') (Join-Path $RepoClaude 'agents')
+Write-Host "Claude Code: $ClaudeDir"
+foreach ($File in 'settings.json', '.i-have-adhd-always') {
+  $Dest = Join-Path $ClaudeDir $File
+  $Src = Join-Path $RepoClaude $File
+  if ((Test-Path $Dest) -and (Get-FileHash $Dest).Hash -ne (Get-FileHash $Src).Hash) {
+    Copy-Item $Dest "$Dest.bak-$Stamp"
+    Write-Host "  backed up $File to $File.bak-$Stamp"
+  }
+  Copy-Item $Src $Dest -Force
+}
+Write-Host '  copied settings.json and the ADHD-mode switch'
+
 # Tools ----------------------------------------------------------------------
 
 # Tools the configs above use, with their winget IDs
