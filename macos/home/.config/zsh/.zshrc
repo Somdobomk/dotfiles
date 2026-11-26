@@ -99,7 +99,7 @@ hash -d icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud='cd ~icloud'
 
 # Yazi (terminal file manager): `y` opens it and stays in the folder you leave it in.
-# `shots` opens the cut list app's screenshots (previews show in WezTerm).
+# `cutlist` opens the cut list app's screenshots (previews show in WezTerm).
 y() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
   yazi "$@" --cwd-file="$tmp"
@@ -107,7 +107,7 @@ y() {
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
   rm -f -- "$tmp"
 }
-alias shots='yazi ~/.cutlist-shots/screenshots'
+alias cutlist='yazi ~/.cutlist-shots/screenshots'
 
 # Updates. Run all three with: brewup && macosstore && macosup
 brewup() {

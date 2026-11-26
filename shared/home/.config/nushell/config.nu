@@ -42,7 +42,7 @@ def --env y [...args] {
   rm -fp $tmp
 }
 # The cut list app's screenshots (Mac)
-def shots [] { ^yazi ([$env.HOME .cutlist-shots screenshots] | path join) }
+def cutlist [] { ^yazi ([$env.HOME .cutlist-shots screenshots] | path join) }
 
 def --env cdi [] {
   let dir = (^tv zoxide | str trim)
