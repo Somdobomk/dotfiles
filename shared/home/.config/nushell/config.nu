@@ -33,6 +33,17 @@ source ~/.cache/nushell/os.nu
 
 # After the zoxide setup, which defines its own fzf-based `cdi`
 # `cdi`: pick a visited folder with Television
+# Yazi (terminal file manager): `y` opens it and stays in the folder you leave it in
+def --env y [...args] {
+  let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+  ^yazi ...$args --cwd-file $tmp
+  let cwd = (open $tmp | str trim)
+  if ($cwd | is-not-empty) and $cwd != $env.PWD { cd $cwd }
+  rm -fp $tmp
+}
+# The cut list app's screenshots (Mac)
+def shots [] { ^yazi ([$env.HOME .cutlist-shots screenshots] | path join) }
+
 def --env cdi [] {
   let dir = (^tv zoxide | str trim)
   if ($dir | is-not-empty) { cd $dir }

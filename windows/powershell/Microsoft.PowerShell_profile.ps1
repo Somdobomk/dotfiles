@@ -47,6 +47,15 @@ if (Get-Command eza -ErrorAction SilentlyContinue) {
 }
 Set-Alias la lsa
 
+# Yazi (terminal file manager): `y` opens it and stays in the folder you leave it in
+function y {
+    $tmp = (New-TemporaryFile).FullName
+    yazi @args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp -Encoding UTF8
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) { Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path }
+    Remove-Item -Path $tmp
+}
+
 # PSReadLine -----------------------------------------------------------------
 
 Set-PSReadLineOption -BellStyle None

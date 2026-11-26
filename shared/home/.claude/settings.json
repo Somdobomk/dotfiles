@@ -21,13 +21,28 @@
     "product-management@synced": false,
     "marketing@synced": false,
     "liquid-skills@synced": false,
-    "operations@synced": false
+    "operations@synced": false,
+    "input-router@token-saving-mods": true,
+    "effort-optimizer@token-saving-mods": true,
+    "model-router@token-saving-mods": true,
+    "cache-clock@token-saving-mods": true,
+    "handoff@token-saving-mods": true,
+    "research-router@token-saving-mods": true,
+    "efficient-browser-use@token-saving-mods": true,
+    "mods@token-saving-mods": true,
+    "savings-proof@token-saving-mods": true
   },
   "extraKnownMarketplaces": {
     "i-have-adhd": {
       "source": {
         "source": "github",
         "repo": "ayghri/i-have-adhd"
+      }
+    },
+    "token-saving-mods": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/david/Library/Mobile Documents/com~apple~CloudDocs/Downloads/token-saving-mods"
       }
     }
   },
@@ -37,5 +52,7 @@
     }
   },
   "theme": "dark-ansi",
-  "preferredNotifChannel": "auto"
+  "preferredNotifChannel": "auto",
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true
 }

@@ -95,6 +95,9 @@
           "PackageIdentifier": "Balena.Etcher"
         },
         {
+          "PackageIdentifier": "sxyazi.yazi"
+        },
+        {
           "PackageIdentifier": "Obsidian.Obsidian"
         },
         {
