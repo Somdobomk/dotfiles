@@ -229,16 +229,25 @@ $ClaudeDir = Join-Path $HOME '.claude'
 New-Item -ItemType Directory -Path $ClaudeDir -Force | Out-Null
 Link-Folder 'Claude Code agents' (Join-Path $ClaudeDir 'agents') (Join-Path $RepoClaude 'agents')
 Write-Host "Claude Code: $ClaudeDir"
+# settings.json names the token-saving-mods plugin folder by its Mac path (iCloud Drive's
+# Downloads). The copy here points at the same folder in iCloud for Windows instead.
+$MacMods = '/Users/david/Library/Mobile Documents/com~apple~CloudDocs/Downloads/token-saving-mods'
+$WinMods = Join-Path $HOME 'iCloudDrive\Downloads\token-saving-mods'
 foreach ($File in 'settings.json', '.i-have-adhd-always') {
   $Dest = Join-Path $ClaudeDir $File
   $Src = Join-Path $RepoClaude $File
-  if ((Test-Path $Dest) -and (Get-FileHash $Dest).Hash -ne (Get-FileHash $Src).Hash) {
+  $Text = [IO.File]::ReadAllText($Src)
+  if ($File -eq 'settings.json') {
+    $Text = $Text.Replace($MacMods, $WinMods.Replace('\', '\\'))
+    if (-not (Test-Path $WinMods)) { Write-Host "  token-saving-mods not found at $WinMods (is iCloud Drive syncing Downloads?)" -ForegroundColor Yellow }
+  }
+  if ((Test-Path $Dest) -and [IO.File]::ReadAllText($Dest) -ne $Text) {
     Copy-Item $Dest "$Dest.bak-$Stamp"
     Write-Host "  backed up $File to $File.bak-$Stamp"
   }
-  Copy-Item $Src $Dest -Force
+  [IO.File]::WriteAllText($Dest, $Text)
 }
-Write-Host '  copied settings.json and the ADHD-mode switch'
+Write-Host '  copied settings.json (plugin folder set for Windows) and the ADHD-mode switch'
 
 # Tools ----------------------------------------------------------------------
 
